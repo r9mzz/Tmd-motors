@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c0c0d">
+<meta name="color-scheme" content="dark only">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>TMD Motors</title>
+<meta name="description" content="TMD Motors, garage à Brie-Comte-Robert (77). Spécialiste BMW / VAG : reprogrammation, Flexfuel E85, mécanique, carrosserie. Devis gratuit.">
+<script>try{if(/v=app/.test(location.search))sessionStorage.setItem("tmd-v","app");if(sessionStorage.getItem("tmd-v")!=="app"&&matchMedia("(min-width: 1025px)").matches)location.replace("./?v=site")}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800;1,900&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#0c0c0d;--ink:#f1f1f2;--muted:#8d8d94;--line:rgba(255,255,255,.09);
+  --red:#e3192e;--ease:cubic-bezier(.25,.8,.25,1);
+  --cond:"Barlow Condensed",system-ui,sans-serif;--sans:"Barlow",system-ui,sans-serif;
+  --top:env(safe-area-inset-top,0px);--bot:env(safe-area-inset-bottom,0px);--tab:62px;--pad:22px;
+  color-scheme:only dark;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg)}
+body{color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:calc(var(--tab) + var(--bot))}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+svg{display:block}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:4px}
+
+/* En-tête */
+.top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;height:calc(60px + var(--top));padding:var(--top) var(--pad) 0;background:rgba(12,12,13,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;font-family:var(--cond)}
+.logo b{font-weight:900;font-style:italic;font-size:24px}
+.logo span{font-weight:800;font-style:italic;font-size:9px;letter-spacing:.52em;margin-right:-.52em;color:var(--red);margin-top:2px}
+.top a.call{font-weight:600;font-size:15px;color:var(--red)}
+
+/* Vues */
+.view{display:none;padding:0 var(--pad)}
+.view.on{display:block;animation:fade .35s var(--ease)}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.js .up{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.js .up.in{opacity:1;transform:none}
+
+/* Titres et textes */
+h1,.h2{font-family:var(--cond);font-style:italic;font-weight:900;text-transform:uppercase;line-height:.92}
+h1{font-size:clamp(46px,13.5vw,60px)}
+.h2{font-size:34px}
+.red{color:var(--red)}
+.eyebrow{font-size:14px;color:var(--muted)}
+.lead{margin-top:16px;font-size:17px;color:#c9c9ce}
+section.block{padding-top:56px}
+.block-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.block-h a{font-size:14px;font-weight:500;color:var(--muted)}
+
+/* Boutons */
+.btns{display:grid;gap:10px;margin-top:28px}
+.btns.two{grid-template-columns:1fr 1fr}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:54px;border-radius:12px;font-weight:600;font-size:16px;transition:transform .15s,opacity .2s}
+.btn:active{transform:scale(.98);opacity:.9}
+.btn svg{width:18px;height:18px}
+.btn-red{background:var(--red);color:#fff}
+.btn-line{border:1px solid rgba(255,255,255,.18)}
+.btn-wa{background:#1fae54;color:#fff}
+
+/* Héro */
+.hero{padding-top:36px}
+.hero h1{margin-top:14px}
+
+/* Compte-tours */
+.gauge-box{margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.gauge{position:relative;width:min(100%,240px);margin:18px auto 0}
+.gauge svg{width:100%;height:auto;overflow:visible}
+.g-track{fill:none;stroke:#1f1f22;stroke-width:6;stroke-linecap:round}
+.g-fill{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:100;transition:stroke-dashoffset 1s var(--ease)}
+.g-tick{stroke:rgba(255,255,255,.22);stroke-width:2}
+.g-needle{transform-origin:150px 150px;transform:rotate(-135deg);transition:transform 1s cubic-bezier(.34,1.3,.5,1)}
+.g-read{position:absolute;left:0;right:0;top:62%;text-align:center}
+.g-read small{display:block;font-size:13px;color:var(--muted)}
+.g-read strong{display:block;font:italic 900 40px/1.05 var(--cond)}
+.g-read strong.q{font-size:26px}
+.stages{position:relative;display:grid;grid-template-columns:repeat(4,1fr);margin-top:18px;border-bottom:1px solid var(--line)}
+.stages button{padding:12px 0;font-size:15px;font-weight:500;color:var(--muted);transition:color .25s}
+.stages button[aria-pressed="true"]{color:var(--ink)}
+.stages .ind{position:absolute;bottom:-1px;left:0;width:25%;height:2px;background:var(--red);transition:transform .4s var(--ease)}
+
+/* Listes */
+.list a,.list div.it{display:flex;align-items:center;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
+.list a:last-child,.list div.it:last-child{border-bottom:0}
+.list .tx{flex:1;min-width:0}
+.list b{display:block;font-weight:600;font-size:17px}
+.list span.d{display:block;margin-top:2px;font-size:14px;color:var(--muted)}
+.list .chev{width:18px;height:18px;color:var(--muted);transition:transform .25s var(--ease)}
+.list a:active .chev{transform:translateX(4px)}
+.price{font:italic 900 22px/1 var(--cond);white-space:nowrap}
+.price small{font:500 12px var(--sans);color:var(--muted);margin-right:4px}
+.price.q{font:500 14px var(--sans);color:var(--muted)}
+
+/* E85 */
+.e85{display:block;margin-top:56px;padding:26px 22px;border-radius:16px;background:#151517}
+.e85 .eyebrow{color:var(--red)}
+.e85 .row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:6px}
+.e85 .h2{font-size:32px}
+.e85 .px{font:italic 900 40px/1 var(--cond)}
+.e85 p{margin-top:10px;font-size:15px;color:var(--muted)}
+
+/* Pied de l'accueil */
+.foot-info{margin-top:56px;padding:26px 0 30px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);line-height:1.8}
+.foot-info b{color:var(--ink);font-weight:600}
+.foot-info a{text-decoration:underline;text-underline-offset:3px}
+
+/* Pages */
+.page{padding-top:34px}
+.page .lead{font-size:16px}
+.svc{scroll-margin-top:calc(70px + var(--top));padding-top:40px}
+.svc h3{font:italic 900 26px/1 var(--cond);text-transform:uppercase}
+.svc .d0{margin-top:4px;font-size:14px;color:var(--muted)}
+.svc .list{margin-top:6px}
+.svc .list div.it{padding:14px 0}
+.svc .list b{font-weight:500;font-size:16px}
+.svc .ask{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:15px;font-weight:600;color:var(--red)}
+.svc .ask svg{width:15px;height:15px}
+.note-free{margin-top:40px;padding:18px 0;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
+.note-free b{color:var(--ink)}
+
+/* Formulaire */
+form{display:grid;gap:16px;margin-top:28px}
+.field{display:grid;gap:6px}
+.field label,.field .lbl{font-size:14px;color:var(--muted)}
+.field input,.field select,.field textarea{width:100%;height:52px;padding:0 16px;border-radius:12px;background:#151517;font-size:16px;border:1px solid transparent;appearance:none;-webkit-appearance:none;transition:border-color .2s}
+.field textarea{height:100px;padding:14px 16px;resize:none}
+.field select{background:#151517 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238d8d94' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--red)}
+.field input::placeholder,.field textarea::placeholder{color:#5c5c62}
+.makes{display:flex;flex-wrap:wrap;gap:8px}
+.makes label{position:relative}
+.makes input{position:absolute;inset:0;opacity:0}
+.makes span{display:block;padding:10px 16px;border-radius:10px;background:#151517;font-size:15px;color:var(--muted);transition:background .2s,color .2s}
+.makes input:checked+span{background:var(--ink);color:var(--bg)}
+.err{color:var(--red);font-size:14px;min-height:1em}
+.small{font-size:13px;color:#5c5c62}
+
+/* Contact */
+.tel{display:block;margin-top:14px;font:italic 900 46px/1 var(--cond)}
+.cgroup{margin-top:44px}
+.cgroup h3{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:6px}
+.addr{font-size:19px;font-weight:600;line-height:1.35}
+.addr span{display:block;font-weight:400;color:var(--muted);font-size:16px}
+
+/* Onglets */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:repeat(4,1fr);height:calc(var(--tab) + var(--bot));padding-bottom:var(--bot);background:rgba(12,12,13,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11.5px;font-weight:500;color:#6a6a70;transition:color .25s}
+.tabbar svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.tabbar a.on{color:var(--ink)}
+.tabbar a.on svg{stroke:var(--red)}
+
+@media (prefers-reduced-motion:reduce){
+  .js .up{opacity:1;transform:none;transition:none}
+  .view.on{animation:none}
+  .g-needle,.g-fill,.stages .ind{transition:none}
+}
+@media (min-width:600px){.view{max-width:540px;margin:0 auto}}
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4.1 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <a class="logo" href="#accueil" aria-label="TMD Motors, accueil"><b>TMD</b><span>MOTORS</span></a>
+  <a class="call" href="tel:+33629400045">06 29 40 00 45</a>
+</header>
+
+<main>
+
+<!-- ACCUEIL -->
+<section class="view" id="v-accueil" aria-label="Accueil">
+  <div class="hero">
+    <p class="eyebrow up">Garage à Brie-Comte-Robert</p>
+    <h1 class="up">Votre véhicule,<br><span class="red">notre expertise.</span></h1>
+    <p class="lead up">Spécialiste BMW, Volkswagen, Audi et Seat. Mécanique, performance et carrosserie.</p>
+    <div class="btns up">
+      <a class="btn btn-red" href="#devis">Demander un devis gratuit</a>
+      <a class="btn btn-line" href="tel:+33629400045"><svg><use href="#i-phone"/></svg>Appeler le garage</a>
+    </div>
+  </div>
+
+  <div class="gauge-box up">
+    <p class="eyebrow">Reprogrammation moteur</p>
+    <div class="gauge">
+      <svg viewBox="0 0 300 260" aria-hidden="true">
+        <path class="g-track" d="M65.15 234.85 A120 120 0 1 1 234.85 234.85"/>
+        <path class="g-fill" id="gfill" pathLength="100" d="M65.15 234.85 A120 120 0 1 1 234.85 234.85"/>
+        <g id="ticks"></g>
+        <g class="g-needle" id="needle"><path d="M150 52 L153 150 L147 150 Z" fill="#f1f1f2"/></g>
+        <circle cx="150" cy="150" r="8" fill="#e3192e"/>
+      </svg>
+      <div class="g-read" aria-live="polite"><small id="glabel">Stage 1</small><strong id="gprice">350 €</strong></div>
+    </div>
+    <div class="stages" role="group" aria-label="Choisir une formule">
+      <span class="ind" id="sind"></span>
+      <button type="button" data-k="0" aria-pressed="false">Origine</button>
+      <button type="button" data-k="1" aria-pressed="true">Stage 1</button>
+      <button type="button" data-k="2" aria-pressed="false">Stage 2</button>
+      <button type="button" data-k="3" aria-pressed="false">Stage 3</button>
+    </div>
+  </div>
+
+  <section class="block">
+    <div class="block-h up"><h2 class="h2">Services</h2><a href="#services">Voir les prix</a></div>
+    <div class="list">
+      <a class="up" href="#services" data-goto="s-reprog"><span class="tx"><b>Reprogrammation</b><span class="d">Stage 1, 2, 3 et Flexfuel E85</span></span><svg class="chev"><use href="#i-chev"/></svg></a>
+      <a class="up" href="#services" data-goto="s-meca"><span class="tx"><b>Mécanique</b><span class="d">Entretien, distribution, embrayage</span></span><svg class="chev"><use href="#i-chev"/></svg></a>
+      <a class="up" href="#services" data-goto="s-carro"><span class="tx"><b>Carrosserie légère</b><span class="d">Réparation, peinture, optiques</span></span><svg class="chev"><use href="#i-chev"/></svg></a>
+      <a class="up" href="#services" data-goto="s-prepa"><span class="tx"><b>Préparation</b><span class="d">Moteur, optimisation, suivi</span></span><svg class="chev"><use href="#i-chev"/></svg></a>
+    </div>
+  </section>
+
+  <a class="e85 up" href="#devis" data-presta="Conversion Flexfuel E85">
+    <p class="eyebrow">Conversion</p>
+    <div class="row"><h2 class="h2">Flexfuel E85</h2><span class="px">350 €</span></div>
+    <p>Roulez à l'éthanol à prix réduit. Compatible Stage 1, 2 et 3.</p>
+  </a>
+
+  <div class="foot-info up">
+    <b>TMD Motors</b> · Spécialiste BMW / VAG<br>
+    Allée du Jardin Doliset, 77170 Brie-Comte-Robert<br>
+    Diagnostic toutes marques · Devis gratuit
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="view" id="v-services" aria-label="Services et tarifs">
+  <div class="page">
+    <p class="eyebrow up">Services et tarifs</p>
+    <h1 class="up" style="font-size:44px;margin-top:10px">Nos <span class="red">prestations</span></h1>
+    <p class="lead up">Les prix sont affichés quand ils sont fixes. Pour le reste, le devis est gratuit.</p>
+
+    <div class="svc" id="s-reprog">
+      <h3 class="up">Reprogrammation</h3>
+      <div class="list">
+        <div class="it up"><span class="tx"><b>Stage 1</b></span><span class="price">350 €</span></div>
+        <div class="it up"><span class="tx"><b>Stage 2</b></span><span class="price">450 €</span></div>
+        <div class="it up"><span class="tx"><b>Stage 3</b></span><span class="price q">Sur devis</span></div>
+        <div class="it up"><span class="tx"><b>Flexfuel E85</b></span><span class="price">350 €</span></div>
+        <div class="it up"><span class="tx"><b>Remise d'origine</b></span><span class="price">200 €</span></div>
+        <div class="it up"><span class="tx"><b>Cartographie sur mesure</b></span><span class="price q">Sur devis</span></div>
+      </div>
+      <a class="ask" href="#devis" data-presta="Stage 1">Demander un devis<svg><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <div class="svc" id="s-meca">
+      <h3 class="up">Mécanique</h3>
+      <div class="list">
+        <div class="it up"><span class="tx"><b>Distribution</b></span><span class="price"><small>dès</small>250 €</span></div>
+        <div class="it up"><span class="tx"><b>Embrayage</b></span><span class="price"><small>dès</small>400 €</span></div>
+        <div class="it up"><span class="tx"><b>Entretien / Révision</b></span><span class="price q">Sur devis</span></div>
+        <div class="it up"><span class="tx"><b>Boîte auto (BVA)</b></span><span class="price q">Sur devis</span></div>
+      </div>
+      <a class="ask" href="#devis" data-presta="Entretien / Révision">Demander un devis<svg><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <div class="svc" id="s-carro">
+      <h3 class="up">Carrosserie légère</h3>
+      <p class="d0 up">Réparation, peinture, rénovation optique, débosselage.</p>
+      <a class="ask up" href="#devis" data-presta="Carrosserie légère">Demander un devis<svg><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <div class="svc" id="s-prepa">
+      <h3 class="up">Préparation</h3>
+      <p class="d0 up">Stage performance, préparation moteur, optimisation et suivi personnalisé.</p>
+      <a class="ask up" href="#devis" data-presta="Stage 3">Demander un devis<svg><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <p class="note-free up"><b>Diagnostic toutes marques.</b> Un travail garanti et des conseils adaptés à votre budget.</p>
+  </div>
+</section>
+
+<!-- DEVIS -->
+<section class="view" id="v-devis" aria-label="Devis">
+  <div class="page">
+    <p class="eyebrow up">Gratuit et sans engagement</p>
+    <h1 class="up" style="font-size:44px;margin-top:10px">Votre <span class="red">devis</span></h1>
+    <p class="lead up">Le garage reçoit votre demande sur WhatsApp ou par e-mail.</p>
+    <form id="form" class="up" novalidate>
+      <div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="nom" autocomplete="name" required></div>
+      <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required></div>
+      <div class="field"><span class="lbl">Marque</span>
+        <div class="makes">
+          <label><input type="radio" name="marque" value="BMW" checked><span>BMW</span></label>
+          <label><input type="radio" name="marque" value="Volkswagen"><span>Volkswagen</span></label>
+          <label><input type="radio" name="marque" value="Audi"><span>Audi</span></label>
+          <label><input type="radio" name="marque" value="Seat"><span>Seat</span></label>
+          <label><input type="radio" name="marque" value="Autre marque"><span>Autre</span></label>
+        </div>
+      </div>
+      <div class="field"><label for="f-modele">Modèle et moteur</label><input id="f-modele" name="modele" placeholder="Ex. : Golf 7 GTI, 320d"></div>
+      <div class="field"><label for="f-presta">Prestation</label>
+        <select id="f-presta" name="presta">
+          <option>Stage 1</option><option>Stage 2</option><option>Stage 3</option><option>Remise d'origine</option>
+          <option>Conversion Flexfuel E85</option><option>Entretien / Révision</option><option>Distribution</option>
+          <option>Embrayage</option><option>Boîte auto (BVA)</option><option>Carrosserie légère</option><option>Diagnostic</option><option>Autre</option>
+        </select>
+      </div>
+      <div class="field"><label for="f-msg">Message (facultatif)</label><textarea id="f-msg" name="msg"></textarea></div>
+      <p class="err" id="err" role="alert"></p>
+      <div class="btns" style="margin-top:0">
+        <button class="btn btn-wa" type="submit" data-via="wa"><svg><use href="#i-wa"/></svg>Envoyer sur WhatsApp</button>
+        <button class="btn btn-line" type="submit" data-via="mail">Envoyer par e-mail</button>
+      </div>
+      <p class="small">Vos informations servent uniquement à vous répondre.</p>
+    </form>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="view" id="v-contact" aria-label="Contact">
+  <div class="page">
+    <p class="eyebrow up">Contact</p>
+    <a class="tel up" href="tel:+33629400045">06 29 40 00 45</a>
+    <div class="btns two up">
+      <a class="btn btn-red" href="tel:+33629400045"><svg><use href="#i-phone"/></svg>Appeler</a>
+      <a class="btn btn-wa" href="https://wa.me/33629400045" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+    </div>
+
+    <div class="cgroup up">
+      <h3>Adresse</h3>
+      <p class="addr">Allée du Jardin Doliset<span>77170 Brie-Comte-Robert</span></p>
+      <div class="btns two" style="margin-top:16px">
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=All%C3%A9e%20du%20Jardin%20Doliset%2077170%20Brie-Comte-Robert" target="_blank" rel="noopener">Google Maps</a>
+        <a class="btn btn-line" href="https://waze.com/ul?q=All%C3%A9e%20du%20Jardin%20Doliset%2077170%20Brie-Comte-Robert&navigate=yes" target="_blank" rel="noopener">Waze</a>
+      </div>
+    </div>
+
+    <div class="cgroup up">
+      <h3>En ligne</h3>
+      <div class="list">
+        <a href="mailto:tmdmotorspro@gmail.com"><span class="tx"><b>E-mail</b><span class="d">tmdmotorspro@gmail.com</span></span><svg class="chev"><use href="#i-chev"/></svg></a>
+        <a href="https://www.tiktok.com/@tmdmotors91" target="_blank" rel="noopener"><span class="tx"><b>TikTok</b><span class="d">@tmdmotors91</span></span><svg class="chev"><use href="#i-chev"/></svg></a>
+      </div>
+    </div>
+
+    <p class="foot-info">© <span id="yr">2026</span> TMD Motors<br><a href="./?v=site">Version ordinateur</a> · Site réalisé par Mon Site Studio</p>
+  </div>
+</section>
+
+</main>
+
+<nav class="tabbar" aria-label="Navigation">
+  <a href="#accueil" data-v="accueil"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Accueil</a>
+  <a href="#services" data-v="services"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>Services</a>
+  <a href="#devis" data-v="devis"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>Devis</a>
+  <a href="#contact" data-v="contact"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Contact</a>
+</nav>
+
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TEL = '33629400045', MAIL = 'tmdmotorspro@gmail.com';
+  var VIEWS = ['accueil', 'services', 'devis', 'contact'];
+  var $ = function (s) { return document.querySelector(s); }, $$ = function (s) { return document.querySelectorAll(s); };
+  $('#yr').textContent = new Date().getFullYear();
+
+  /* Apparition douce au défilement */
+  var io = ('IntersectionObserver' in window) && !reduce ? new IntersectionObserver(function (es) {
+    es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+  }, { rootMargin: '0px 0px -5% 0px' }) : null;
+  function arm(view) { view.querySelectorAll('.up:not(.in)').forEach(function (el) { if (io) io.observe(el); else el.classList.add('in'); }); }
+
+  /* Onglets */
+  var tabs = $$('.tabbar a'), pending = null;
+  function show() {
+    var v = location.hash.slice(1); if (v === 'tarifs') v = 'services'; if (VIEWS.indexOf(v) < 0) v = 'accueil';
+    VIEWS.forEach(function (n) { var el = document.getElementById('v-' + n); el.classList.toggle('on', n === v); if (n === v) arm(el); });
+    tabs.forEach(function (t) { var on = t.dataset.v === v; t.classList.toggle('on', on); if (on) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
+    if (pending) goSection(); else scrollTo(0, 0);
+    if (v === 'accueil') gaugeIntro();
+  }
+  addEventListener('hashchange', show);
+
+  /* Raccourcis vers une rubrique de Services */
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-goto]'); if (!g) return;
+    e.preventDefault(); pending = g.dataset.goto;
+    if (location.hash !== '#services') location.hash = 'services'; else goSection();
+  });
+  function goSection() {
+    var el = document.getElementById(pending); pending = null;
+    el.querySelectorAll('.up').forEach(function (u) { u.classList.add('in'); });
+    requestAnimationFrame(function () { el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+  }
+
+  /* Compte-tours */
+  var html = '';
+  for (var i = 0; i <= 8; i++) {
+    var a = (-135 + i * 33.75) * Math.PI / 180;
+    html += '<line class="g-tick" x1="' + (150 + 100 * Math.sin(a)).toFixed(1) + '" y1="' + (150 - 100 * Math.cos(a)).toFixed(1) + '" x2="' + (150 + 108 * Math.sin(a)).toFixed(1) + '" y2="' + (150 - 108 * Math.cos(a)).toFixed(1) + '"/>';
+  }
+  $('#ticks').innerHTML = html;
+  var stages = [
+    { l: "Remise d'origine", p: 200, a: -95 },
+    { l: 'Stage 1', p: 350, a: -10 },
+    { l: 'Stage 2', p: 450, a: 60 },
+    { l: 'Stage 3', p: 0, a: 122 }
+  ];
+  var needle = $('#needle'), fill = $('#gfill'), lab = $('#glabel'), price = $('#gprice'), sind = $('#sind');
+  var sbtn = $$('.stages button'), shown = 0, played = false, raf;
+  function showPrice(to) {
+    cancelAnimationFrame(raf);
+    if (!to) { price.textContent = 'Sur devis'; price.classList.add('q'); shown = 0; return; }
+    price.classList.remove('q');
+    if (reduce) { price.textContent = to + ' €'; shown = to; return; }
+    var from = shown, t0 = performance.now();
+    (function step(t) {
+      var k = Math.min(1, (t - t0) / 600), e = 1 - Math.pow(1 - k, 3);
+      shown = Math.round(from + (to - from) * e); price.textContent = shown + ' €';
+      if (k < 1) raf = requestAnimationFrame(step);
+    })(t0);
+  }
+  function setStage(k) {
+    var s = stages[k];
+    needle.style.transform = 'rotate(' + s.a + 'deg)';
+    fill.style.strokeDashoffset = (100 - (s.a + 135) / 270 * 100).toFixed(1);
+    sind.style.transform = 'translateX(' + (k * 100) + '%)';
+    lab.textContent = s.l; showPrice(s.p);
+    sbtn.forEach(function (b, j) { b.setAttribute('aria-pressed', j === k ? 'true' : 'false'); });
+  }
+  sbtn.forEach(function (b) { b.addEventListener('click', function () { setStage(+b.dataset.k); }); });
+  function gaugeIntro() {
+    if (played) return; played = true;
+    sind.style.transform = 'translateX(100%)';
+    if (reduce) { setStage(1); return; }
+    setTimeout(function () { setStage(1); }, 500);
+  }
+
+  /* Liens qui pré-remplissent la prestation */
+  var sel = $('#f-presta');
+  document.addEventListener('click', function (e) { var a = e.target.closest('[data-presta]'); if (a) sel.value = a.dataset.presta; });
+
+  /* Formulaire : WhatsApp ou e-mail */
+  var form = $('#form'), err = $('#err'), via = 'wa';
+  form.querySelectorAll('[data-via]').forEach(function (b) { b.addEventListener('click', function () { via = b.dataset.via; }); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = new FormData(form), nom = (d.get('nom') || '').trim(), tel = (d.get('tel') || '').trim();
+    if (!nom || tel.replace(/\D/g, '').length < 9) { err.textContent = 'Merci d’indiquer votre nom et un numéro de téléphone valide.'; (nom ? form.tel : form.nom).focus(); return; }
+    err.textContent = '';
+    var txt = 'Bonjour TMD Motors, je souhaite un devis.\n\nNom : ' + nom + '\nTéléphone : ' + tel + '\nVéhicule : ' + d.get('marque') + (d.get('modele') ? ' ' + d.get('modele') : '') +
+      '\nPrestation : ' + d.get('presta') + (d.get('msg') ? '\n\n' + d.get('msg') : '');
+    if (via === 'wa') window.open('https://wa.me/' + TEL + '?text=' + encodeURIComponent(txt), '_blank', 'noopener');
+    else location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Demande de devis - ' + d.get('presta')) + '&body=' + encodeURIComponent(txt);
+  });
+
+  show();
+})();
+</script>
+</body>
+</html>
