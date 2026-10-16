@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0b">
+<meta name="color-scheme" content="dark only">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>TMD Motors</title>
@@ -21,7 +22,7 @@
   --ease:cubic-bezier(.2,.7,.2,1);
   --cond:"Barlow Condensed",system-ui,sans-serif;--sans:"Barlow",system-ui,sans-serif;
   --top:env(safe-area-inset-top,0px);--bot:env(safe-area-inset-bottom,0px);--tab:68px;
-  color-scheme:dark;
+  color-scheme:only dark;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--bg)}
@@ -65,7 +66,7 @@ svg{display:block}
 /* Compte-tours */
 .gauge-card{margin-top:18px;padding:18px 14px 14px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.01))}
 .gauge-card h3{font:700 12px/1 var(--cond);letter-spacing:.28em;text-transform:uppercase;color:var(--muted);text-align:center}
-.gauge{position:relative;width:min(100%,300px);margin:8px auto 0}
+.gauge{position:relative;width:min(100%,250px);margin:4px auto 0}
 .gauge svg{width:100%;height:auto;overflow:visible}
 .g-track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:14;stroke-linecap:round}
 .g-fill{fill:none;stroke:url(#gred);stroke-width:14;stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:100;transition:stroke-dashoffset 1.1s var(--ease)}
@@ -207,6 +208,69 @@ form{margin-top:20px;display:grid;gap:14px}
 
 @media (prefers-reduced-motion:reduce){.view{animation:none}.g-needle,.g-fill{transition:none}}
 @media (min-width:600px){.view{max-width:560px;margin:0 auto}.top{padding-inline:max(16px,calc(50% - 264px))}}
+
+/* Héro : filigrane BMW / VAG + reflet */
+.hero .wm{position:absolute;right:-14px;top:8px;font:italic 900 108px/.82 var(--cond);text-transform:uppercase;text-align:right;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.07);pointer-events:none;z-index:0}
+.hero>*:not(.wm){position:relative;z-index:1}
+.gauge-card{position:relative;overflow:hidden}
+.gauge-card::before{content:"";position:absolute;top:-40%;bottom:-40%;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.07),transparent);transform:skewX(-20deg);animation:shine 5.5s ease-in-out 2s infinite;pointer-events:none}
+@keyframes shine{0%,70%{left:-60%}100%{left:130%}}
+
+/* Métiers : grille 2 x 2 bien visible */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mtile{position:relative;display:flex;flex-direction:column;min-height:186px;padding:16px 15px 15px;border-radius:18px;overflow:hidden;background:linear-gradient(160deg,#1d1d23,#121216);border:1px solid var(--line);transition:transform .2s var(--ease),border-color .2s}
+.mtile:active{transform:scale(.97);border-color:rgba(227,25,46,.6)}
+.mtile::after{content:"";position:absolute;right:-30px;bottom:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(227,25,46,.28),transparent 70%)}
+.mtile .n{font:italic 900 13px/1 var(--cond);color:var(--dim);letter-spacing:.08em}
+.mtile .mi{display:grid;place-items:center;width:48px;height:48px;margin:12px 0 14px;border-radius:14px;background:var(--red);box-shadow:0 10px 24px -10px rgba(227,25,46,.9)}
+.mtile .mi svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mtile b{font:800 19px/1 var(--cond);letter-spacing:.03em;text-transform:uppercase}
+.mtile p{margin-top:6px;font-size:13px;line-height:1.4;color:var(--muted);flex:1}
+.mtile .go{position:absolute;right:14px;top:14px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.06)}
+.mtile .go svg{width:14px;height:14px;color:#fff}
+.mtile.wide{grid-column:1/-1;min-height:0;flex-direction:row;align-items:center;gap:14px;padding:16px}
+.mtile.wide .mi{margin:0;flex:none}
+.mtile.wide .tx{flex:1}
+.mtile.wide .tx p{margin-top:4px}
+.mprices{display:flex;gap:6px;margin-top:10px}
+.mprices span{padding:6px 8px;border-radius:6px;background:rgba(0,0,0,.35);border:1px solid var(--line2);font:700 11.5px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mprices span i{font-style:normal;color:var(--red2)}
+
+/* Engagements : 2 x 2 compact */
+.egrid{display:grid;grid-template-columns:1fr 1fr;gap:1px;border-radius:16px;overflow:hidden;background:var(--line);border:1px solid var(--line)}
+.egrid div{padding:16px 14px;background:var(--bg2)}
+.egrid svg{width:24px;height:24px;stroke:var(--red2);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.egrid b{display:block;margin-top:10px;font:800 15.5px/1.15 var(--cond);letter-spacing:.05em;text-transform:uppercase}
+.egrid span{display:block;margin-top:4px;font-size:12.5px;line-height:1.4;color:var(--muted)}
+
+/* Prestations : cartes ouvertes + puces de navigation collantes */
+.snav{position:sticky;top:calc(61px + var(--top));z-index:30;display:flex;gap:6px;margin:18px -16px 0;padding:10px 16px;overflow-x:auto;scrollbar-width:none;background:rgba(10,10,11,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.snav::-webkit-scrollbar{display:none}
+.snav a{flex:none;padding:10px 14px;border-radius:20px;border:1px solid var(--line2);font:700 13px/1 var(--cond);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:background .3s,color .3s,border-color .3s}
+.snav a.on{background:var(--red);border-color:var(--red);color:#fff}
+.scards{display:grid;gap:14px;margin-top:8px}
+.scard{scroll-margin-top:calc(124px + var(--top));border-radius:20px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.scard-head{position:relative;padding:20px 18px 18px;background:linear-gradient(120deg,rgba(227,25,46,.9),rgba(120,10,22,.95));overflow:hidden}
+.scard-head::after{content:attr(data-n);position:absolute;right:10px;bottom:-22px;font:italic 900 110px/1 var(--cond);color:rgba(0,0,0,.18)}
+.scard-head .mi{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:rgba(0,0,0,.25)}
+.scard-head .mi svg{width:25px;height:25px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.scard-head h3{margin-top:14px;font:italic 900 30px/.95 var(--cond);text-transform:uppercase}
+.scard-head p{margin-top:4px;font-size:14px;opacity:.9}
+.slist{list-style:none;padding:6px 18px}
+.slist li{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line);font-size:15.5px}
+.slist li:last-child{border-bottom:0}
+.slist li svg{width:18px;height:18px;flex:none;stroke:var(--red2);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.slist li span{flex:1}
+.slist li em{font:italic 900 19px/1 var(--cond);font-style:italic;color:var(--red2)}
+.slist li em.q{font-size:13px;font-style:normal;letter-spacing:.08em;text-transform:uppercase}
+.scard .ask{display:flex;align-items:center;justify-content:center;gap:8px;margin:4px 18px 18px;height:50px;border-radius:12px;background:rgba(227,25,46,.12);color:var(--red2);font:700 14px/1 var(--cond);letter-spacing:.14em;text-transform:uppercase;transition:transform .15s}
+.scard .ask:active{transform:scale(.97)}
+.scard .ask svg{width:16px;height:16px}
+
+/* Apparition douce au défilement */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.gauge-card::before{animation:none}}
 </style>
 </head>
 <body>
@@ -233,6 +297,7 @@ form{margin-top:20px;display:grid;gap:14px}
 <!-- ACCUEIL -->
 <section class="view" id="v-accueil" aria-label="Accueil">
   <div class="hero">
+    <div class="wm" aria-hidden="true">BMW<br>VAG</div>
     <p class="kicker">Brie-Comte-Robert (77)</p>
     <h1 class="h1">Votre véhicule,<em>notre expertise.</em></h1>
     <p class="sig">Mécanique<b>·</b>Performance<b>·</b>Carrosserie</p>
@@ -267,58 +332,59 @@ form{margin-top:20px;display:grid;gap:14px}
     <a class="q-map" href="https://www.google.com/maps/search/?api=1&query=All%C3%A9e%20du%20Jardin%20Doliset%2077170%20Brie-Comte-Robert" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Itinéraire</a>
   </div>
 
-  <a class="promo" href="#devis" data-presta="Conversion Flexfuel E85">
+  <div class="sec-t"><h2>Nos métiers</h2><a href="#services">Tout voir</a></div>
+  <div class="mgrid">
+    <a class="mtile wide rv" href="#services" data-goto="s-reprog"><span class="mi"><svg class="" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3M9 9h6v6H9z"/></svg></span><span class="tx"><b>Reprogrammation</b><p>Stage 1, 2, 3, E85 et cartographie sur mesure.</p><span class="mprices"><span>Stage 1 <i>350€</i></span><span>Stage 2 <i>450€</i></span><span>E85 <i>350€</i></span></span></span></a>
+    <a class="mtile rv" href="#services" data-goto="s-meca"><span class="n">02</span><span class="go"><svg><use href="#i-arrow"/></svg></span><span class="mi"><svg class="" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><b>Mécanique</b><p>Entretien, distribution, embrayage, boîte auto.</p></a>
+    <a class="mtile rv" href="#services" data-goto="s-carro"><span class="n">03</span><span class="go"><svg><use href="#i-arrow"/></svg></span><span class="mi"><svg class="" viewBox="0 0 24 24"><path d="M3 16v-3l2-5h11l3 5h2v3"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/><path d="M9 16.5h6M5 13h16"/></svg></span><b>Carrosserie</b><p>Réparation, peinture, optiques, débosselage.</p></a>
+    <a class="mtile wide rv" href="#services" data-goto="s-prepa"><span class="mi"><svg class="" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l6-6"/><path d="M16 3h5v5"/></svg></span><span class="tx"><b>Préparation</b><p>Préparation moteur, optimisation et suivi personnalisé.</p></span><span class="go" style="position:static;flex:none"><svg><use href="#i-arrow"/></svg></span></a>
+  </div>
+
+  <a class="promo rv" href="#devis" data-presta="Conversion Flexfuel E85" style="margin-top:14px">
     <small>Conversion</small>
     <b>Flexfuel E85</b>
     <p>Roulez à l'éthanol à prix réduit. Compatible Stage 1, 2 et 3.</p>
     <i>350€</i>
   </a>
 
-  <div class="sec-t"><h2>Nos métiers</h2><a href="#services">Tout voir</a></div>
-  <div class="hs">
-    <div class="g-item"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3M9 9h6v6H9z"/></svg><h3>Reprogrammation</h3><p>Stage 1 / 2 / 3, E85, cartographie sur mesure.</p></div>
-    <div class="g-item"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><h3>Mécanique</h3><p>Entretien, distribution, embrayage, boîte auto.</p></div>
-    <div class="g-item"><svg viewBox="0 0 24 24"><path d="M3 16v-3l2-5h11l3 5h2v3"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/><path d="M9 16.5h6M5 13h16"/></svg><h3>Carrosserie</h3><p>Réparation, peinture, optiques, débosselage.</p></div>
-    <div class="g-item"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l6-6"/><path d="M16 3h5v5"/></svg><h3>Préparation</h3><p>Préparation moteur, optimisation, suivi.</p></div>
-  </div>
-
   <div class="sec-t"><h2>Nos engagements</h2></div>
-  <div class="hs">
-    <div class="g-item"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><h3>Diagnostic toutes marques</h3><p>On trouve la panne, quelle que soit la marque.</p></div>
-    <div class="g-item"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><h3>Qualité et garantie</h3><p>Un travail propre, garanti par le garage.</p></div>
-    <div class="g-item"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 10h8"/></svg><h3>Conseils personnalisés</h3><p>Un accueil humain, adapté à votre budget.</p></div>
-    <div class="g-item"><svg viewBox="0 0 24 24"><path d="M3 15a9 9 0 0 1 18 0"/><path d="M12 15l4-5"/><circle cx="12" cy="15" r="1.5"/></svg><h3>Passion automobile</h3><p>La mécanique et la performance, notre métier.</p></div>
+  <div class="egrid rv">
+    <div><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><b>Diagnostic toutes marques</b><span>On trouve la panne.</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><b>Qualité et garantie</b><span>Un travail garanti.</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 10h8"/></svg><b>Conseils personnalisés</b><span>Adaptés à votre budget.</span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M3 15a9 9 0 0 1 18 0"/><path d="M12 15l4-5"/><circle cx="12" cy="15" r="1.5"/></svg><b>Passion automobile</b><span>Notre métier.</span></div>
   </div>
 
-  <p class="slogan">TMD Motors, c'est plus <em>qu'un garage&nbsp;!</em></p>
+  <p class="slogan rv">TMD Motors, c'est plus <em>qu'un garage&nbsp;!</em></p>
 </section>
 
 <!-- SERVICES -->
 <section class="view" id="v-services" aria-label="Prestations">
   <p class="kicker">Spécialiste BMW / VAG</p>
   <h2 class="h2">Nos <em>prestations</em></h2>
-  <p class="lead">Quatre métiers sous le même toit. Touchez une carte pour voir le détail.</p>
-  <div class="acc">
-    <details open>
-      <summary><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3M9 9h6v6H9z"/></svg></span><div><b>Reprogrammation</b><span>Plus de performance</span></div><svg class="chev"><use href="#i-chev"/></svg></summary>
-      <ul><li>Stage 1 / 2 / 3</li><li>Flexfuel E85</li><li>Cartographie sur mesure</li><li>Remise d'origine</li></ul>
+  <p class="lead">Quatre métiers sous le même toit.</p>
+  <nav class="snav" aria-label="Métiers"><a href="#services" data-goto="s-reprog" class="on">Reprogrammation</a><a href="#services" data-goto="s-meca">Mécanique</a><a href="#services" data-goto="s-carro">Carrosserie</a><a href="#services" data-goto="s-prepa">Préparation</a></nav>
+  <div class="scards">
+    <article class="scard" id="s-reprog">
+      <div class="scard-head" data-n="01"><span class="mi"><svg class="" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3M9 9h6v6H9z"/></svg></span><h3>Reprogrammation</h3><p>Plus de puissance, moins de consommation.</p></div>
+      <ul class="slist"><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stage 1</span><em>350€</em></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stage 2</span><em>450€</em></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stage 3</span><em class="q">Sur devis</em></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Flexfuel E85</span><em>350€</em></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Cartographie sur mesure</span></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Remise d'origine</span><em>200€</em></li></ul>
       <a class="ask" href="#devis" data-presta="Stage 1">Demander un devis<svg><use href="#i-arrow"/></svg></a>
-    </details>
-    <details>
-      <summary><span class="ic"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><div><b>Mécanique</b><span>Entretien et réparations</span></div><svg class="chev"><use href="#i-chev"/></svg></summary>
-      <ul><li>Entretien / Révision</li><li>Distribution</li><li>Embrayage</li><li>Boîte auto (BVA)</li></ul>
+    </article>
+    <article class="scard" id="s-meca">
+      <div class="scard-head" data-n="02"><span class="mi"><svg class="" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span><h3>Mécanique</h3><p>Entretien et réparations.</p></div>
+      <ul class="slist"><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Entretien / Révision</span><em class="q">Sur devis</em></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Distribution</span><em>dès 250€</em></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Embrayage</span><em>dès 400€</em></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Boîte auto (BVA)</span></li></ul>
       <a class="ask" href="#devis" data-presta="Entretien / Révision">Demander un devis<svg><use href="#i-arrow"/></svg></a>
-    </details>
-    <details>
-      <summary><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 16v-3l2-5h11l3 5h2v3"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/><path d="M9 16.5h6M5 13h16"/></svg></span><div><b>Carrosserie légère</b><span>Votre voiture comme neuve</span></div><svg class="chev"><use href="#i-chev"/></svg></summary>
-      <ul><li>Réparation</li><li>Peinture</li><li>Rénovation optique</li><li>Débosselage</li></ul>
+    </article>
+    <article class="scard" id="s-carro">
+      <div class="scard-head" data-n="03"><span class="mi"><svg class="" viewBox="0 0 24 24"><path d="M3 16v-3l2-5h11l3 5h2v3"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/><path d="M9 16.5h6M5 13h16"/></svg></span><h3>Carrosserie légère</h3><p>Votre voiture comme neuve.</p></div>
+      <ul class="slist"><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Réparation</span></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Peinture</span></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Rénovation optique</span></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Débosselage</span></li></ul>
       <a class="ask" href="#devis" data-presta="Carrosserie légère">Demander un devis<svg><use href="#i-arrow"/></svg></a>
-    </details>
-    <details>
-      <summary><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l6-6"/><path d="M16 3h5v5"/></svg></span><div><b>Préparation</b><span>Sur mesure</span></div><svg class="chev"><use href="#i-chev"/></svg></summary>
-      <ul><li>Stage performance</li><li>Préparation moteur</li><li>Optimisation</li><li>Suivi personnalisé</li></ul>
+    </article>
+    <article class="scard" id="s-prepa">
+      <div class="scard-head" data-n="04"><span class="mi"><svg class="" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l6-6"/><path d="M16 3h5v5"/></svg></span><h3>Préparation</h3><p>Sur mesure, avec suivi.</p></div>
+      <ul class="slist"><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Stage performance</span></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Préparation moteur</span></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Optimisation</span></li><li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Suivi personnalisé</span></li></ul>
       <a class="ask" href="#devis" data-presta="Stage 3">Demander un devis<svg><use href="#i-arrow"/></svg></a>
-    </details>
+    </article>
   </div>
 </section>
 
@@ -437,7 +503,7 @@ form{margin-top:20px;display:grid;gap:14px}
     var v = location.hash.slice(1); if (VIEWS.indexOf(v) < 0) v = 'accueil';
     VIEWS.forEach(function (n) { document.getElementById('v-' + n).classList.toggle('on', n === v); });
     tabs.forEach(function (t) { var on = t.dataset.v === v; t.classList.toggle('on', on); if (on) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
-    scrollTo(0, 0);
+    if (!(v === 'services' && pending)) scrollTo(0, 0);
     if (v === 'accueil') gaugeIntro();
   }
   addEventListener('hashchange', show);
@@ -488,9 +554,36 @@ form{margin-top:20px;display:grid;gap:14px}
     });
   });
 
-  /* Un seul métier ouvert à la fois */
-  var det = document.querySelectorAll('.acc details');
-  det.forEach(function (d) { d.addEventListener('toggle', function () { if (d.open) det.forEach(function (o) { if (o !== d) o.open = false; }); }); });
+  /* Métiers : aller directement à la bonne carte, puces qui suivent le défilement */
+  var pending = null;
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-goto]'); if (!g) return;
+    e.preventDefault(); pending = g.dataset.goto;
+    if (location.hash !== '#services') location.hash = 'services'; else goCard();
+  });
+  function goCard() {
+    if (!pending) return; var el = document.getElementById(pending); pending = null;
+    requestAnimationFrame(function () { el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+  }
+  addEventListener('hashchange', function () { if (location.hash === '#services') setTimeout(goCard, 60); });
+  var chips = document.querySelectorAll('.snav a');
+  if ('IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (x) {
+        if (!x.isIntersecting) return;
+        chips.forEach(function (c) { var on = c.dataset.goto === x.target.id; c.classList.toggle('on', on); if (on) c.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); });
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    document.querySelectorAll('.scard').forEach(function (c) { cio.observe(c); });
+  }
+
+  /* Apparition au défilement */
+  var rvs = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) rvs.forEach(function (el) { el.classList.add('in'); });
+  else {
+    var rio = new IntersectionObserver(function (es) { es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); rio.unobserve(x.target); } }); }, { rootMargin: '0px 0px -6% 0px' });
+    rvs.forEach(function (el) { rio.observe(el); });
+  }
 
   /* Formulaire : WhatsApp ou e-mail */
   var form = document.getElementById('form'), err = document.getElementById('err'), via = 'wa';
