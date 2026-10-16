@@ -7,4 +7,4 @@ Maquette du site de TMD Motors, garage spécialiste BMW / VAG à Brie-Comte-Robe
 
 Réalisé par Mon Site Studio.
 
-En ligne : https://r9mzz.github.io/tmd-motors/
+En ligne : https://r9mzz.github.io/Tmd-motors/
