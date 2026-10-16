@@ -616,6 +616,94 @@ body.inner.scrolled .topbar{opacity:1}
   (function () { var g = grain.getContext('2d'), d = g.createImageData(160, 160); for (var i = 0; i < d.data.length; i += 4) { var n = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = n; d.data[i + 3] = 14; } g.putImageData(d, 0, 0); })();
   var grainPat = null;
 
+  /* BMW M3 vue de dessus, dessinée en unités : longueur 100, avant vers +x */
+  function smooth(g, pts) {
+    var n = pts.length;
+    g.moveTo((pts[n - 1][0] + pts[0][0]) / 2, (pts[n - 1][1] + pts[0][1]) / 2);
+    for (var i = 0; i < n; i++) { var a = pts[i], b = pts[(i + 1) % n]; g.quadraticCurveTo(a[0], a[1], (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); }
+    g.closePath();
+  }
+  function mirror(half) { var out = half.slice(); for (var i = half.length - 1; i >= 0; i--) if (half[i][1] !== 0) out.push([half[i][0], -half[i][1]]); return out; }
+  var M3 = {
+    body: mirror([[51.3, 0], [51.1, -8], [50.4, -13.4], [48.8, -17.3], [45.4, -19.7], [38, -20.8], [30, -20.8], [22, -20.1], [10, -19.5], [-6, -19.7], [-20, -20.7], [-30, -21.3], [-40, -21], [-46, -20.2], [-49.8, -18], [-51.1, -13.5], [-51.5, -6], [-51.6, 0]]),
+    glass: mirror([[19.4, 0], [19, -9], [18.2, -15.4], [17, -16], [6.5, -15.6], [-18.5, -15.4], [-27.5, -14.4], [-30, -12.6], [-31, -6], [-31.2, 0]]),
+    roof: mirror([[6.6, 0], [6.4, -12.8], [5.6, -13.8], [-17.4, -13.8], [-18.4, -12.8], [-18.6, 0]]),
+    lampL: [[50.2, -11.2], [49.4, -15.6], [47.4, -18.4], [46.4, -18], [48.2, -15], [48.9, -11.4]]
+  };
+  function poly(g, p, my) { g.beginPath(); p.forEach(function (q, i) { g[i ? 'lineTo' : 'moveTo'](q[0], my ? -q[1] : q[1]); }); g.closePath(); }
+  function drawM3(g, t, sp) {
+    /* Quatre sorties d'échappement (sous le pare-chocs) */
+    [-12, -8.6, 8.6, 12].forEach(function (y) { g.fillStyle = '#9aa3ad'; g.beginPath(); g.arc(-52.2, y, 1.2, 0, Math.PI * 2); g.fill(); g.fillStyle = '#0b0d10'; g.beginPath(); g.arc(-52.2, y, .75, 0, Math.PI * 2); g.fill(); });
+    /* Ombre portée */
+    g.save(); g.shadowColor = 'rgba(0,0,0,.85)'; g.shadowBlur = 30; g.shadowOffsetY = 0;
+    g.fillStyle = '#0a1226'; g.beginPath(); smooth(g, M3.body); g.fill(); g.restore();
+    /* Carrosserie bleu métallisé */
+    var paint = g.createLinearGradient(0, -21, 0, 21);
+    paint.addColorStop(0, '#08112a'); paint.addColorStop(.18, '#1c3d8c'); paint.addColorStop(.38, '#3963c4'); paint.addColorStop(.5, '#2a4fa8');
+    paint.addColorStop(.7, '#18357c'); paint.addColorStop(.88, '#0f2357'); paint.addColorStop(1, '#060d20');
+    g.fillStyle = paint; g.beginPath(); smooth(g, M3.body); g.fill();
+    g.save(); g.beginPath(); smooth(g, M3.body); g.clip();
+    /* Reflet des lampadaires qui glisse sur la carrosserie */
+    var k = ((t * (0.35 + sp * .5)) % 1.6) - .3, hx = 70 - k * 140;
+    var sh = g.createLinearGradient(hx - 16, 0, hx + 16, 0);
+    sh.addColorStop(0, 'rgba(255,200,150,0)'); sh.addColorStop(.5, 'rgba(255,205,160,.22)'); sh.addColorStop(1, 'rgba(255,200,150,0)');
+    g.globalCompositeOperation = 'lighter'; g.fillStyle = sh; g.fillRect(-60, -25, 120, 50); g.globalCompositeOperation = 'source-over';
+    /* Bas de caisse plus sombre */
+    var edge = g.createLinearGradient(0, -21, 0, 21);
+    edge.addColorStop(0, 'rgba(0,0,0,.55)'); edge.addColorStop(.1, 'rgba(0,0,0,0)'); edge.addColorStop(.9, 'rgba(0,0,0,0)'); edge.addColorStop(1, 'rgba(0,0,0,.6)');
+    g.fillStyle = edge; g.fillRect(-60, -25, 120, 50);
+    g.restore();
+    /* Nervures du capot (bossages) */
+    g.lineCap = 'round'; g.lineWidth = .6;
+    [-1, 1].forEach(function (s) {
+      g.strokeStyle = 'rgba(160,190,255,.35)'; g.beginPath(); g.moveTo(47, s * 5.5); g.quadraticCurveTo(34, s * 7.5, 19.5, s * 9.5); g.stroke();
+      g.strokeStyle = 'rgba(0,0,0,.35)'; g.beginPath(); g.moveTo(47, s * 6.4); g.quadraticCurveTo(34, s * 8.4, 19.5, s * 10.4); g.stroke();
+      /* Ligne d'épaule */
+      g.strokeStyle = 'rgba(140,170,240,.22)'; g.beginPath(); g.moveTo(38, s * 18.6); g.quadraticCurveTo(0, s * 17.8, -38, s * 19.2); g.stroke();
+    });
+    /* Vitres */
+    var gl = g.createLinearGradient(18, 0, -30, 0);
+    gl.addColorStop(0, '#0b1320'); gl.addColorStop(.25, '#1b2a3c'); gl.addColorStop(.6, '#0a111b'); gl.addColorStop(1, '#141f2d');
+    g.fillStyle = gl; poly(g, M3.glass); g.lineJoin = 'round'; g.fill();
+    g.strokeStyle = 'rgba(0,0,0,.6)'; g.lineWidth = .8; g.stroke();
+    /* Reflet sur le pare-brise */
+    g.fillStyle = 'rgba(190,215,255,.10)'; g.beginPath(); g.moveTo(18.2, -11); g.lineTo(10, -14.6); g.lineTo(8.4, -6); g.lineTo(17.4, -2); g.closePath(); g.fill();
+    /* Toit carbone */
+    var rf = g.createLinearGradient(0, -13, 0, 13);
+    rf.addColorStop(0, '#07090c'); rf.addColorStop(.45, '#20262e'); rf.addColorStop(.55, '#161b21'); rf.addColorStop(1, '#050608');
+    g.fillStyle = rf; g.beginPath(); smooth(g, M3.roof); g.fill();
+    g.strokeStyle = 'rgba(255,255,255,.05)'; g.lineWidth = .3;
+    for (var x = -17; x < 6; x += 1.4) { g.beginPath(); g.moveTo(x, -13.2); g.lineTo(x, 13.2); g.stroke(); }
+    /* Rétroviseurs */
+    [-1, 1].forEach(function (s) {
+      g.fillStyle = '#16306f'; g.beginPath(); g.moveTo(14.5, s * 19.3); g.quadraticCurveTo(13.5, s * 23.6, 10.5, s * 23.4); g.lineTo(9.5, s * 19.4); g.closePath(); g.fill();
+      g.fillStyle = 'rgba(0,0,0,.5)'; g.fillRect(9.6, s > 0 ? 19.4 : -20.2, 4.2, .8);
+    });
+    /* Calandre : doubles haricots */
+    g.fillStyle = '#05070a';
+    [-1, 1].forEach(function (s) { g.beginPath(); g.roundRect(48.4, s > 0 ? 1 : -8.2, 2.6, 7.2, 1.1); g.fill(); });
+    g.strokeStyle = 'rgba(200,210,225,.55)'; g.lineWidth = .35;
+    [-1, 1].forEach(function (s) { g.beginPath(); g.roundRect(48.4, s > 0 ? 1 : -8.2, 2.6, 7.2, 1.1); g.stroke(); });
+    /* Petit logo sur le capot */
+    g.fillStyle = 'rgba(230,235,245,.85)'; g.beginPath(); g.arc(46.2, 0, 1.15, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#1d5fd1'; g.beginPath(); g.arc(46.2, 0, .75, 0, Math.PI * .5); g.lineTo(46.2, 0); g.fill(); g.beginPath(); g.arc(46.2, 0, .75, Math.PI, Math.PI * 1.5); g.lineTo(46.2, 0); g.fill();
+    /* Becquet de malle */
+    g.strokeStyle = 'rgba(0,0,0,.55)'; g.lineWidth = .9; g.beginPath(); g.moveTo(-44.6, -15); g.quadraticCurveTo(-46, 0, -44.6, 15); g.stroke();
+    g.strokeStyle = 'rgba(150,180,250,.25)'; g.lineWidth = .4; g.beginPath(); g.moveTo(-43.6, -14.6); g.quadraticCurveTo(-45, 0, -43.6, 14.6); g.stroke();
+    /* Diffuseur et quatre sorties d'échappement */
+    g.fillStyle = '#05070a'; g.beginPath(); g.roundRect(-51.8, -13.4, 1.2, 26.8, .5); g.fill();
+    /* Phares */
+    g.globalCompositeOperation = 'lighter';
+    g.shadowColor = 'rgba(200,225,255,.9)'; g.shadowBlur = 10;
+    [false, true].forEach(function (my) { g.fillStyle = 'rgba(215,232,255,.9)'; poly(g, M3.lampL, my); g.fill(); });
+    /* Feux arrière en L */
+    g.shadowColor = '#ff1a30'; g.shadowBlur = 16; g.fillStyle = '#ff2236';
+    [-1, 1].forEach(function (s) {
+      g.beginPath(); g.moveTo(-49.4, s * 10.5); g.quadraticCurveTo(-50.1, s * 15.6, -47.2, s * 18.6); g.lineTo(-42.5, s * 19.8); g.lineTo(-42.8, s * 18.6); g.lineTo(-46.6, s * 17.3); g.quadraticCurveTo(-48.6, s * 15, -48.3, s * 10.5); g.closePath(); g.fill();
+    });
+    g.shadowBlur = 0; g.globalCompositeOperation = 'source-over';
+  }
+
   function draw(now) {
     var dt = Math.min(50, now - last) / 1000; last = now;
     speed += (targetSpeed - speed) * Math.min(1, dt * 2);
@@ -627,7 +715,7 @@ body.inner.scrolled .topbar{opacity:1}
     ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
 
     ctx.save();
-    ctx.translate(W * (mobile ? .5 : .52), H * (mobile ? .4 : .46));
+    ctx.translate(W * (mobile ? .5 : .52), H * (mobile ? .4 : .38));
     ctx.rotate(-0.42);
     /* Route */
     var rw = S * 0.5;
@@ -658,26 +746,19 @@ body.inner.scrolled .topbar{opacity:1}
       ctx.strokeStyle = g; ctx.lineWidth = 5; ctx.lineCap = 'round';
       ctx.beginPath(); ctx.moveTo(u, v); ctx.lineTo(u + len, v); ctx.stroke();
     });
-    /* La voiture (vue de dessus) et ses feux arrière */
-    var cu = S * (mobile ? .02 : .06), cvv = rw * .07, L = S * (mobile ? .085 : .07), Wd = L * .44, wob = Math.sin(t * .8) * rw * .006;
-    var glow = ctx.createRadialGradient(cu - L * .55, cvv + wob, 0, cu - L * .55, cvv + wob, L * 1.6);
-    glow.addColorStop(0, 'rgba(255,30,45,.42)'); glow.addColorStop(.35, 'rgba(200,10,30,.15)'); glow.addColorStop(1, 'rgba(160,0,20,0)');
-    ctx.fillStyle = glow; ctx.beginPath(); ctx.ellipse(cu - L * .7, cvv + wob, L * 1.8, L * .9, 0, 0, Math.PI * 2); ctx.fill();
-    var head = ctx.createRadialGradient(cu + L * .9, cvv + wob, 0, cu + L * .9, cvv + wob, L * 1.4);
-    head.addColorStop(0, 'rgba(220,240,240,.09)'); head.addColorStop(1, 'rgba(220,240,240,0)');
-    ctx.fillStyle = head; ctx.beginPath(); ctx.ellipse(cu + L * 1.5, cvv + wob, L * 1.3, L * .38, 0, 0, Math.PI * 2); ctx.fill();
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.save(); ctx.translate(cu, cvv + wob);
-    var body = ctx.createLinearGradient(0, -Wd / 2, 0, Wd / 2);
-    body.addColorStop(0, '#1f2827'); body.addColorStop(.5, '#0f1414'); body.addColorStop(1, '#070a0a');
-    ctx.fillStyle = body; ctx.beginPath(); ctx.roundRect(-L / 2, -Wd / 2, L, Wd, Wd * .42); ctx.fill();
-    ctx.fillStyle = 'rgba(140,175,175,.16)'; ctx.beginPath(); ctx.roundRect(-L * .12, -Wd * .36, L * .3, Wd * .72, Wd * .25); ctx.fill();
-    ctx.fillStyle = 'rgba(0,0,0,.45)'; ctx.beginPath(); ctx.roundRect(-L * .28, -Wd * .34, L * .14, Wd * .68, Wd * .2); ctx.fill();
+    /* La voiture : BMW M3 vue de dessus (bleu Portimao), feux allumés */
+    var cu = S * (mobile ? .0 : .05), cvv = rw * .07, L = S * (mobile ? .17 : .135), wob = Math.sin(t * .8) * rw * .005;
     ctx.globalCompositeOperation = 'lighter';
-    ctx.fillStyle = '#ff2a3c'; ctx.shadowColor = '#ff1a30'; ctx.shadowBlur = 14;
-    ctx.fillRect(-L / 2 - 1, -Wd * .44, 2.5, Wd * .26); ctx.fillRect(-L / 2 - 1, Wd * .18, 2.5, Wd * .26);
-    ctx.shadowBlur = 6; ctx.globalAlpha = .35; ctx.fillRect(-L / 2 - .5, -Wd * .18, 1.5, Wd * .36); ctx.globalAlpha = 1;
-    ctx.shadowBlur = 0; ctx.globalCompositeOperation = 'source-over';
+    var glow = ctx.createRadialGradient(cu - L * .52, cvv + wob, 0, cu - L * .52, cvv + wob, L * .95);
+    glow.addColorStop(0, 'rgba(255,30,45,.40)'); glow.addColorStop(.4, 'rgba(200,10,30,.13)'); glow.addColorStop(1, 'rgba(160,0,20,0)');
+    ctx.fillStyle = glow; ctx.beginPath(); ctx.ellipse(cu - L * .62, cvv + wob, L * .95, L * .5, 0, 0, Math.PI * 2); ctx.fill();
+    var head = ctx.createLinearGradient(cu + L * .5, 0, cu + L * 1.9, 0);
+    head.addColorStop(0, 'rgba(225,240,255,.16)'); head.addColorStop(1, 'rgba(225,240,255,0)');
+    ctx.fillStyle = head; ctx.beginPath();
+    ctx.moveTo(cu + L * .48, cvv + wob - L * .17); ctx.lineTo(cu + L * 1.9, cvv + wob - L * .42); ctx.lineTo(cu + L * 1.9, cvv + wob + L * .42); ctx.lineTo(cu + L * .48, cvv + wob + L * .17); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.save(); ctx.translate(cu, cvv + wob); ctx.scale(L / 100, L / 100);
+    drawM3(ctx, t, speed);
     ctx.restore();
     ctx.restore();
 
