@@ -28,7 +28,7 @@ button,input,select,textarea{font:inherit;color:inherit;background:none;border:0
 :focus-visible{outline:2px solid #fff;outline-offset:3px;border-radius:999px}
 
 /* ---------- Fond animé (route de nuit) ---------- */
-#scene{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+#scene{position:fixed;left:0;top:0;width:100%;height:100vh;height:100lvh;z-index:0;display:block}
 .veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:rgba(6,9,9,.0);-webkit-backdrop-filter:blur(0);backdrop-filter:blur(0);transition:background .8s var(--ease),backdrop-filter .8s var(--ease),-webkit-backdrop-filter .8s var(--ease)}
 body.inner .veil{background:rgba(6,9,9,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 
@@ -38,7 +38,7 @@ body.inner .veil{background:rgba(6,9,9,.72);-webkit-backdrop-filter:blur(14px);b
 .pill{display:flex;align-items:center;gap:4px;height:44px;padding:0 6px 0 16px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-b);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
 .logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;font-family:var(--cond);margin-right:10px}
 .logo b{font-weight:900;font-style:italic;font-size:21px;letter-spacing:0}
-.logo span{font-weight:800;font-style:italic;font-size:7.5px;letter-spacing:.52em;margin-right:-.52em;color:var(--red);margin-top:1px}
+.logo span{font-weight:800;font-style:italic;font-size:7.5px;letter-spacing:.52em;margin-right:-.52em;color:#1ce6d1;filter:invert(1);margin-top:1px}
 .links{display:flex}
 .links a{padding:8px 12px;border-radius:999px;font-size:13.5px;color:var(--soft);transition:color .25s,background .25s}
 .links a:hover,.links a.on{color:var(--ink)}
@@ -46,8 +46,8 @@ body.inner .veil{background:rgba(6,9,9,.72);-webkit-backdrop-filter:blur(14px);b
 .nav-cta{height:44px;padding:0 20px;display:flex;align-items:center;border-radius:999px;background:var(--glass);border:1px solid var(--glass-b);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);font-size:13.5px;transition:background .25s}
 .nav-cta:hover{background:rgba(255,255,255,.14)}
 .menu-btn{display:none;height:44px;padding:0 18px;border-radius:999px;background:var(--glass);border:1px solid var(--glass-b);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);font-size:14px;cursor:pointer;align-items:center;gap:10px}
-.menu-btn i{position:relative;display:block;width:16px;height:8px}
-.menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;border-radius:2px;transition:transform .4s var(--ease),top .4s var(--ease)}
+.menu-btn i{position:relative;display:block;width:16px;height:8px;filter:invert(1)}
+.menu-btn i::before,.menu-btn i::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:#0c0b0c;border-radius:2px;transition:transform .4s var(--ease),top .4s var(--ease)}
 .menu-btn i::before{top:0}.menu-btn i::after{top:6.5px}
 body.menu-open .menu-btn i::before{top:3.25px;transform:rotate(45deg)}
 body.menu-open .menu-btn i::after{top:3.25px;transform:rotate(-45deg)}
@@ -64,12 +64,15 @@ main{transition:opacity .4s var(--ease)}body.menu-open main{opacity:0}
 .menu-foot{display:flex;justify-content:space-between;margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--soft);opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease) .25s,transform .6s var(--ease) .25s}
 body.menu-open .menu-foot{opacity:1;transform:none}
 
-/* ---------- Boutons ---------- */
+/* ---------- Boutons ----------
+   Samsung Internet (thème sombre forcé) inverse les fonds clairs et éclaircit les textes foncés :
+   les éléments clairs sont peints en négatif puis remis à l'endroit par filter:invert(1). */
 .btns{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;white-space:nowrap;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 24px;border-radius:999px;font-size:14.5px;font-weight:500;cursor:pointer;transition:transform .2s var(--ease),background .25s,color .25s}
 .btn:active{transform:scale(.97)}
-.btn-white{background-image:linear-gradient(#f3f4f3,#f3f4f3);color:#0b0f0f}
-.btn-white:hover{background-image:linear-gradient(#fff,#fff)}
+.btn-white{background:#0c0b0c;color:#f4f0f0;filter:invert(1)}
+.btn-white:hover{background:#000}
+.btn-white:focus-visible{outline-color:#000}
 .btn-glass{background:var(--glass);border:1px solid var(--glass-b);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
 .btn-glass:hover{background:rgba(255,255,255,.14)}
 .arrow{display:inline-block;transition:transform .3s var(--ease)}
@@ -79,8 +82,8 @@ a:hover .arrow{transform:translateX(4px)}
 main{position:relative;z-index:5}
 .view{display:none}
 .view.on{display:block}
-.js .rise{opacity:0;transform:translateY(16px);filter:blur(8px)}
-.js .on .rise{opacity:1;transform:none;filter:none;transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:calc(var(--d,0) * 90ms + 80ms)}
+.js .rise{opacity:0;transform:translateY(16px);filter:var(--inv,) blur(8px)}
+.js .on .rise{opacity:1;transform:none;filter:var(--inv,none);transition:opacity 1s var(--ease),transform 1s var(--ease),filter 1s var(--ease);transition-delay:calc(var(--d,0) * 90ms + 80ms)}
 
 /* Accueil : uniquement l'image et le message */
 .home{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 var(--pad) calc(46px + env(safe-area-inset-bottom,0px));text-align:center}
@@ -96,14 +99,14 @@ main{position:relative;z-index:5}
 body.inner.scrolled .topbar{opacity:1}
 .wrap{max-width:1120px;margin:0 auto;padding:0 var(--pad)}
 .hero-in{padding:calc(150px + env(safe-area-inset-top,0px)) 0 40px;text-align:center}
-.eyebrow{font-size:15px;font-weight:500;color:var(--red);letter-spacing:-.01em}
-.hl{margin-top:12px;font-size:clamp(46px,8.4vw,104px);font-weight:600;line-height:.98;letter-spacing:-.055em;background:linear-gradient(180deg,#fff 30%,#8d9695);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.06em}
+.eyebrow{font-size:15px;font-weight:500;color:#1ce6d1;letter-spacing:-.01em;--inv:invert(1);filter:invert(1)}
+.hl{margin-top:12px;font-size:clamp(46px,8.4vw,104px);font-weight:600;line-height:.98;letter-spacing:-.055em;background:linear-gradient(180deg,#000 30%,#72696a);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.06em;--inv:invert(1);filter:invert(1)}
 .sub{max-width:600px;margin:22px auto 0;font-size:clamp(17px,1.7vw,21px);line-height:1.45;color:var(--soft);letter-spacing:-.02em}
 .cta-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}
 
 /* Révélation au défilement */
-.js .rv{opacity:0;transform:translateY(44px);filter:blur(6px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease);transition-delay:calc(var(--d,0) * 110ms)}
-.js .rv.in{opacity:1;transform:none;filter:none}
+.js .rv{opacity:0;transform:translateY(44px);filter:var(--inv,) blur(6px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease),filter 1.1s var(--ease);transition-delay:calc(var(--d,0) * 110ms)}
+.js .rv.in{opacity:1;transform:none;filter:var(--inv,none)}
 
 /* Phrase qui s'allume mot à mot */
 .lit{padding:12vh 0 14vh;max-width:940px;margin:0 auto;font-size:clamp(28px,4.4vw,54px);font-weight:600;line-height:1.14;letter-spacing:-.045em;text-align:center}
@@ -145,14 +148,14 @@ body.inner.scrolled .topbar{opacity:1}
 
 /* Tarifs */
 .config{margin:30px auto 0;max-width:760px;text-align:center}
-.big-price{font-size:clamp(84px,15vw,170px);font-weight:600;letter-spacing:-.065em;line-height:1;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff 35%,#7e8786);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.04em}
+.big-price{font-size:clamp(84px,15vw,170px);font-weight:600;letter-spacing:-.065em;line-height:1;font-variant-numeric:tabular-nums;--inv:invert(1);filter:invert(1);background:linear-gradient(180deg,#000 35%,#817879);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.04em}
 .big-price.q{font-size:clamp(56px,9vw,104px);padding:.2em 0 .14em}
 .price-of{margin-top:6px;font-size:19px;font-weight:500;letter-spacing:-.02em}
 .price-txt{max-width:460px;margin:8px auto 0;min-height:3em;font-size:16px;color:var(--faint);line-height:1.5}
 .seg{position:relative;display:inline-grid;grid-template-columns:repeat(4,auto);margin-top:30px;padding:4px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
-.seg i{position:absolute;top:4px;bottom:4px;left:0;border-radius:999px;background-image:linear-gradient(#f3f4f3,#f3f4f3);transition:transform .55s var(--ease),width .55s var(--ease)}
+.seg i{position:absolute;top:4px;bottom:4px;left:0;border-radius:999px;background:#0c0b0c;filter:invert(1);transition:transform .55s var(--ease),width .55s var(--ease)}
 .seg button{position:relative;z-index:1;height:42px;padding:0 22px;border-radius:999px;font-size:15px;color:var(--soft);cursor:pointer;transition:color .35s}
-.seg button[aria-pressed="true"]{color:#0b0f0f}
+.seg button[aria-pressed="true"]{color:#f4f0f0;filter:invert(1)}
 .power{max-width:460px;height:3px;margin:34px auto 0;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
 .power i{display:block;height:100%;width:25%;background:linear-gradient(90deg,rgba(255,255,255,.5),var(--red));transition:width 1s var(--ease)}
 .power-l{display:flex;justify-content:space-between;max-width:460px;margin:10px auto 0;font-size:13px;color:var(--faint)}
@@ -174,7 +177,7 @@ body.inner.scrolled .topbar{opacity:1}
 .steps{max-width:760px;margin:20px auto 0}
 .prog{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .prog i{height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;position:relative}
-.prog i::after{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
+.prog i::after{content:"";position:absolute;inset:0;background:#0c0b0c;filter:invert(1);transform:scaleX(0);transform-origin:left;transition:transform .6s var(--ease)}
 .prog i.done::after{transform:none}
 .prog-l{display:flex;justify-content:space-between;margin-top:12px;font-size:14px;color:var(--faint)}
 .stage-box{position:relative;margin-top:34px}
@@ -212,7 +215,7 @@ body.inner.scrolled .topbar{opacity:1}
 .small{margin-top:6px;font-size:13px;color:var(--faint)}
 
 /* Contact */
-.tel-xl{display:inline-block;margin-top:18px;font-size:clamp(50px,9.6vw,120px);font-weight:600;letter-spacing:-.06em;line-height:1;background:linear-gradient(180deg,#fff 35%,#7e8786);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.05em;font-variant-numeric:tabular-nums}
+.tel-xl{display:inline-block;margin-top:18px;font-size:clamp(50px,9.6vw,120px);font-weight:600;letter-spacing:-.06em;line-height:1;--inv:invert(1);filter:invert(1);background:linear-gradient(180deg,#000 35%,#817879);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.05em;font-variant-numeric:tabular-nums}
 .map{position:relative;overflow:hidden;height:min(62vh,560px);min-height:420px;margin-top:9vh;border-radius:30px;border:1px solid rgba(255,255,255,.08);background:radial-gradient(60% 60% at 50% 45%,rgba(227,25,46,.12),transparent 70%),#0e1313}
 .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.92) hue-rotate(180deg) grayscale(.85) brightness(.85) contrast(1.05)}
 .map-card{position:absolute;left:20px;bottom:20px;right:20px;max-width:380px;padding:24px;border-radius:22px;background:rgba(10,14,14,.78);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12)}
@@ -261,7 +264,7 @@ body.inner.scrolled .topbar{opacity:1}
 }
 @media (min-width:861px){.menu{display:none}.home-meta{display:flex}}
 @media (prefers-reduced-motion:reduce){
-  .js .rise,.js .rv{opacity:1;transform:none;filter:none;transition:none}
+  .js .rise,.js .rv{opacity:1;transform:none;filter:var(--inv,none);transition:none}
   .menu,.menu nav a span,.menu-foot,.veil,.draw,.needle,.power i,.seg i{transition:none}
   .belt,.spin,.step.on{animation:none}
 }
@@ -597,268 +600,759 @@ body.inner.scrolled .topbar{opacity:1}
   var onView = function () {};
 
   /* =========================================================
-     Fond : route de nuit vue d'en haut, la voiture roule,
-     les lignes et les lampadaires défilent.
+     Fond : autoroute de nuit vue du ciel, chaussée mouillée.
+     La BMW M3 noir mat roule au centre de la voie du milieu ;
+     les lampadaires l'éclairent au passage. Tout est précalculé
+     une fois : chaque image ne fait que déplacer les textures.
      ========================================================= */
   if (!CanvasRenderingContext2D.prototype.roundRect) CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h) { this.rect(x, y, w, h); };
-  var cv = $('#scene'), ctx = cv.getContext('2d'), W, H, dpr, t0 = performance.now(), last = t0, running = true;
-  var speed = 1, targetSpeed = 1, lamps = [], drops = [];
-  function size() {
-    dpr = Math.min(window.devicePixelRatio || 1, 1.6);
-    W = cv.clientWidth; H = cv.clientHeight;
-    cv.width = W * dpr; cv.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    lamps = []; for (var i = 0; i < 9; i++) lamps.push({ u: Math.random() * 2 - 1, v: -0.42 - Math.random() * 0.22, len: 0.05 + Math.random() * 0.06, a: 0.35 + Math.random() * 0.5 });
-    drops = []; for (var j = 0; j < 70; j++) drops.push({ u: Math.random() * 2 - 1, v: Math.random() * 1.6 - 0.8, l: 0.01 + Math.random() * 0.03, a: 0.04 + Math.random() * 0.08 });
-  }
-  /* Grain fixe, dessiné une seule fois */
-  var grain = document.createElement('canvas'); grain.width = grain.height = 160;
-  (function () { var g = grain.getContext('2d'), d = g.createImageData(160, 160); for (var i = 0; i < d.data.length; i += 4) { var n = Math.random() * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = n; d.data[i + 3] = 14; } g.putImageData(d, 0, 0); })();
-  var grainPat = null;
+  /* ---- BMW M3 (G80) noir mat vue de dessus, rendue comme une image 3D :
+     carte de hauteur (capot, pavillon, vitres, ailes élargies) -> normales ->
+     reflet du ciel de nuit, occlusion, puis éclairage des lampadaires précalculé
+     pour plusieurs positions (la voiture s'éclaire en passant sous chaque lampe).
+     Unités : longueur 1034, avant vers +x. ---- */
+  var M3 = (function () {
+    function sm(pts, p) {
+      p = p || new Path2D(); var n = pts.length, i, a, b;
+      p.moveTo((pts[n - 1][0] + pts[0][0]) / 2, (pts[n - 1][1] + pts[0][1]) / 2);
+      for (i = 0; i < n; i++) { a = pts[i]; b = pts[(i + 1) % n]; p.quadraticCurveTo(a[0], a[1], (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); }
+      p.closePath(); return p;
+    }
+    function mir(h) { var o = h.slice(); for (var i = h.length - 1; i >= 0; i--) if (h[i][1]) o.push([h[i][0], -h[i][1]]); return o; }
+    function flip(h) { return h.map(function (q) { return [q[0], -q[1]]; }); }
+    function both(pts, fn) { var p = new Path2D(); fn(pts, p); fn(flip(pts), p); return p; }
+    function poly(pts, p) { pts.forEach(function (q, i) { p[i ? 'lineTo' : 'moveTo'](q[0], q[1]); }); p.closePath(); return p; }
+    function mk(w, h) { var c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; }
+    function ss(a, b, x) { var t = (x - a) / (b - a); t = t < 0 ? 0 : t > 1 ? 1 : t; return t * t * (3 - 2 * t); }
+    function sig(t) { return 1 / (1 + Math.exp(-t)); }
+    function sst(t) { t = t < 0 ? 0 : t > 1 ? 1 : t; return t * t * (3 - 2 * t); }
 
-  var M3P = {"body": "M515 30Q516 0 515 -30Q514 -60 511.5 -89Q509 -118 503 -138Q497 -158 486.5 -172Q476 -186 458 -194Q440 -202 410 -205Q380 -208 350 -206.5Q320 -205 280 -200.5Q240 -196 180 -193.5Q120 -191 60 -191.5Q0 -192 -60 -194.5Q-120 -197 -165 -201.5Q-210 -206 -255 -209Q-300 -212 -340 -211Q-380 -210 -410 -206.5Q-440 -203 -460 -196.5Q-480 -190 -491.5 -177Q-503 -164 -508 -141Q-513 -118 -515 -89Q-517 -60 -517.5 -30Q-518 0 -517.5 30Q-517 60 -515 89Q-513 118 -508 141Q-503 164 -491.5 177Q-480 190 -460 196.5Q-440 203 -410 206.5Q-380 210 -340 211Q-300 212 -255 209Q-210 206 -165 201.5Q-120 197 -60 194.5Q0 192 60 191.5Q120 191 180 193.5Q240 196 280 200.5Q320 205 350 206.5Q380 208 410 205Q440 202 458 194Q476 186 486.5 172Q497 158 503 138Q509 118 511.5 89Q514 60 515 30Z", "glass": "M214.5 40Q216 0 214.5 -40Q213 -80 208.5 -104Q204 -128 196.5 -137.5Q189 -147 174.5 -150.5Q160 -154 110 -153Q60 -152 -30 -151Q-120 -150 -167.5 -148.5Q-215 -147 -243.5 -142.5Q-272 -138 -295 -129Q-318 -120 -329 -98Q-340 -76 -343 -38Q-346 0 -343 38Q-340 76 -329 98Q-318 120 -295 129Q-272 138 -243.5 142.5Q-215 147 -167.5 148.5Q-120 150 -30 151Q60 152 110 153Q160 154 174.5 150.5Q189 147 196.5 137.5Q204 128 208.5 104Q213 80 214.5 40Z", "roof": "M61.5 56Q62 0 61.5 -56Q61 -112 58.5 -123Q56 -134 48 -137Q40 -140 -75 -139.5Q-190 -139 -197 -136.5Q-204 -134 -207 -122Q-210 -110 -210.5 -55Q-211 0 -210.5 55Q-210 110 -207 122Q-204 134 -197 136.5Q-190 139 -75 139.5Q40 140 48 137Q56 134 58.5 123Q61 112 61.5 56Z", "hood": "M504 40Q505 0 504 -40Q503 -80 499 -109Q495 -138 486.5 -153Q478 -168 464 -173Q450 -178 390 -180Q330 -182 277.5 -176Q225 -170 219.5 -130Q214 -90 213 -45Q212 0 213 45Q214 90 219.5 130Q225 170 277.5 176Q330 182 390 180Q450 178 464 173Q478 168 486.5 153Q495 138 499 109Q503 80 504 40Z", "trunk": "M-351 45Q-352 0 -351 -45Q-350 -90 -345 -115Q-340 -140 -350 -156Q-360 -172 -400 -177Q-440 -182 -459 -177Q-478 -172 -488 -156Q-498 -140 -501.5 -110Q-505 -80 -506 -40Q-507 0 -506 40Q-505 80 -501.5 110Q-498 140 -488 156Q-478 172 -459 177Q-440 182 -400 177Q-360 172 -350 156Q-340 140 -345 115Q-350 90 -351 45Z", "mirR": "M147 -178Q172 -176 171 -190Q170 -204 165 -212.5Q160 -221 150 -223.5Q140 -226 132 -223.5Q124 -221 121 -212.5Q118 -204 120 -192Q122 -180 147 -178Z", "mirL": "M147 178Q172 176 171 190Q170 204 165 212.5Q160 221 150 223.5Q140 226 132 223.5Q124 221 121 212.5Q118 204 120 192Q122 180 147 178Z", "headR": "M508 -96L503 -136L492 -162L474 -184L452 -192L446 -184L470 -166L486 -140L495 -98Z", "headL": "M508 96L503 136L492 162L474 184L452 192L446 184L470 166L486 140L495 98Z", "tailR": "M-509 -92L-504 -140L-492 -168L-470 -190L-428 -201L-424 -188L-462 -178L-482 -158L-493 -132L-497 -92Z", "tailL": "M-509 92L-504 140L-492 168L-470 190L-428 201L-424 188L-462 178L-482 158L-493 132L-497 92Z"};
-  /* BMW M3 noir mat, dessinée directement dans le canvas (unités : longueur 1034, avant vers +x) */
-  var MP = {}; for (var key in M3P) MP[key] = new Path2D(M3P[key]);
-  function drawM3matte(g, L, t, sp) {
-    var k = L / 1034;
-    g.save(); g.scale(k, k);
-    /* Reflets rouges des feux sur la chaussée mouillée */
-    g.globalCompositeOperation = 'lighter';
-    var rr = g.createLinearGradient(-520, 0, -1500, 0);
-    rr.addColorStop(0, 'rgba(255,40,55,.38)'); rr.addColorStop(.35, 'rgba(255,25,45,.12)'); rr.addColorStop(1, 'rgba(255,20,40,0)');
-    g.fillStyle = rr;
-    [-150, 150].forEach(function (y) { g.beginPath(); g.ellipse(-900, y, 420, 34, 0, 0, Math.PI * 2); g.fill(); });
-    var rg = g.createRadialGradient(-540, 0, 0, -540, 0, 380);
-    rg.addColorStop(0, 'rgba(255,30,45,.30)'); rg.addColorStop(1, 'rgba(255,30,45,0)');
-    g.fillStyle = rg; g.beginPath(); g.ellipse(-600, 0, 380, 260, 0, 0, Math.PI * 2); g.fill();
-    g.globalCompositeOperation = 'source-over';
-    /* Ombre au sol */
-    g.save(); g.shadowColor = 'rgba(0,0,0,.9)'; g.shadowBlur = 40 * k * dpr; g.fillStyle = '#020303'; g.fill(MP.body); g.restore();
-    /* Échappements */
-    [-122, -84, 84, 122].forEach(function (y) { g.fillStyle = '#2a2d31'; g.beginPath(); g.arc(-516, y, 14, 0, 6.3); g.fill(); g.fillStyle = '#030303'; g.beginPath(); g.arc(-518, y, 9, 0, 6.3); g.fill(); });
-    /* Carrosserie noir mat : dégradé doux, sans reflet dur */
-    var p = g.createLinearGradient(0, -212, 0, 212);
-    p.addColorStop(0, '#030404'); p.addColorStop(.12, '#121518'); p.addColorStop(.32, '#1b1f23'); p.addColorStop(.55, '#111417'); p.addColorStop(.85, '#08090b'); p.addColorStop(1, '#020203');
-    g.fillStyle = p; g.fill(MP.body);
-    g.save(); g.clip(MP.body);
-    /* Lumière diffuse des lampadaires qui glisse (mat = large et douce) */
-    var q = ((t * (0.3 + sp * .45)) % 1.7) - .35, hx = 700 - q * 1400;
-    var sh = g.createRadialGradient(hx, -90, 0, hx, -90, 340);
-    sh.addColorStop(0, 'rgba(255,214,170,.10)'); sh.addColorStop(1, 'rgba(255,214,170,0)');
-    g.fillStyle = sh; g.fillRect(-560, -260, 1120, 520);
-    /* Bossages du capot et ligne d'épaule, très discrets */
-    g.lineCap = 'round';
-    [[-1, 'rgba(210,225,235,.10)'], [1, 'rgba(0,0,0,.5)']].forEach(function (a) {
-      g.strokeStyle = a[1]; g.lineWidth = 4;
-      g.beginPath(); g.moveTo(488, a[0] * 56); g.quadraticCurveTo(380, a[0] * 68, 232, a[0] * 92); g.stroke();
-      g.beginPath(); g.moveTo(470, a[0] * 166); g.quadraticCurveTo(120, a[0] * 182, -300, a[0] * 196); g.stroke();
-    });
-    g.strokeStyle = 'rgba(0,0,0,.75)'; g.lineWidth = 2.4; g.stroke(MP.hood); g.stroke(MP.trunk);
-    g.restore();
-    /* Liseré de lumière froide sur le côté éclairé */
-    var rim = g.createLinearGradient(0, -212, 0, 0);
-    rim.addColorStop(0, 'rgba(190,225,225,.38)'); rim.addColorStop(.5, 'rgba(190,225,225,.06)'); rim.addColorStop(1, 'rgba(190,225,225,0)');
-    g.strokeStyle = rim; g.lineWidth = 3; g.stroke(MP.body);
-    /* Vitrage : noir brillant, plus réfléchissant que la carrosserie */
-    var gl = g.createLinearGradient(216, 0, -346, 0);
-    gl.addColorStop(0, '#0d1316'); gl.addColorStop(.18, '#222b30'); gl.addColorStop(.3, '#05080a'); gl.addColorStop(.72, '#040607'); gl.addColorStop(.86, '#1a2226'); gl.addColorStop(1, '#090c0e');
-    g.fillStyle = gl; g.fill(MP.glass);
-    g.save(); g.clip(MP.glass);
-    var gx = 300 - ((t * (0.3 + sp * .45) + .4) % 1.7) * 520;
-    var gs = g.createLinearGradient(gx - 40, 0, gx + 40, 0);
-    gs.addColorStop(0, 'rgba(255,220,180,0)'); gs.addColorStop(.5, 'rgba(255,220,180,.16)'); gs.addColorStop(1, 'rgba(255,220,180,0)');
-    g.fillStyle = gs; g.fillRect(-400, -200, 800, 400);
-    g.restore();
-    g.strokeStyle = 'rgba(0,0,0,.9)'; g.lineWidth = 4; g.stroke(MP.glass);
-    /* Toit noir mat */
-    var rf = g.createLinearGradient(0, -140, 0, 140);
-    rf.addColorStop(0, '#0b0d0f'); rf.addColorStop(.35, '#181b1e'); rf.addColorStop(1, '#060708');
-    g.fillStyle = rf; g.fill(MP.roof);
-    g.strokeStyle = 'rgba(190,225,225,.08)'; g.lineWidth = 2; g.stroke(MP.roof);
-    /* Rétroviseurs */
-    g.fillStyle = '#0e1012'; g.fill(MP.mirR); g.fill(MP.mirL);
-    g.strokeStyle = 'rgba(190,225,225,.18)'; g.lineWidth = 2; g.stroke(MP.mirL);
-    /* Calandre noire (shadow line) */
-    g.fillStyle = '#020203'; g.strokeStyle = 'rgba(160,170,180,.28)'; g.lineWidth = 2.5;
-    [14, -92].forEach(function (y) { g.beginPath(); g.roundRect(490, y, 26, 78, 12); g.fill(); g.stroke(); });
-    /* Phares allumés */
-    g.fillStyle = '#05070a'; g.fill(MP.headR); g.fill(MP.headL);
-    g.globalCompositeOperation = 'lighter'; g.lineCap = 'round';
-    g.shadowColor = 'rgba(210,235,255,.95)'; g.shadowBlur = 14 * k * dpr * 2;
-    g.strokeStyle = '#eef6ff'; g.lineWidth = 6;
-    [1, -1].forEach(function (s) { g.beginPath(); g.moveTo(502, -104 * s); g.lineTo(490, -146 * s); g.lineTo(470, -172 * s); g.stroke(); });
-    /* Feux arrière en L */
-    g.shadowColor = '#ff1a2e'; g.shadowBlur = 22 * k * dpr * 2;
-    g.fillStyle = '#2a0206'; g.fill(MP.tailR); g.fill(MP.tailL);
-    g.strokeStyle = '#ff2b40'; g.lineWidth = 7; g.lineJoin = 'round';
-    [1, -1].forEach(function (s) { g.beginPath(); g.moveTo(-503, -100 * s); g.lineTo(-496, -140 * s); g.lineTo(-482, -166 * s); g.lineTo(-462, -184 * s); g.lineTo(-430, -194 * s); g.stroke(); });
-    g.shadowBlur = 0; g.globalCompositeOperation = 'source-over';
-    g.restore();
-  }
-  /* BMW M3 vue de dessus, dessinée en unités : longueur 100, avant vers +x */
-  function smooth(g, pts) {
-    var n = pts.length;
-    g.moveTo((pts[n - 1][0] + pts[0][0]) / 2, (pts[n - 1][1] + pts[0][1]) / 2);
-    for (var i = 0; i < n; i++) { var a = pts[i], b = pts[(i + 1) % n]; g.quadraticCurveTo(a[0], a[1], (a[0] + b[0]) / 2, (a[1] + b[1]) / 2); }
-    g.closePath();
-  }
-  function mirror(half) { var out = half.slice(); for (var i = half.length - 1; i >= 0; i--) if (half[i][1] !== 0) out.push([half[i][0], -half[i][1]]); return out; }
-  var M3 = {
-    body: mirror([[51.3, 0], [51.1, -8], [50.4, -13.4], [48.8, -17.3], [45.4, -19.7], [38, -20.8], [30, -20.8], [22, -20.1], [10, -19.5], [-6, -19.7], [-20, -20.7], [-30, -21.3], [-40, -21], [-46, -20.2], [-49.8, -18], [-51.1, -13.5], [-51.5, -6], [-51.6, 0]]),
-    glass: mirror([[19.4, 0], [19, -9], [18.2, -15.4], [17, -16], [6.5, -15.6], [-18.5, -15.4], [-27.5, -14.4], [-30, -12.6], [-31, -6], [-31.2, 0]]),
-    roof: mirror([[6.6, 0], [6.4, -12.8], [5.6, -13.8], [-17.4, -13.8], [-18.4, -12.8], [-18.6, 0]]),
-    lampL: [[50.2, -11.2], [49.4, -15.6], [47.4, -18.4], [46.4, -18], [48.2, -15], [48.9, -11.4]]
-  };
-  function poly(g, p, my) { g.beginPath(); p.forEach(function (q, i) { g[i ? 'lineTo' : 'moveTo'](q[0], my ? -q[1] : q[1]); }); g.closePath(); }
-  function drawM3(g, t, sp) {
-    /* Quatre sorties d'échappement (sous le pare-chocs) */
-    [-12, -8.6, 8.6, 12].forEach(function (y) { g.fillStyle = '#9aa3ad'; g.beginPath(); g.arc(-52.2, y, 1.2, 0, Math.PI * 2); g.fill(); g.fillStyle = '#0b0d10'; g.beginPath(); g.arc(-52.2, y, .75, 0, Math.PI * 2); g.fill(); });
-    /* Ombre portée */
-    g.save(); g.shadowColor = 'rgba(0,0,0,.85)'; g.shadowBlur = 30; g.shadowOffsetY = 0;
-    g.fillStyle = '#0a1226'; g.beginPath(); smooth(g, M3.body); g.fill(); g.restore();
-    /* Carrosserie bleu métallisé */
-    var paint = g.createLinearGradient(0, -21, 0, 21);
-    paint.addColorStop(0, '#08112a'); paint.addColorStop(.18, '#1c3d8c'); paint.addColorStop(.38, '#3963c4'); paint.addColorStop(.5, '#2a4fa8');
-    paint.addColorStop(.7, '#18357c'); paint.addColorStop(.88, '#0f2357'); paint.addColorStop(1, '#060d20');
-    g.fillStyle = paint; g.beginPath(); smooth(g, M3.body); g.fill();
-    g.save(); g.beginPath(); smooth(g, M3.body); g.clip();
-    /* Reflet des lampadaires qui glisse sur la carrosserie */
-    var k = ((t * (0.35 + sp * .5)) % 1.6) - .3, hx = 70 - k * 140;
-    var sh = g.createLinearGradient(hx - 16, 0, hx + 16, 0);
-    sh.addColorStop(0, 'rgba(255,200,150,0)'); sh.addColorStop(.5, 'rgba(255,205,160,.22)'); sh.addColorStop(1, 'rgba(255,200,150,0)');
-    g.globalCompositeOperation = 'lighter'; g.fillStyle = sh; g.fillRect(-60, -25, 120, 50); g.globalCompositeOperation = 'source-over';
-    /* Bas de caisse plus sombre */
-    var edge = g.createLinearGradient(0, -21, 0, 21);
-    edge.addColorStop(0, 'rgba(0,0,0,.55)'); edge.addColorStop(.1, 'rgba(0,0,0,0)'); edge.addColorStop(.9, 'rgba(0,0,0,0)'); edge.addColorStop(1, 'rgba(0,0,0,.6)');
-    g.fillStyle = edge; g.fillRect(-60, -25, 120, 50);
-    g.restore();
-    /* Nervures du capot (bossages) */
-    g.lineCap = 'round'; g.lineWidth = .6;
-    [-1, 1].forEach(function (s) {
-      g.strokeStyle = 'rgba(160,190,255,.35)'; g.beginPath(); g.moveTo(47, s * 5.5); g.quadraticCurveTo(34, s * 7.5, 19.5, s * 9.5); g.stroke();
-      g.strokeStyle = 'rgba(0,0,0,.35)'; g.beginPath(); g.moveTo(47, s * 6.4); g.quadraticCurveTo(34, s * 8.4, 19.5, s * 10.4); g.stroke();
-      /* Ligne d'épaule */
-      g.strokeStyle = 'rgba(140,170,240,.22)'; g.beginPath(); g.moveTo(38, s * 18.6); g.quadraticCurveTo(0, s * 17.8, -38, s * 19.2); g.stroke();
-    });
-    /* Vitres */
-    var gl = g.createLinearGradient(18, 0, -30, 0);
-    gl.addColorStop(0, '#0b1320'); gl.addColorStop(.25, '#1b2a3c'); gl.addColorStop(.6, '#0a111b'); gl.addColorStop(1, '#141f2d');
-    g.fillStyle = gl; poly(g, M3.glass); g.lineJoin = 'round'; g.fill();
-    g.strokeStyle = 'rgba(0,0,0,.6)'; g.lineWidth = .8; g.stroke();
-    /* Reflet sur le pare-brise */
-    g.fillStyle = 'rgba(190,215,255,.10)'; g.beginPath(); g.moveTo(18.2, -11); g.lineTo(10, -14.6); g.lineTo(8.4, -6); g.lineTo(17.4, -2); g.closePath(); g.fill();
-    /* Toit carbone */
-    var rf = g.createLinearGradient(0, -13, 0, 13);
-    rf.addColorStop(0, '#07090c'); rf.addColorStop(.45, '#20262e'); rf.addColorStop(.55, '#161b21'); rf.addColorStop(1, '#050608');
-    g.fillStyle = rf; g.beginPath(); smooth(g, M3.roof); g.fill();
-    g.strokeStyle = 'rgba(255,255,255,.05)'; g.lineWidth = .3;
-    for (var x = -17; x < 6; x += 1.4) { g.beginPath(); g.moveTo(x, -13.2); g.lineTo(x, 13.2); g.stroke(); }
-    /* Rétroviseurs */
-    [-1, 1].forEach(function (s) {
-      g.fillStyle = '#16306f'; g.beginPath(); g.moveTo(14.5, s * 19.3); g.quadraticCurveTo(13.5, s * 23.6, 10.5, s * 23.4); g.lineTo(9.5, s * 19.4); g.closePath(); g.fill();
-      g.fillStyle = 'rgba(0,0,0,.5)'; g.fillRect(9.6, s > 0 ? 19.4 : -20.2, 4.2, .8);
-    });
-    /* Calandre : doubles haricots */
-    g.fillStyle = '#05070a';
-    [-1, 1].forEach(function (s) { g.beginPath(); g.roundRect(48.4, s > 0 ? 1 : -8.2, 2.6, 7.2, 1.1); g.fill(); });
-    g.strokeStyle = 'rgba(200,210,225,.55)'; g.lineWidth = .35;
-    [-1, 1].forEach(function (s) { g.beginPath(); g.roundRect(48.4, s > 0 ? 1 : -8.2, 2.6, 7.2, 1.1); g.stroke(); });
-    /* Petit logo sur le capot */
-    g.fillStyle = 'rgba(230,235,245,.85)'; g.beginPath(); g.arc(46.2, 0, 1.15, 0, Math.PI * 2); g.fill();
-    g.fillStyle = '#1d5fd1'; g.beginPath(); g.arc(46.2, 0, .75, 0, Math.PI * .5); g.lineTo(46.2, 0); g.fill(); g.beginPath(); g.arc(46.2, 0, .75, Math.PI, Math.PI * 1.5); g.lineTo(46.2, 0); g.fill();
-    /* Becquet de malle */
-    g.strokeStyle = 'rgba(0,0,0,.55)'; g.lineWidth = .9; g.beginPath(); g.moveTo(-44.6, -15); g.quadraticCurveTo(-46, 0, -44.6, 15); g.stroke();
-    g.strokeStyle = 'rgba(150,180,250,.25)'; g.lineWidth = .4; g.beginPath(); g.moveTo(-43.6, -14.6); g.quadraticCurveTo(-45, 0, -43.6, 14.6); g.stroke();
-    /* Diffuseur et quatre sorties d'échappement */
-    g.fillStyle = '#05070a'; g.beginPath(); g.roundRect(-51.8, -13.4, 1.2, 26.8, .5); g.fill();
-    /* Phares */
-    g.globalCompositeOperation = 'lighter';
-    g.shadowColor = 'rgba(200,225,255,.9)'; g.shadowBlur = 10;
-    [false, true].forEach(function (my) { g.fillStyle = 'rgba(215,232,255,.9)'; poly(g, M3.lampL, my); g.fill(); });
-    /* Feux arrière en L */
-    g.shadowColor = '#ff1a30'; g.shadowBlur = 16; g.fillStyle = '#ff2236';
-    [-1, 1].forEach(function (s) {
-      g.beginPath(); g.moveTo(-49.4, s * 10.5); g.quadraticCurveTo(-50.1, s * 15.6, -47.2, s * 18.6); g.lineTo(-42.5, s * 19.8); g.lineTo(-42.8, s * 18.6); g.lineTo(-46.6, s * 17.3); g.quadraticCurveTo(-48.6, s * 15, -48.3, s * 10.5); g.closePath(); g.fill();
-    });
-    g.shadowBlur = 0; g.globalCompositeOperation = 'source-over';
-  }
+    var BODY = mir([[519, 0], [518, -42], [515, -80], [509, -114], [499, -144], [485, -168], [467, -186], [445, -198], [414, -205], [376, -209], [334, -210], [292, -208], [252, -202], [200, -198], [120, -196], [20, -196], [-80, -198], [-160, -202], [-215, -209], [-262, -214], [-300, -215], [-340, -213], [-385, -208], [-428, -199], [-462, -185], [-488, -165], [-505, -138], [-514, -102], [-519, -60], [-521, 0]]);
+    var GH = mir([[240, 0], [238, -62], [232, -108], [220, -138], [202, -156], [170, -164], [80, -163], [-40, -161], [-150, -158], [-226, -152], [-284, -140], [-326, -118], [-352, -84], [-363, -40], [-366, 0]]);
+    var ROOF = mir([[70, 0], [69, -100], [64, -126], [50, -138], [-180, -138], [-212, -132], [-227, -116], [-231, -60], [-232, 0]]);
+    var CPIL = [[-200, -137], [-226, -152], [-284, -140], [-326, -118], [-352, -84], [-363, -40], [-364, -12], [-359, -36], [-350, -72], [-332, -100], [-298, -117], [-262, -120], [-234, -112], [-222, -126]];
+    var APIL = [[212, -149], [201, -161], [52, -140], [62, -128]];
+    var MIR = [[200, -178], [198, -204], [188, -226], [166, -236], [142, -233], [130, -217], [134, -192], [152, -181]];
+    var HEAD = [[510, -100], [506, -134], [496, -160], [478, -184], [452, -199], [444, -190], [466, -174], [484, -150], [495, -124], [499, -98]];
+    var TAIL = [[-514, -96], [-509, -140], [-497, -166], [-475, -188], [-437, -201], [-431, -189], [-467, -177], [-487, -159], [-498, -135], [-502, -96]];
+    var P = {
+      body: sm(BODY), gh: sm(GH), roof: sm(ROOF),
+      ng: both(CPIL, sm), apil: both(APIL, poly),
+      mir: both(MIR, sm), head: both(HEAD, poly), tail: both(TAIL, poly),
+      hood: sm(mir([[506, 0], [505, -66], [500, -108], [492, -140], [476, -164], [452, -178], [400, -183], [320, -184], [262, -179], [246, -168], [244, -80], [244, 0]])),
+      trunk: sm(mir([[-370, 0], [-370, -90], [-364, -132], [-372, -160], [-402, -176], [-448, -182], [-480, -172], [-500, -150], [-509, -110], [-512, -60], [-513, 0]]))
+    };
+    P.ng.addPath(P.apil);
+    P.seams = new Path2D();
+    [[234, 199, 228, 164], [-24, 197, -27, 161], [-202, 207, -208, 154]].forEach(function (q) { [-1, 1].forEach(function (s) { P.seams.moveTo(q[0], s * q[1]); P.seams.lineTo(q[2], s * q[3]); }); });
 
-  function draw(now) {
-    var dt = Math.min(50, now - last) / 1000; last = now;
-    speed += (targetSpeed - speed) * Math.min(1, dt * 2);
-    var t = (now - t0) / 1000, S = Math.max(W, H);
-    var mobile = W < 860;
-    /* Ciel / fond */
-    var bg = ctx.createLinearGradient(0, 0, W, H);
-    bg.addColorStop(0, '#0d1b1b'); bg.addColorStop(.55, '#0a1414'); bg.addColorStop(1, '#050909');
-    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    /* Distance (en pixels) au pixel extérieur le plus proche (Felzenszwalb), limitée au rectangle rc = [i0, j0, i1, j1] */
+    function* edt(src, ch, w, h, rc) {
+      var i0 = rc[0], j0 = rc[1], cw = rc[2] - i0, chh = rc[3] - j0, n = Math.max(cw, chh), f = new Float32Array(cw * chh),
+        a = new Float64Array(n), d = new Float64Array(n), v = new Int32Array(n), zz = new Float64Array(n + 1), out = new Float32Array(w * h), x, y;
+      for (y = 0; y < chh; y++) for (x = 0; x < cw; x++) f[y * cw + x] = src[((y + j0) * w + x + i0) * 4 + ch] >= 128 ? 1e10 : 0;
+      function dt(len) {
+        var k = 0, q, s; v[0] = 0; zz[0] = -1e20; zz[1] = 1e20;
+        for (q = 1; q < len; q++) {
+          s = ((a[q] + q * q) - (a[v[k]] + v[k] * v[k])) / (2 * q - 2 * v[k]);
+          while (s <= zz[k]) { k--; s = ((a[q] + q * q) - (a[v[k]] + v[k] * v[k])) / (2 * q - 2 * v[k]); }
+          k++; v[k] = q; zz[k] = s; zz[k + 1] = 1e20;
+        }
+        for (k = 0, q = 0; q < len; q++) { while (zz[k + 1] < q) k++; d[q] = (q - v[k]) * (q - v[k]) + a[v[k]]; }
+      }
+      for (x = 0; x < cw; x++) { if ((x & 31) === 31) yield; for (y = 0; y < chh; y++) a[y] = f[y * cw + x]; dt(chh); for (y = 0; y < chh; y++) f[y * cw + x] = d[y]; }
+      for (y = 0; y < chh; y++) { if ((y & 31) === 31) yield; for (x = 0; x < cw; x++) a[x] = f[y * cw + x]; dt(cw); for (x = 0; x < cw; x++) out[(y + j0) * w + x + i0] = Math.sqrt(d[x]); }
+      return out;
+    }
+    /* Flou rapide (somme glissante) d'un tableau 2D, dans le rectangle rc */
+    function blur(src, w, h, r, rc) {
+      rc = rc || [0, 0, w, h];
+      var i0 = rc[0], j0 = rc[1], i1 = rc[2], j1 = rc[3], tmp = new Float32Array(w * h), out = new Float32Array(w * h), x, y, s, k = 1 / (2 * r + 1);
+      for (y = j0; y < j1; y++) {
+        var o = y * w; s = 0;
+        for (x = -r; x <= r; x++) s += src[o + Math.min(i1 - 1, Math.max(i0, i0 + x))];
+        for (x = i0; x < i1; x++) { tmp[o + x] = s * k; s += src[o + Math.min(i1 - 1, x + r + 1)] - src[o + Math.max(i0, x - r)]; }
+      }
+      for (x = i0; x < i1; x++) {
+        s = 0;
+        for (y = -r; y <= r; y++) s += tmp[Math.min(j1 - 1, Math.max(j0, j0 + y)) * w + x];
+        for (y = j0; y < j1; y++) { out[y * w + x] = s * k; s += tmp[Math.min(j1 - 1, y + r + 1) * w + x] - tmp[Math.max(j0, y - r) * w + x]; }
+      }
+      return out;
+    }
 
-    ctx.save();
-    ctx.translate(W * (mobile ? .5 : .52), H * (mobile ? .4 : .38));
-    ctx.rotate(-0.42);
-    /* Route */
-    var rw = S * 0.5;
-    var road = ctx.createLinearGradient(0, -rw * .55, 0, rw * .55);
-    road.addColorStop(0, 'rgba(70,110,108,0)'); road.addColorStop(.18, 'rgba(70,110,108,.16)'); road.addColorStop(.5, 'rgba(90,130,128,.22)'); road.addColorStop(.82, 'rgba(70,110,108,.14)'); road.addColorStop(1, 'rgba(70,110,108,0)');
-    ctx.fillStyle = road; ctx.fillRect(-S * 1.5, -rw * .55, S * 3, rw * 1.1);
-    /* Bords de route */
-    ctx.strokeStyle = 'rgba(190,220,215,.18)'; ctx.lineWidth = 1.2;
-    [-rw * .4, rw * .4].forEach(function (v) { ctx.beginPath(); ctx.moveTo(-S * 1.5, v); ctx.lineTo(S * 1.5, v); ctx.stroke(); });
-    /* Lignes de voie qui défilent */
-    var period = S * 0.12, off = -((t * S * 0.22 * speed) % period);
-    ctx.strokeStyle = 'rgba(210,235,230,.28)'; ctx.lineWidth = 2;
-    [-rw * .13, rw * .13].forEach(function (v) {
-      for (var u = -S * 1.5 + off; u < S * 1.5; u += period) { ctx.beginPath(); ctx.moveTo(u, v); ctx.lineTo(u + period * .45, v); ctx.stroke(); }
-    });
-    /* Gouttes / reflets sur la chaussée */
-    drops.forEach(function (d) {
-      var u = ((d.u * S * 1.5 - t * S * 0.22 * speed) % (S * 3) + S * 4.5) % (S * 3) - S * 1.5;
-      ctx.strokeStyle = 'rgba(200,230,225,' + d.a + ')'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(u, d.v * rw); ctx.lineTo(u + d.l * S * speed, d.v * rw); ctx.stroke();
-    });
-    /* Lampadaires flous (traînées orangées) */
-    ctx.globalCompositeOperation = 'lighter';
-    lamps.forEach(function (l) {
-      var u = ((l.u * S * 1.5 - t * S * 0.32 * speed) % (S * 3) + S * 4.5) % (S * 3) - S * 1.5, v = l.v * rw * 1.6, len = l.len * S * (0.8 + speed * .4);
-      var g = ctx.createLinearGradient(u, 0, u + len, 0);
-      g.addColorStop(0, 'rgba(255,170,110,0)'); g.addColorStop(.5, 'rgba(255,180,120,' + l.a + ')'); g.addColorStop(1, 'rgba(255,170,110,0)');
-      ctx.strokeStyle = g; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.shadowColor = 'rgba(255,170,100,.8)'; ctx.shadowBlur = 16;
-      ctx.beginPath(); ctx.moveTo(u, v); ctx.lineTo(u + len, v); ctx.stroke();
-    });
-    ctx.shadowBlur = 0;
-    /* La voiture : BMW M3 vue de dessus (bleu Portimao), feux allumés */
-    var cu = S * (mobile ? .0 : .05), cvv = rw * .07, L = S * (mobile ? .23 : .165), wob = Math.sin(t * .8) * rw * .005;
-    ctx.globalCompositeOperation = 'lighter';
-    /* Faisceaux des phares : halos allongés et flous */
-    ctx.save(); ctx.translate(cu + L * .5, cvv + wob); ctx.scale(1, .3);
-    var hd = ctx.createRadialGradient(L * .55, 0, 0, L * .55, 0, L * 1.05);
-    hd.addColorStop(0, 'rgba(225,240,255,.15)'); hd.addColorStop(.45, 'rgba(225,240,255,.06)'); hd.addColorStop(1, 'rgba(225,240,255,0)');
-    ctx.fillStyle = hd; ctx.beginPath(); ctx.arc(L * .55, 0, L * 1.05, 0, Math.PI * 2); ctx.fill();
-    ctx.restore();
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.save(); ctx.translate(cu, cvv + wob);
-    drawM3matte(ctx, L, t, speed);
-    ctx.restore();
-    ctx.restore();
+    /* Ciel de nuit sarcelle reflété : sombre au zénith, brume claire vers l'horizon (plus claire du côté -y) */
+    var er = 0, eg = 0, eb = 0;
+    function sky(x, y, z) {
+      if (z < 0) { var gz = Math.min(1, -z * 3), q = 1 - gz; er = .003 + .010 * q; eg = .006 + .017 * q; eb = .006 + .018 * q; return; }
+      var t = 1 - z, t3 = t * t * t, t8 = t3 * t3 * t * t, hl = Math.sqrt(x * x + y * y) || 1, hz = t3 * (.65 + .7 * (.5 - .5 * y / hl));
+      er = .005 + .036 * hz + .028 * t8; eg = .010 + .062 * hz + .015 * t8; eb = .012 + .066 * hz + .006 * t8;
+    }
+    var EXPO = 7.5, KX = -.22, KY = -.72, KZ = .66, KH = Math.sqrt(KX * KX + KY * KY + (KZ + 1) * (KZ + 1));
+    var TMN = 4096, TMV = .8, TMT = new Float32Array(TMN + 1);
+    for (var ti = 0; ti <= TMN; ti++) { var tv = ti / TMN; TMT[ti] = Math.pow(1 - Math.exp(-tv * tv * TMV * EXPO), 1 / 2.2); }
+    function tm(x) { if (x <= 0) return 0; var f = Math.sqrt(x / TMV) * TMN; if (f >= TMN) return TMT[TMN]; var i = f | 0; return TMT[i] + (TMT[i + 1] - TMT[i]) * (f - i); }
 
-    /* Brume et vignette */
-    var fog = ctx.createRadialGradient(W * .15, H * .1, 0, W * .15, H * .1, S * .7);
-    fog.addColorStop(0, 'rgba(120,170,165,.10)'); fog.addColorStop(1, 'rgba(120,170,165,0)');
-    ctx.fillStyle = fog; ctx.fillRect(0, 0, W, H);
-    var vg = ctx.createRadialGradient(W / 2, H * .45, S * .2, W / 2, H * .45, S * .8);
-    vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.7)');
-    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
-    var bottom = ctx.createLinearGradient(0, H * .5, 0, H);
-    bottom.addColorStop(0, 'rgba(5,8,8,0)'); bottom.addColorStop(1, 'rgba(5,8,8,.75)');
-    ctx.fillStyle = bottom; ctx.fillRect(0, H * .5, W, H * .5);
-    if (!grainPat) grainPat = ctx.createPattern(grain, 'repeat');
-    ctx.fillStyle = grainPat; ctx.fillRect(0, 0, W, H);
+    /* sc : pixels par unité. DU : positions des lampes (en longueurs de voiture) pour l'éclairage précalculé.
+       Générateur : le calcul est découpé en petites tranches (yield) pour ne jamais bloquer la page.
+       res reçoit l'image dès qu'elle est prête (res.img), puis les images d'éclairage une à une (res.lit). */
+    function* build(sc, DU, LV, LH, res) {
+      var SS = sc < .45 ? 1.5 : 1.25, s2 = sc * SS, X0 = -548, Y0 = -250, w = Math.ceil(1096 * s2), h = Math.ceil(500 * s2), N = w * h, i, j, k, x, y;
+      function mask(fills) {
+        var c = mk(w, h), g = c.getContext('2d');
+        g.fillStyle = '#000'; g.fillRect(0, 0, w, h);
+        g.setTransform(s2, 0, 0, s2, -X0 * s2, -Y0 * s2); g.globalCompositeOperation = 'lighter';
+        fills.forEach(function (f) { g.fillStyle = f[1]; g.fill(f[0]); });
+        return g.getImageData(0, 0, w, h).data;
+      }
+      var m1 = mask([[P.body, '#f00'], [P.gh, '#0f0'], [P.roof, '#00f']]); yield;
+      var m2 = mask([[P.mir, '#f00'], [P.ng, '#0f0']]); yield;
+      function rc(x0, y0, x1, y1) { return [Math.max(0, Math.floor((x0 - X0) * s2)), Math.max(0, Math.floor((y0 - Y0) * s2)), Math.min(w, Math.ceil((x1 - X0) * s2)), Math.min(h, Math.ceil((y1 - Y0) * s2))]; }
+      var br = Math.max(1, Math.round(s2 * 1.6)), rB = rc(-540, -232, 540, 232), rG = rc(-380, -176, 252, 176), rM = rc(116, -250, 214, 250);
+      var Db = yield* edt(m1, 0, w, h, rB); yield; Db = blur(Db, w, h, br, rB); yield;
+      var Dg = yield* edt(m1, 1, w, h, rG); yield; Dg = blur(Dg, w, h, br, rG); yield;
+      var Dm = yield* edt(m2, 0, w, h, rM); yield; Dm = blur(Dm, w, h, br, rM); yield;
 
-    if (running && !reduce) requestAnimationFrame(draw);
-  }
-  size(); addEventListener('resize', function () { size(); if (reduce) draw(performance.now()); });
-  document.addEventListener('visibilitychange', function () { running = !document.hidden; if (running && !reduce) { last = performance.now(); requestAnimationFrame(draw); } });
-  requestAnimationFrame(draw);
+      /* Profils le long de la voiture */
+      var X = new Float32Array(w), deck = new Float32Array(w), hc = new Float32Array(w), rad = new Float32Array(w), crown = new Float32Array(w),
+        fF = new Float32Array(w), fR = new Float32Array(w), rY = new Float32Array(w), rA = new Float32Array(w), cY = new Float32Array(w), cA = new Float32Array(w), hcv = 199;
+      for (i = w - 1; i >= 0; i--) {
+        x = X[i] = X0 + (i + .5) / s2;
+        deck[i] = x > 236 ? 199 - (x - 236) * .115 : x > -368 ? 199 + (236 - x) * .0185 : 210.2 - (-368 - x) * .03;
+        if (x < 238) hcv += (.54 * sig((x - 68) / 9) + .062 * (x + 81) / 150 * sig((68 - x) / 9) * sig((x + 229) / 9) - .6 * sig((-229 - x) / 9)) / s2;
+        hc[i] = hcv;
+        rad[i] = 34 + (x > 420 ? (x - 420) * .32 : 0) + (x < -430 ? (-430 - x) * .2 : 0);
+        crown[i] = 3 + 7 * ss(200, 262, x) + 3 * ss(-340, -400, x);
+        fF[i] = 10 * Math.exp(-Math.pow((x - 332) / 92, 2)); fR[i] = 13 * Math.exp(-Math.pow((x + 292) / 104, 2));
+        rY[i] = 64 + (486 - x) * .065; rA[i] = 2.2 * ss(505, 465, x) * ss(246, 300, x);
+        cY[i] = 150 + (470 - x) * .1; cA[i] = 1.6 * ss(492, 462, x) * ss(240, 272, x);
+      }
+
+      /* Carte de hauteur */
+      var z = new Float32Array(N), cov = new Float32Array(N), TG = 24;
+      for (j = 0; j < h; j++) {
+        y = Y0 + (j + .5) / s2; var ay = Math.abs(y), cr = Math.max(0, 1 - ay * ay / 42025), cc = Math.max(0, 1 - ay * ay / 26000);
+        var sF = ss(108, 186, ay), sR = ss(116, 198, ay);
+        for (i = 0; i < w; i++) {
+          k = j * w + i; var cb = m1[k * 4] / 255, cm = m2[k * 4] / 255;
+          cov[k] = Math.max(cb, cm);
+          if (cov[k] <= 0) continue;
+          var zz = 0;
+          if (cb > 0) {
+            var d = Math.max(0, (Db[k] - .5) / s2), R = rad[i], t = d < R ? d : R, e = sst(d / R);
+            zz = deck[i] - (R - Math.sqrt(R * R - (R - t) * (R - t))) + e * (crown[i] * cr + fF[i] * sF + fR[i] * sR + rA[i] * sst((rY[i] + 13 - ay) / 20) + cA[i] * Math.exp(-Math.pow((ay - cY[i]) / 10, 2)));
+            if (m1[k * 4 + 1] > 0) {
+              var dg = Math.max(0, (Dg[k] - .5) / s2), f = dg < TG ? 1 - (1 - dg / TG) * (1 - dg / TG) : 1, bl = Math.min(deck[i], 210);
+              var zc = bl + (hc[i] - bl) * f + 4.5 * f * cc;
+              if (zc > zz) zz = zc;
+            }
+          }
+          if (cm > 0) { var dm = Math.max(0, (Dm[k] - .5) / s2), tq = dm < 12 ? dm : 12, zm = 220 - (12 - Math.sqrt(144 - (12 - tq) * (12 - tq))); if (zm > zz) zz = zm; }
+          z[k] = zz;
+        }
+        if ((j & 15) === 15) yield;
+      }
+      var zb = blur(z, w, h, Math.max(2, Math.round(20 * s2))); yield;
+
+      /* Normales, matériaux, rendu de base */
+      var NX = new Float32Array(N), NY = new Float32Array(N), NZ = new Float32Array(N), AO = new Float32Array(N), MP = new Float32Array(N), MG = new Float32Array(N), MR = new Float32Array(N),
+        BR = new Float32Array(N), BG = new Float32Array(N), BB = new Float32Array(N);
+      var base = mk(w, h), bg = base.getContext('2d'), img = bg.createImageData(w, h), px = img.data, inv = s2 / 2;
+      for (j = 1; j < h - 1; j++) {
+        if ((j & 7) === 0) yield;
+        for (i = 1; i < w - 1; i++) {
+        k = j * w + i; if (cov[k] <= 0) continue;
+        var z0 = z[k], zl = cov[k - 1] > 0 ? z[k - 1] : z0, zr = cov[k + 1] > 0 ? z[k + 1] : z0, zu = cov[k - w] > 0 ? z[k - w] : z0, zd = cov[k + w] > 0 ? z[k + w] : z0;
+        var gx = (zr - zl) * inv, gy = (zd - zu) * inv, nl = Math.sqrt(gx * gx + gy * gy + 1), nx = -gx / nl, ny = -gy / nl, nz = 1 / nl;
+        NX[k] = nx; NY[k] = ny; NZ[k] = nz;
+        var ao = 1 - Math.min(.55, Math.max(0, (zb[k] - z0) / 34)); AO[k] = ao;
+        var mr = m1[k * 4 + 2] / 255, mg = Math.max(0, m1[k * 4 + 1] / 255 - mr - m2[k * 4 + 1] / 255), mp = Math.max(0, 1 - mr - mg);
+        MP[k] = mp; MG[k] = mg; MR[k] = mr;
+        var rx = 2 * nz * nx, ry = 2 * nz * ny, rz = 2 * nz * nz - 1, c1 = 1 - nz, c5 = c1 * c1 * c1 * c1 * c1;
+        var R0 = 0, G0 = 0, B0 = 0;
+        if (mp > 0) {   // peinture noir mat : reflet très diffus
+          var qx = rx + nx * 1.5, qy = ry + ny * 1.5, qz = rz + nz * 1.5, ql = Math.sqrt(qx * qx + qy * qy + qz * qz);
+          sky(qx / ql, qy / ql, qz / ql);
+          var Fm = .045 + .09 * c1 * c1, df = .0004 * (.6 + .4 * nz), kd = nx * KX + ny * KY + nz * KZ, kh = (nx * KX + ny * KY + nz * (KZ + 1)) / KH;
+          kd = kd > 0 ? kd : 0; kh = kh > 0 ? kh : 0; kh *= kh; kh *= kh; kh *= kh;
+          var key = .0005 * kd + .0021 * kh;
+          R0 += mp * ao * (df * .9 + Fm * er + key * .55); G0 += mp * ao * (df + Fm * eg + key * .9); B0 += mp * ao * (df * 1.05 + Fm * eb + key);
+        }
+        if (mg > 0 || mr > 0) {
+          sky(rx, ry, rz);
+          var Fg = .04 + .96 * c5;
+          R0 += mg * (.00022 * (1 - Fg) + Fg * er * 2.2) + mr * (.0004 * ao + (Fg + .01) * er);
+          G0 += mg * (.0003 * (1 - Fg) + Fg * eg * 2.2) + mr * (.00046 * ao + (Fg + .01) * eg);
+          B0 += mg * (.00034 * (1 - Fg) + Fg * eb * 2.2) + mr * (.00052 * ao + (Fg + .01) * eb);
+        }
+        BR[k] = R0; BG[k] = G0; BB[k] = B0;
+        var o = k * 4; px[o] = tm(R0) * 255; px[o + 1] = tm(G0) * 255; px[o + 2] = tm(B0) * 255; px[o + 3] = cov[k] * 255;
+        }
+      }
+      bg.putImageData(img, 0, 0); m1 = m2 = Db = Dg = Dm = zb = img = px = null; yield;
+
+      /* Détails dessinés par-dessus : jeux, joints de vitres, calandre, toit carbone... */
+      var g = bg; g.setTransform(s2, 0, 0, s2, -X0 * s2, -Y0 * s2); g.lineCap = 'round'; g.lineJoin = 'round';
+      g.save(); g.clip(P.roof);
+      g.strokeStyle = 'rgba(255,255,255,.02)'; g.lineWidth = 1.2;
+      for (x = -300; x < 80; x += 6) { g.beginPath(); g.moveTo(x, -140); g.lineTo(x + 46, 140); g.stroke(); }
+      g.restore();
+      g.lineWidth = 3.2; g.strokeStyle = 'rgba(0,0,0,.85)'; g.stroke(P.gh);
+      g.lineWidth = 2.4; g.strokeStyle = 'rgba(0,0,0,.7)'; g.stroke(P.roof); g.stroke(P.ng);
+      g.lineWidth = 2; g.strokeStyle = 'rgba(0,0,0,.8)'; g.stroke(P.hood); g.stroke(P.trunk); g.stroke(P.seams);
+      g.save(); g.translate(0, -1.6); g.lineWidth = 1; g.strokeStyle = 'rgba(200,225,230,.05)'; g.stroke(P.hood); g.stroke(P.trunk); g.restore();
+      g.strokeStyle = '#030404'; g.lineWidth = 3.5;
+      g.beginPath(); g.moveTo(248, -134); g.lineTo(242, -18); g.moveTo(246, 4); g.lineTo(240, 118); g.stroke();
+      g.strokeStyle = 'rgba(6,8,9,.95)'; g.lineWidth = 9;
+      [-1, 1].forEach(function (s) { g.beginPath(); g.moveTo(-25, s * 139); g.lineTo(-28, s * 160); g.stroke(); });
+      [6, -56].forEach(function (y) {   // doubles haricots
+        g.fillStyle = '#030404'; g.beginPath(); g.roundRect(500, y, 26, 50, 12); g.fill();
+        g.strokeStyle = 'rgba(150,160,170,.28)'; g.lineWidth = 2.2; g.stroke();
+      });
+      g.strokeStyle = 'rgba(160,170,180,.3)'; g.lineWidth = 1.8; g.beginPath(); g.arc(486, 0, 8.5, 0, 7); g.stroke();
+      g.fillStyle = '#060708'; g.beginPath(); g.ellipse(-214, 0, 24, 8, 0, 0, 7); g.fill();   // antenne requin
+      g.strokeStyle = 'rgba(200,225,230,.16)'; g.lineWidth = 1.4; g.beginPath(); g.ellipse(-214, -1, 20, 5, 0, Math.PI, 2 * Math.PI); g.stroke();
+      g.lineWidth = 2; g.strokeStyle = 'rgba(0,0,0,.6)'; g.beginPath(); g.moveTo(-500, -118); g.quadraticCurveTo(-516, 0, -500, 118); g.stroke();   // becquet
+      g.fillStyle = '#05070a'; g.fill(P.head); g.strokeStyle = 'rgba(140,160,180,.4)'; g.lineWidth = 1.6; g.stroke(P.head);
+      g.fillStyle = '#1a0306'; g.fill(P.tail);
+
+      yield;
+      /* Image finale : ombre au sol, pièces sous la caisse, carrosserie, feux allumés */
+      var Wf = Math.round(1200 * sc), Hf = Math.round(600 * sc), out = mk(Wf, Hf), o2 = out.getContext('2d');
+      o2.setTransform(sc, 0, 0, sc, 600 * sc, 300 * sc);
+      o2.save(); o2.shadowColor = 'rgba(0,0,0,.6)'; o2.shadowBlur = 90 * sc; o2.fillStyle = 'rgba(0,0,0,.5)';
+      o2.save(); o2.scale(1.04, 1.12); o2.fill(P.body); o2.restore();
+      o2.shadowColor = 'rgba(0,0,0,.9)'; o2.shadowBlur = 26 * sc; o2.fillStyle = 'rgba(0,0,0,.8)';
+      o2.save(); o2.scale(1.005, 1.03); o2.fill(P.body); o2.restore();
+      [[332, 1], [332, -1], [-290, 1], [-290, -1]].forEach(function (q) { o2.beginPath(); o2.ellipse(q[0], q[1] * 180, 70, 26, 0, 0, 7); o2.fill(); });
+      o2.restore();
+      o2.fillStyle = '#040505'; o2.beginPath(); o2.roundRect(500, -156, 30, 312, 12); o2.fill();
+      o2.beginPath(); o2.roundRect(-536, -140, 30, 280, 12); o2.fill();
+      [-116, -82, 82, 116].forEach(function (y) {
+        o2.fillStyle = '#30353a'; o2.beginPath(); o2.arc(-527, y, 13, 0, 7); o2.fill();
+        o2.fillStyle = '#060707'; o2.beginPath(); o2.arc(-528, y, 9.5, 0, 7); o2.fill();
+      });
+      o2.save(); o2.setTransform(1, 0, 0, 1, 0, 0); o2.imageSmoothingQuality = 'high';
+      o2.drawImage(base, (X0 + 600) * sc, (Y0 + 300) * sc, w / SS, h / SS); o2.restore();
+      o2.globalCompositeOperation = 'lighter'; o2.lineCap = 'round'; o2.lineJoin = 'round';
+      [-1, 1].forEach(function (s) {   // reflet rouge des feux sur la malle
+        var r = o2.createRadialGradient(-480, s * 170, 0, -480, s * 170, 80); r.addColorStop(0, 'rgba(255,30,45,.22)'); r.addColorStop(1, 'rgba(255,30,45,0)');
+        o2.fillStyle = r; o2.fillRect(-560, s * 170 - 80, 160, 160);
+      });
+      o2.shadowColor = 'rgba(200,228,255,1)'; o2.shadowBlur = 12 * sc; o2.strokeStyle = '#f1f7ff'; o2.lineWidth = 4.5;
+      [-1, 1].forEach(function (s) {
+        o2.beginPath(); o2.moveTo(502, s * 108); o2.lineTo(497, s * 132); o2.stroke();
+        o2.beginPath(); o2.moveTo(485, s * 160); o2.lineTo(466, s * 181); o2.stroke();
+      });
+      o2.shadowColor = 'rgba(60,150,255,1)'; o2.strokeStyle = '#6cb8ff'; o2.lineWidth = 2.6;
+      [-1, 1].forEach(function (s) { o2.beginPath(); o2.moveTo(494, s * 141); o2.lineTo(489, s * 151); o2.stroke(); });
+      o2.shadowColor = 'rgba(255,24,44,1)'; o2.shadowBlur = 20 * sc; o2.strokeStyle = '#ff3346'; o2.lineWidth = 6;
+      [-1, 1].forEach(function (s) { o2.beginPath(); o2.moveTo(-507, s * 102); o2.lineTo(-500, s * 140); o2.lineTo(-486, s * 164); o2.lineTo(-466, s * 182); o2.lineTo(-437, s * 194); o2.stroke(); });
+      o2.shadowBlur = 7 * sc; o2.strokeStyle = 'rgba(255,110,120,.8)'; o2.lineWidth = 2.6;
+      [-1, 1].forEach(function (s) { o2.beginPath(); o2.moveTo(-499, s * 112); o2.lineTo(-493, s * 138); o2.lineTo(-481, s * 156); o2.stroke(); });
+
+      yield;
+      /* Silhouette floue pour l'ombre portée par les lampadaires */
+      var sh = mk(300 * sc + 2, 150 * sc + 2), sg = sh.getContext('2d');
+      sg.setTransform(sc / 4, 0, 0, sc / 4, sh.width / 2, sh.height / 2); sg.shadowColor = '#000'; sg.shadowBlur = 30 * sc / 4; sg.fillStyle = '#000'; sg.fill(P.body);
+
+      res.img = out; res.box = [X0, Y0, w / s2, h / s2]; res.shadow = sh; res.lit = []; res.du = DU = DU || []; res.more = true; res.fade = 0;
+      yield;
+
+      /* Éclairage des lampadaires : une image par position de lampe (côté +y ; l'autre côté = miroir).
+         Calculé dans un worker quand c'est possible (l'animation n'est jamais ralentie), sinon ici par tranches. */
+      var st = 2, bw = Math.ceil(w / st), bh = Math.ceil(h / st), LY = LV * 1034, LZ = LH * 1034, n;
+      var d = { w: w, h: h, bw: bw, bh: bh, st: st, X: X, Y0: Y0, s2: s2, z: z, cov: cov, NX: NX, NY: NY, NZ: NZ, AO: AO, MP: MP, MG: MG, MR: MR, BR: BR, BG: BG, BB: BB,
+        DU: DU, LY: LY, LZ: LZ, norm: (LY * LY + LZ * LZ) * (LY * LY + LZ * LZ) / (LZ * LZ), T: TMT, TV: TMV };
+      var wk = null, state = 0, left = DU.length, wake = null;   // state : 0 en attente, 1 prêt, -1 indisponible, -2 échec en cours de calcul
+      function poke() { if (wake) { var f = wake; wake = null; f(); } }
+      function wait(go) { wake = go; }
+      if (left) try { wk = new Worker(workerURL()); } catch (e) { wk = null; }
+      if (wk) {
+        var tid = setTimeout(function () { if (!state) { state = -1; poke(); } }, 2500);
+        wk.onerror = function (e) { if (e && e.preventDefault) e.preventDefault(); state = state > 0 ? -2 : -1; poke(); };
+        wk.onmessage = function (e) {
+          if (e.data === 'ready') { if (!state) { state = 1; clearTimeout(tid); poke(); } return; }
+          var c = mk(bw, bh), gc = c.getContext('2d'), im = gc.createImageData(bw, bh);
+          im.data.set(e.data.q); gc.putImageData(im, 0, 0); res.lit[e.data.n] = c;
+          if (--left === 0) poke();
+        };
+        while (!state) yield wait;
+        if (state > 0) {
+          wk.postMessage(d, [z.buffer, cov.buffer, NX.buffer, NY.buffer, NZ.buffer, AO.buffer, MP.buffer, MG.buffer, MR.buffer, BR.buffer, BG.buffer, BB.buffer]);
+          while (left > 0 && state > 0) yield wait;
+          if (state < 0) res.lit = [];
+          res.more = false; return;
+        }
+        wk.terminate();
+      }
+      for (n = 0; n < DU.length; n++) {
+        var c = mk(bw, bh), gc = c.getContext('2d'), im = gc.createImageData(bw, bh);
+        for (var bj = 0; bj < bh; bj += 12) { litRows(d, n, bj, Math.min(bh, bj + 12), im.data); yield; }
+        gc.putImageData(im, 0, 0); res.lit[n] = c; yield;
+      }
+      res.more = false;
+    }
+
+    /* Une bande de lignes de l'image d'éclairage n (fonction autonome : elle sert aussi dans le worker) */
+    function litRows(d, n, j0, j1, q) {
+      var w = d.w, h = d.h, bw = d.bw, st = d.st, X = d.X, z = d.z, cov = d.cov, NX = d.NX, NY = d.NY, NZ = d.NZ, AO = d.AO, MP = d.MP, MG = d.MG, MR = d.MR,
+        BR = d.BR, BG = d.BG, BB = d.BB, LX = d.DU[n] * 1034, LY = d.LY, LZ = d.LZ, norm = d.norm, T = d.T, TN = T.length - 1, TV = d.TV;
+      function tm(x) { if (x <= 0) return 0; var f = Math.sqrt(x / TV) * TN; if (f >= TN) return T[TN]; var i = f | 0; return T[i] + (T[i + 1] - T[i]) * (f - i); }
+      for (var bj = j0; bj < j1; bj++) for (var bi = 0; bi < bw; bi++) {
+        var ii = Math.min(w - 2, bi * st + (st >> 1)), jj = Math.min(h - 2, bj * st + (st >> 1)), kk = jj * w + ii, cv = 0;
+        for (var a = 0; a < st; a += 2) for (var b = 0; b < st; b += 2) cv += cov[Math.min(h - 1, bj * st + b) * w + Math.min(w - 1, bi * st + a)];
+        cv /= Math.ceil(st / 2) * Math.ceil(st / 2);
+        if (cv <= 0 || NZ[kk] === 0) continue;
+        var lx = LX - X[ii], ly = LY - (d.Y0 + (jj + .5) / d.s2), lz = LZ - z[kk], d2 = lx * lx + ly * ly + lz * lz, dl = Math.sqrt(d2);
+        lx /= dl; ly /= dl; lz /= dl;
+        var E = lz * lz / d2 * norm, nx = NX[kk], ny = NY[kk], nz = NZ[kk], ndl = Math.max(0, nx * lx + ny * ly + nz * lz);
+        var hz = lz + 1, hl = Math.sqrt(lx * lx + ly * ly + hz * hz), ndh = Math.max(0, (nx * lx + ny * ly + nz * hz) / hl);
+        var c1 = 1 - nz, Fg = .04 + .96 * c1 * c1 * c1 * c1 * c1, n2 = ndh * ndh, n4 = n2 * n2, n8 = n4 * n4, n16 = n8 * n8, n64 = n16 * n16; n64 *= n64;
+        var v = E * (MP[kk] * AO[kk] * (.0003 * ndl + .0028 * n16 + .02 * n64 * n64) + MG[kk] * 4 * Fg * n64 * n64 + MR[kk] * (.0002 * ndl + .16 * n64 * n64 * (Fg + .02)));
+        var o = (bj * bw + bi) * 4;
+        q[o] = (tm(BR[kk] + v) - tm(BR[kk])) * 255;
+        q[o + 1] = (tm(BG[kk] + v * .62) - tm(BG[kk])) * 255;
+        q[o + 2] = (tm(BB[kk] + v * .36) - tm(BB[kk])) * 255;
+        q[o + 3] = cv * 255;
+      }
+    }
+    var WURL = null;
+    function workerURL() {
+      return WURL || (WURL = URL.createObjectURL(new Blob(['var litRows = ' + litRows + ';\n' +
+        'onmessage = function (e) { var d = e.data; for (var n = 0; n < d.DU.length; n++) { var q = new Uint8ClampedArray(d.bw * d.bh * 4); litRows(d, n, 0, d.bh, q); postMessage({ n: n, q: q }, [q.buffer]); } close(); };\n' +
+        'postMessage("ready");'], { type: 'text/javascript' })));
+    }
+    return { P: P, build: build };
+  })();
+  var scene = (function () {
+    var cv = $('#scene'), ctx = cv.getContext('2d', { alpha: false });
+    var TILE = 9.6, VR = 1.64, LANE = .68, EDGE = 1.02, ASPH = 1.3, RAIL = 1.42, FT = 9, ROAD = 1.7, GAP = 2.4, LV = .98, LH = 2, PAR = 1.2;
+    var DU = [-3.6, -2.6, -1.9, -1.3, -.8, -.4, 0, .4, .8, 1.3, 1.9, 2.6, 3.6];
+    var NZ = null, POOL = null, W = 0, H = 0, dpr = 1, L = 1, R = 1, cx = 0, cy = 0, tex = null, overlay = null, job = null, jobL = 0, jobD = 0, rebuild = 0;
+    var scrollL = 0, speed = 1, targetSpeed = 1, last = 0, raf = 0, clock = 0;
+    var paused = false, menuOpen = false, pauseTimer = 0, introT = reduce ? 9 : 0, introD = 4;
+    var spray = [], sprayAcc = 0, carU = 0, carV = 0, yaw = 0, grainPat = null, grainTick = 0, grainX = 0, grainY = 0;
+
+    function mk(w, h) { var c = document.createElement('canvas'); c.width = Math.max(1, Math.round(w)); c.height = Math.max(1, Math.round(h)); return c; }
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function stops(gr, list) { list.forEach(function (s) { gr.addColorStop(s[0], s[1]); }); return gr; }
+    function sst(t) { t = t < 0 ? 0 : t > 1 ? 1 : t; return t * t * (3 - 2 * t); }
+
+    /* Bruit : grain fin ou longues traînées (flou de vitesse) ; raccord parfait sur les bords */
+    function* noiseTile(n, blur, amp, darkOnly) {
+      var c = mk(n, n), g = c.getContext('2d'), d = g.createImageData(n, n), a = d.data, row = new Float32Array(n), tmp = new Float32Array(n), gain = blur ? Math.sqrt(2 * blur + 1) * 1.15 : 1;
+      for (var y = 0; y < n; y++) {
+        if ((y & 31) === 31) yield;
+        var x, s, p, v, i;
+        for (x = 0; x < n; x++) row[x] = Math.random() * 2 - 1;
+        for (p = 0; p < 2 && blur; p++) {
+          s = 0; for (x = -blur; x <= blur; x++) s += row[(x + n) % n];
+          for (x = 0; x < n; x++) { tmp[x] = s / (2 * blur + 1); s += row[(x + blur + 1) % n] - row[(x - blur + n) % n]; }
+          row.set(tmp);
+        }
+        for (x = 0; x < n; x++) {
+          v = row[x] * gain; i = (y * n + x) * 4;
+          a[i] = a[i + 1] = a[i + 2] = (v > 0 && !darkOnly) ? 255 : 0;
+          a[i + 3] = Math.min(255, Math.abs(v) * amp * 255);
+        }
+      }
+      g.putImageData(d, 0, 0); return c;
+    }
+
+    /* Texture calculée pixel par pixel (lumières douces, aucun bord net) */
+    function field(wu, hu, px, x0, y0, fn) {
+      var c = mk(wu * px, hu * px), g = c.getContext('2d'), im = g.createImageData(c.width, c.height), d = im.data, col = [0, 0, 0], i, j, o = 0;
+      for (j = 0; j < c.height; j++) for (i = 0; i < c.width; i++, o += 4) {
+        var a = fn(x0 + (i + .5) * wu / c.width, y0 + (j + .5) * hu / c.height, col);
+        if (a > 0) { d[o] = col[0]; d[o + 1] = col[1]; d[o + 2] = col[2]; d[o + 3] = a >= 1 ? 255 : a * 255; }
+      }
+      g.putImageData(im, 0, 0); return c;
+    }
+
+    /* ---- Route : tuile qui se répète sans raccord visible ---- */
+    function* buildRoad() {
+      var px = L * Math.min(dpr, 1.35), max = Math.sqrt(4.2e6 / (TILE * 2 * VR));
+      if (px > max) px = max;
+      px = Math.max(512, Math.round(TILE * px / 512) * 512) / TILE;
+      var cw = Math.round(TILE * px), ch = Math.round(2 * VR * px), c = mk(cw, ch), g = c.getContext('2d'), i;
+      function pat(tile, v0, v1, k) {
+        g.save(); g.setTransform(1, 0, 0, 1, 0, 0); var p = g.createPattern(tile, 'repeat');
+        if (k && p.setTransform) p.setTransform(new DOMMatrix([k, 0, 0, k, 0, 0]));
+        g.fillStyle = p; g.fillRect(0, (v0 + VR) * px, cw, (v1 - v0) * px); g.restore();
+      }
+      function wrap(fn) { fn(0); fn(-TILE); fn(TILE); }
+      g.scale(px, px); g.translate(0, VR);
+      /* Accotements, puis l'enrobé sarcelle sombre, légèrement plus clair au centre des voies */
+      g.fillStyle = '#0a1415'; g.fillRect(0, -VR, TILE, 2 * VR);
+      g.fillStyle = stops(g.createLinearGradient(0, -ASPH, 0, ASPH), [[0, '#0b181b'], [.1, '#0e1e22'], [.3, '#112428'], [.5, '#102327'], [.7, '#112428'], [.9, '#0e1e22'], [1, '#0b181b']]);
+      g.fillRect(0, -ASPH, TILE, 2 * ASPH);
+      pat(NZ.streak, -ASPH, ASPH); yield;
+      pat(NZ.fine, -VR, VR); yield;
+      /* Zones plus mouillées (taches très floues) */
+      g.globalAlpha = .32; pat(NZ.blot, -VR, VR, cw / 96); g.globalAlpha = 1;
+      /* Traces de roues : l'eau chassée par les pneus */
+      [-LANE, 0, LANE].forEach(function (lc) {
+        [-.165, .165].forEach(function (o) {
+          var v = lc + o;
+          g.fillStyle = stops(g.createLinearGradient(0, v - .07, 0, v + .07), [[0, 'rgba(3,8,9,0)'], [.5, 'rgba(3,8,9,.3)'], [1, 'rgba(3,8,9,0)']]);
+          g.fillRect(0, v - .07, TILE, .14);
+        });
+      });
+      yield;
+      /* Reflets mouillés étirés par la vitesse */
+      for (i = 0; i < 120; i++) (function () {
+        var u = rnd(0, TILE), v = rnd(-1.25, 1.25), l = rnd(.3, 1.6), w = rnd(.004, .012), a = rnd(.015, .05);
+        wrap(function (o) {
+          g.fillStyle = stops(g.createLinearGradient(u + o, 0, u + o + l, 0), [[0, 'rgba(180,215,215,0)'], [.5, 'rgba(180,215,215,' + a + ')'], [1, 'rgba(180,215,215,0)']]);
+          g.fillRect(u + o, v - w / 2, l, w);
+        });
+      })();
+      yield;
+      /* Marquage : lignes de rive continues, tirets aux extrémités adoucies, usés */
+      var marks = new Path2D();
+      g.fillStyle = 'rgba(214,228,224,.5)';
+      [-EDGE, EDGE].forEach(function (v) { g.fillRect(0, v - .021, TILE, .042); marks.rect(0, v - .021, TILE, .042); });
+      [-LANE / 2, LANE / 2].forEach(function (v) {
+        for (var k = 0; k < TILE / GAP; k++) {
+          var u0 = .4 + k * GAP;
+          g.fillStyle = stops(g.createLinearGradient(u0, 0, u0 + .66, 0), [[0, 'rgba(214,228,224,0)'], [.12, 'rgba(214,228,224,.48)'], [.88, 'rgba(214,228,224,.48)'], [1, 'rgba(214,228,224,0)']]);
+          g.fillRect(u0, v - .016, .66, .032); marks.rect(u0, v - .016, .66, .032);
+        }
+      });
+      g.save(); g.clip(marks); pat(NZ.wear, -VR, VR); g.restore();
+      /* Bord de l'enrobé et glissières de sécurité */
+      [-1, 1].forEach(function (s) {
+        g.fillStyle = 'rgba(0,0,0,.3)'; g.fillRect(0, s * ASPH - .014, TILE, .028);
+        var y = s * RAIL;
+        g.fillStyle = 'rgba(0,0,0,.45)'; g.fillRect(0, y + s * .02 - .035, TILE, .07);
+        g.fillStyle = '#0f1617'; for (var k = 0; k < TILE / .4; k++) g.fillRect(k * .4 + .1, y + s * .035 - .016, .028, .032);
+        g.fillStyle = stops(g.createLinearGradient(0, y - .024, 0, y + .024), [[0, s < 0 ? '#4e5c5c' : '#253030'], [.5, '#3c4848'], [1, s < 0 ? '#253030' : '#313d3d']]);
+        g.fillRect(0, y - .024, TILE, .048);
+        g.fillStyle = 'rgba(200,222,222,.16)'; g.fillRect(0, y - .024, TILE, .006);
+      });
+      yield;
+      bakePools(g); yield;
+      /* Fondu des bords vers le décor */
+      g.globalCompositeOperation = 'destination-out';
+      g.fillStyle = stops(g.createLinearGradient(0, -VR, 0, -VR + .16), [[0, 'rgba(0,0,0,1)'], [1, 'rgba(0,0,0,0)']]); g.fillRect(0, -VR, TILE, .16);
+      g.fillStyle = stops(g.createLinearGradient(0, VR, 0, VR - .16), [[0, 'rgba(0,0,0,1)'], [1, 'rgba(0,0,0,0)']]); g.fillRect(0, VR - .16, TILE, .16);
+      return c;
+    }
+
+    /* Lumière des lampadaires (une lampe tous les GAP, côtés alternés) cuite dans les textures :
+       la lumière révèle le grain de la chaussée mouillée, sans aucun calcul par image */
+    function bakePools(g) {
+      for (var pass = 0; pass < 2; pass++) {
+        g.globalCompositeOperation = pass ? 'lighter' : 'overlay'; g.globalAlpha = pass ? .26 : .6;
+        for (var k = -1; k <= TILE / GAP; k++) g.drawImage(pass ? POOL[1] : POOL[0], k * GAP - 1.5, ((k & 1) ? LV : -LV) - 1.35, 3, 2.7);
+      }
+      g.globalCompositeOperation = 'source-over'; g.globalAlpha = 1;
+    }
+
+    /* ---- Décor au-delà des glissières : herbe, buissons, arbres (basse résolution) ---- */
+    function* buildTerrain() {
+      var ext = R / L + .5, px = Math.max(256, Math.round(TILE * L * .4 / 256) * 256) / TILE;
+      var c = mk(TILE * px, 2 * ext * px), g = c.getContext('2d'), i;
+      g.scale(px, px); g.translate(0, ext);
+      g.fillStyle = '#071011'; g.fillRect(0, -ext, TILE, 2 * ext);
+      [-1, 1].forEach(function (s) {   // talus éclairé près de la route
+        g.fillStyle = stops(g.createLinearGradient(0, s * 1.5, 0, s * 2.6), [[0, 'rgba(22,40,40,.6)'], [1, 'rgba(22,40,40,0)']]);
+        g.fillRect(0, Math.min(s * 1.5, s * 2.6), TILE, 1.1);
+      });
+      for (i = 0; i < TILE * 7; i++) (function () {
+        var u = rnd(0, TILE), v = rnd(1.75, ext) * (Math.random() < .5 ? -1 : 1), r = rnd(.25, .85), tree = Math.random() < .65;
+        [0, -TILE, TILE].forEach(function (o) {
+          var gr = g.createRadialGradient(u + o, v, 0, u + o, v, r);
+          gr.addColorStop(0, tree ? 'rgba(1,4,4,.85)' : 'rgba(16,30,30,.4)'); gr.addColorStop(1, 'rgba(1,4,4,0)');
+          g.fillStyle = gr; g.fillRect(u + o - r, v - r, 2 * r, 2 * r);
+        });
+      })();
+      yield;
+      g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = g.createPattern(NZ.fine, 'repeat'); g.fillRect(0, 0, c.width, c.height); g.restore();
+      bakePools(g);
+      return { c: c, h: ext };
+    }
+
+    /* ---- Feuillages au premier plan, flous (défilent plus vite : profondeur) ---- */
+    function buildFoliage() {
+      var v0 = 1.85, ext = R / L / 1.3 + .6, px = L * .25, c = mk(FT * px, Math.max(.5, ext - v0) * px), g = c.getContext('2d'), i;
+      g.scale(px, px); g.translate(0, -v0);
+      for (i = 0; i < 24; i++) (function () {
+        var u = rnd(0, FT), v = rnd(v0 + .35, ext), r = rnd(.35, .95);
+        [0, -FT, FT].forEach(function (o) {
+          var rr = g.createRadialGradient(u + o - .06, v - .08, 0, u + o - .06, v - .08, r * 1.08);
+          rr.addColorStop(.7, 'rgba(46,84,82,.2)'); rr.addColorStop(1, 'rgba(46,84,82,0)');
+          g.fillStyle = rr; g.fillRect(u + o - r * 1.2, v - r * 1.2, r * 2.4, r * 2.4);
+          var cg = g.createRadialGradient(u + o, v, 0, u + o, v, r);
+          cg.addColorStop(0, 'rgba(1,3,3,.96)'); cg.addColorStop(.72, 'rgba(1,3,3,.88)'); cg.addColorStop(1, 'rgba(1,3,3,0)');
+          g.fillStyle = cg; g.fillRect(u + o - r, v - r, 2 * r, 2 * r);
+        });
+      })();
+      g.globalCompositeOperation = 'destination-out';
+      g.fillStyle = stops(g.createLinearGradient(0, v0, 0, v0 + .5), [[0, 'rgba(0,0,0,1)'], [1, 'rgba(0,0,0,0)']]); g.fillRect(0, v0, FT, .5);
+      return { c: c, v0: v0, h: Math.max(.5, ext - v0) };
+    }
+
+    /* ---- Lumières ---- */
+    function buildPool(r, g, b) {   // lumière d'un lampadaire sur la chaussée
+      return field(3, 2.7, Math.max(24, L * .2), -1.5, -1.35, function (x, y, c) {
+        var q = x * x / 2.25 + y * y / 1.82; if (q >= 1) return 0;
+        var f = 1 - q; f *= f * f;
+        c[0] = r; c[1] = g; c[2] = b; return f;
+      });
+    }
+    function buildHead() {   // tête de lampadaire, floue et filée
+      return field(.8, .36, Math.max(24, L * .5), -.4, -.18, function (x, y, c) {
+        var q = x * x / .16 + y * y / .0324; if (q >= 1) return 0;
+        var halo = (1 - q) * (1 - q) * .28, cu = Math.max(0, 1 - Math.abs(x) / .24), core = Math.exp(-y * y / .0007) * cu * cu;
+        c[0] = 255; c[1] = 168 + 70 * Math.min(1, core); c[2] = 86 + 90 * Math.min(1, core); return Math.min(1, halo + core);
+      });
+    }
+    function buildGlint() {   // reflet d'un lampadaire dans l'eau : traînée brisée qui défile moins vite que la route
+      var ph = rnd(0, 9);
+      return field(1.8, .2, Math.max(24, L * .3), -.9, -.1, function (x, y, c) {
+        var e = 1 - Math.abs(x) / .9; if (e <= 0) return 0;
+        var br = .55 + .45 * Math.sin(x * 23 + ph) * Math.sin(x * 9.7 + ph * 2);
+        c[0] = 255; c[1] = 178; c[2] = 108; return e * e * Math.exp(-y * y / .0012) * (.35 + .65 * br * br) * .9;
+      });
+    }
+    function buildBeam() {   // faisceaux des phares sur la route
+      return field(3.1, 2, Math.max(24, L * .18), .3, -1, function (x, y, c) {
+        var dx = x - .48; if (dx <= 0) return 0;
+        var a = 0, s, dy, th;
+        for (s = -1; s <= 1; s += 2) { dy = y - s * (.135 + dx * .07); th = Math.atan2(Math.abs(dy), dx); a += Math.exp(-th * th / .07); }
+        a *= (1 - Math.exp(-dx / .2)) * Math.exp(-dx / 1.1) * (1 - sst((x - 2.4) / 1)) * .6;
+        c[0] = 222; c[1] = 236; c[2] = 255; return a;
+      });
+    }
+    function buildTail() {   // feux arrière sur la route mouillée : halo et longs reflets
+      return field(3, 1.7, Math.max(24, L * .2), -3.1, -.85, function (x, y, c) {
+        var a = 0, s, dx = -.5 - x, dy, r;
+        for (s = -1; s <= 1; s += 2) {
+          dy = y - s * .18; r = Math.sqrt(dy * dy + (dx > 0 ? dx * dx * .55 : dx * dx * 5));
+          a += .5 * Math.exp(-r / .08) + .3 * Math.exp(-r / .3);
+          if (dx > 0) a += .45 * Math.exp(-dy * dy / .0022) * Math.exp(-dx / .85) * (1 - Math.exp(-dx / .06));
+        }
+        a *= (1 - sst((-x - 2.5) / .6)) * (1 - sst((x + .36) / .26)) * (1 - sst((Math.abs(y) - .55) / .3));
+        c[0] = 255; c[1] = 34; c[2] = 50; return a > 1 ? 1 : a;
+      });
+    }
+    function buildSheen() {   // reflet du ciel sur la chaussée mouillée, fixe par rapport à la caméra
+      return field(10, 2.8, 26, -5, -1.4, function (x, y, c) {
+        var b = Math.exp(-Math.pow((y + .6) / .33, 2)) + .35 * Math.exp(-Math.pow((y - .55) / .45, 2));
+        var a = b * (.5 + .5 * Math.tanh(x / 2.2)) * (1 - sst((Math.abs(x) - 3.6) / 1.4)) * (1 - sst((Math.abs(y) - 1.15) / .25));
+        c[0] = 205; c[1] = 232; c[2] = 230; return a * .85;
+      });
+    }
+    function buildMist(rgb) {
+      var c = mk(64, 64), g = c.getContext('2d');
+      g.fillStyle = stops(g.createRadialGradient(32, 32, 0, 32, 32, 32), [[0, 'rgba(' + rgb + ',1)'], [.5, 'rgba(' + rgb + ',.35)'], [1, 'rgba(' + rgb + ',0)']]);
+      g.fillRect(0, 0, 64, 64); return c;
+    }
+    function buildOverlay() {   // brume sarcelle, vignettage, fondu sous le texte
+      var q = .5, c = mk(W * q, H * q), g = c.getContext('2d'), S = Math.max(W, H);
+      g.scale(q, q);
+      g.fillStyle = stops(g.createRadialGradient(W * .62, -H * .08, 0, W * .62, -H * .08, S * .95), [[0, 'rgba(78,152,162,.18)'], [.45, 'rgba(58,124,134,.07)'], [1, 'rgba(58,124,134,0)']]); g.fillRect(0, 0, W, H);
+      g.fillStyle = stops(g.createRadialGradient(cx, cy + H * .06, S * .2, cx, cy + H * .06, S * .85), [[0, 'rgba(0,0,0,0)'], [1, 'rgba(0,0,0,.72)']]); g.fillRect(0, 0, W, H);
+      g.fillStyle = stops(g.createLinearGradient(0, H * .5, 0, H), [[0, 'rgba(3,7,8,0)'], [1, 'rgba(3,7,8,.8)']]); g.fillRect(0, H * .5, W, H * .5);
+      overlay = c;
+    }
+    /* Toutes les textures, calculées par petites tranches (la page reste fluide pendant le calcul).
+       Premier calcul : la scène démarre dès que la voiture et la route sont prêtes, l'éclairage
+       des lampadaires sur la voiture arrive ensuite en fondu. Recalcul (rotation, fenêtre) :
+       les anciennes textures restent affichées jusqu'à ce que les nouvelles soient prêtes. */
+    function* buildAll() {
+      var t = {}, car = {}, first = !tex;
+      if (!NZ) {
+        var nz = {};
+        nz.fine = yield* noiseTile(256, 1, .045); nz.streak = yield* noiseTile(512, 44, .028);
+        nz.wear = yield* noiseTile(128, 0, .5, true); nz.grain = yield* noiseTile(160, 0, .04); nz.blot = yield* noiseTile(48, 0, .7, true);
+        NZ = nz; yield;
+      }
+      var cg = M3.build(L / 1034 * dpr, DU, LV, LH, car);
+      while (!car.img) yield cg.next().value;
+      POOL = [buildPool(255, 228, 200)]; yield;
+      POOL[1] = buildPool(255, 138, 58); yield;
+      t.road = yield* buildRoad(); yield;
+      t.terrain = yield* buildTerrain(); yield;
+      t.foliage = buildFoliage(); yield;
+      t.head = buildHead(); t.glint = buildGlint(); yield;
+      t.beam = buildBeam(); yield;
+      t.tail = buildTail(); yield;
+      t.sheen = buildSheen(); t.mistR = buildMist('255,40,55'); t.mistW = buildMist('190,220,220'); yield;
+      t.car = car;
+      if (first) { tex = t; step(0); render(); kick(); yield; }
+      for (var r; !(r = cg.next()).done;) yield r.value;
+      if (!first || !raf) car.fade = 1;
+      tex = t;
+      if (!raf) render();
+    }
+    function startJob() {
+      clearTimeout(rebuild); jobL = L; jobD = dpr;
+      var g = buildAll(), me = job = {};
+      (function slice() {
+        if (job !== me) return;
+        var t0 = performance.now(), lim = tex ? 6 : 12, r;
+        while (performance.now() - t0 < lim) {
+          r = g.next();
+          if (r.done) { job = null; return; }
+          if (typeof r.value === 'function') { r.value(slice); return; }   // attend le worker : reprise à son signal
+        }
+        setTimeout(slice, 0);
+      })();
+    }
+
+    function layout() {
+      var w = cv.clientWidth || innerWidth, h = cv.clientHeight || innerHeight, d = Math.min(window.devicePixelRatio || 1, w < 860 ? 1.75 : 1.5);
+      if (w * h * d * d > 3.6e6) d = Math.sqrt(3.6e6 / (w * h));
+      if (w === W && h === H && d === dpr) return false;
+      W = w; H = h; dpr = d;
+      var mobile = W < 860, S = Math.max(W, H);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      L = mobile ? Math.min(S * .23, W * .52) : S * .165;
+      cx = W * (mobile ? .5 : .54); cy = H * .4;
+      R = Math.sqrt(W * W + H * H) / 2 + Math.hypot(cx - W / 2, cy - H / 2) + L * .4;
+      introD = (cx + .7 * L) / (.913 * L);
+      buildOverlay();
+      if (jobL && (Math.abs(L / jobL - 1) > .04 || jobD !== dpr)) { clearTimeout(rebuild); rebuild = setTimeout(startJob, 220); }
+      return true;
+    }
+
+    /* Dessine une texture répétée le long de la route (léger recouvrement : aucun joint) */
+    function strip(img, len, v0, h, off, umin, umax) {
+      var u = -(((off % len) + len) % len);
+      while (u > umin) u -= len;
+      for (; u < umax; u += len) ctx.drawImage(img, u * L, v0 * L, len * L + 1.2, h * L);
+    }
+
+    function step(dt) {
+      clock += dt;
+      speed += (targetSpeed - speed) * Math.min(1, dt * 1.6);
+      scrollL += dt * ROAD * speed;
+      if (introT < 9) introT += dt;
+      var p = Math.min(1, introT / 2.6), e = 1 - Math.pow(1 - p, 4), c = tex.car;
+      if (!c.more && c.fade < 1) c.fade = Math.min(1, c.fade + dt * 1.5);
+      carU = -introD * (1 - e);
+      /* Très léger flottement latéral : la voiture reste au centre de sa voie */
+      var t = clock;
+      carV = .012 * Math.sin(t * .33) + .007 * Math.sin(t * .71 + 1);
+      yaw = Math.atan2(.012 * .33 * Math.cos(t * .33) + .007 * .71 * Math.cos(t * .71 + 1), ROAD * Math.max(.3, speed));
+      /* Embruns soulevés par les roues arrière */
+      if (speed > .3) {
+        sprayAcc += dt * (W < 860 ? 20 : 28) * speed;
+        while (sprayAcc >= 1) {
+          sprayAcc--;
+          for (var s = -1; s <= 1; s += 2) spray.push({ u: carU - .3 + rnd(-.03, .03), v: carV + s * .17 + rnd(-.02, .02), vu: -ROAD * speed * rnd(.2, .4), vv: s * rnd(.01, .06), age: 0, life: rnd(.8, 1.3), r: rnd(.05, .09) });
+        }
+      }
+      for (var i = spray.length - 1; i >= 0; i--) {
+        var q = spray[i]; q.age += dt;
+        if (q.age >= q.life) { spray[i] = spray[spray.length - 1]; spray.pop(); continue; }
+        q.u += q.vu * dt; q.v += q.vv * dt; q.vv *= 1 - dt * .8;
+      }
+    }
+
+    function render() {
+      var t = clock, still = reduce, k, x, s, i, car = tex.car, kc = L / 1034, b = car.box;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+      var zoom = 1 + (still ? 0 : .012 * Math.sin(t * .071));
+      ctx.save();
+      ctx.translate(cx + (still ? 0 : W * .004 * Math.sin(t * .09)), cy);
+      ctx.rotate(-.42 + (still ? 0 : .008 * Math.sin(t * .13)));
+      ctx.scale(zoom, zoom);
+      var ext = R / L / zoom + .3;
+      strip(tex.terrain.c, TILE, -tex.terrain.h, 2 * tex.terrain.h, scrollL, -ext, ext);
+      strip(tex.road, TILE, -VR, 2 * VR, scrollL, -ext, ext);
+      var k0 = Math.floor((scrollL - ext - 2) / GAP), k1 = Math.ceil((scrollL + ext + 2) / GAP);
+      /* Reflets des lampadaires dans l'eau (image virtuelle sous la chaussée : défile moins vite) */
+      ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .55;
+      ctx.save(); ctx.scale(1 / (2 - 1 / PAR), 1 / (2 - 1 / PAR));
+      for (k = k0; k <= k1; k++) { x = k * GAP - scrollL; s = (k & 1) ? 1 : -1; ctx.drawImage(tex.glint, (x - .9) * L, (s * LV - .1) * L, 1.8 * L, .2 * L); }
+      ctx.restore();
+      /* Reflet du ciel sur l'eau, fixe par rapport à la caméra */
+      ctx.globalCompositeOperation = 'lighter'; ctx.globalAlpha = .1;
+      ctx.drawImage(tex.sheen, -5 * L, -1.4 * L, 10 * L, 2.8 * L);
+      /* Ombres de la voiture projetées par les lampadaires proches */
+      ctx.globalCompositeOperation = 'source-over';
+      for (k = Math.floor((scrollL + carU - 3) / GAP); k <= Math.ceil((scrollL + carU + 3) / GAP); k++) {
+        var du0 = k * GAP - scrollL - carU, sd = (k & 1) ? 1 : -1, sa = .36 * Math.exp(-du0 * du0 / 1.8);
+        if (sa < .02) continue;
+        ctx.globalAlpha = sa;
+        ctx.drawImage(car.shadow, (carU - du0 * .14 - .58) * L, (carV - sd * LV * .14 - .29) * L, 1.16 * L, .58 * L);
+      }
+      ctx.globalAlpha = 1;
+      /* Phares et feux sur la route, puis la voiture */
+      ctx.save(); ctx.translate(carU * L, carV * L); ctx.rotate(yaw);
+      ctx.globalCompositeOperation = 'overlay'; ctx.globalAlpha = .9;
+      ctx.drawImage(tex.tail, -3.1 * L, -.85 * L, 3 * L, 1.7 * L);
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.globalAlpha = .4; ctx.drawImage(tex.beam, .3 * L, -L, 3.1 * L, 2 * L);
+      ctx.globalAlpha = .6; ctx.drawImage(tex.tail, -3.1 * L, -.85 * L, 3 * L, 1.7 * L);
+      ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
+      ctx.drawImage(car.img, -600 * kc, -300 * kc, 1200 * kc, 600 * kc);
+      /* Les lampadaires éclairent la voiture au passage (éclairage précalculé, interpolé) */
+      ctx.globalCompositeOperation = 'lighter';
+      if (car.fade > 0) for (k = Math.floor((scrollL + carU - 3.6) / GAP); k <= Math.ceil((scrollL + carU + 3.6) / GAP); k++) {
+        var du = k * GAP - scrollL - carU, side = (k & 1) ? 1 : -1, j = 0;
+        if (du <= DU[0] || du >= DU[DU.length - 1]) continue;
+        while (DU[j + 1] < du) j++;
+        var f = (du - DU[j]) / (DU[j + 1] - DU[j]), fade = (1 - sst((Math.abs(du) - 3) / .6)) * car.fade;
+        ctx.save(); if (side < 0) ctx.scale(1, -1);
+        if (car.lit[j]) { ctx.globalAlpha = (1 - f) * fade; ctx.drawImage(car.lit[j], b[0] * kc, b[1] * kc, b[2] * kc, b[3] * kc); }
+        if (car.lit[j + 1]) { ctx.globalAlpha = f * fade; ctx.drawImage(car.lit[j + 1], b[0] * kc, b[1] * kc, b[2] * kc, b[3] * kc); }
+        ctx.restore();
+      }
+      ctx.restore();
+      /* Embruns : rougis par les feux près de la voiture, gris plus loin */
+      ctx.globalCompositeOperation = 'lighter';
+      for (i = 0; i < spray.length; i++) {
+        var q = spray[i], fa = q.age / q.life, a = Math.sin(Math.PI * fa) * .075, rr = (q.r + fa * .3) * L, red = Math.max(0, 1 - fa * 1.7);
+        if (red > 0) { ctx.globalAlpha = a * red; ctx.drawImage(tex.mistR, q.u * L - rr, q.v * L - rr, 2 * rr, 2 * rr); }
+        ctx.globalAlpha = a * (1 - red) * .55; ctx.drawImage(tex.mistW, q.u * L - rr, q.v * L - rr, 2 * rr, 2 * rr);
+      }
+      /* Têtes de lampadaires (en hauteur, plus proches de la caméra : elles défilent plus vite) */
+      ctx.globalAlpha = 1;
+      ctx.save(); ctx.scale(PAR, PAR);
+      for (k = k0; k <= k1; k++) { x = k * GAP - scrollL; s = (k & 1) ? 1 : -1; ctx.drawImage(tex.head, (x - .4) * L, (s * LV - .18) * L, .8 * L, .36 * L); }
+      ctx.restore();
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.save(); ctx.scale(1.3, 1.3);
+      strip(tex.foliage.c, FT, tex.foliage.v0, tex.foliage.h, scrollL, -ext / 1.3, ext / 1.3);
+      ctx.restore();
+      ctx.restore();
+      /* Brume, vignettage, grain de film */
+      ctx.drawImage(overlay, 0, 0, W, H);
+      if (!grainPat) grainPat = ctx.createPattern(NZ.grain, 'repeat');
+      if (!still && (++grainTick & 1)) { grainX = Math.random() * 160; grainY = Math.random() * 160; }
+      ctx.save(); ctx.translate(-grainX, -grainY); ctx.fillStyle = grainPat; ctx.fillRect(0, 0, W + 160, H + 160); ctx.restore();
+      if (introT < 1.2) { ctx.fillStyle = 'rgba(0,0,0,' + Math.pow(1 - introT / 1.2, 1.6).toFixed(3) + ')'; ctx.fillRect(0, 0, W, H); }
+    }
+
+    function wantRun() { return tex && !reduce && !document.hidden && !paused && !menuOpen; }
+    function frame(now) {
+      raf = 0;
+      step(Math.min(.05, (now - last) / 1000)); last = now;
+      render();
+      if (wantRun()) raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!raf && wantRun()) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+
+    /* Le calcul commence juste après le premier affichage de la page */
+    layout(); requestAnimationFrame(function () { setTimeout(startJob, 0); });
+    addEventListener('resize', function () { if (layout() && tex) render(); });
+    document.addEventListener('visibilitychange', kick);
+    return {
+      /* Accueil : la scène roule. Pages intérieures : elle ralentit puis s'arrête (défilement fluide). */
+      mode: function (home) {
+        clearTimeout(pauseTimer);
+        targetSpeed = home ? 1 : .35;
+        if (home) { paused = false; kick(); } else pauseTimer = setTimeout(function () { paused = true; }, 1200);
+      },
+      menu: function (open) { menuOpen = open; kick(); }
+    };
+  })();
 
   /* =========================================================
      Pages et menu
@@ -870,17 +1364,17 @@ body.inner.scrolled .topbar{opacity:1}
     VIEWS.forEach(function (n) { document.getElementById('v-' + n).classList.toggle('on', n === v); });
     document.body.classList.toggle('inner', v !== 'accueil');
     meta.style.display = v === 'accueil' ? '' : 'none';
-    targetSpeed = v === 'accueil' ? 1 : 0.35;
+    scene.mode(v === 'accueil');
     $$('.links a, .menu nav a').forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + v); });
     closeMenu(); scrollTo(0, 0);
     onView(v);
   }
   addEventListener('hashchange', show);
   var mbtn = $('#menu-btn');
-  function closeMenu() { document.body.classList.remove('menu-open'); mbtn.setAttribute('aria-expanded', 'false'); mbtn.firstChild.nodeValue = 'Menu '; }
+  function closeMenu() { document.body.classList.remove('menu-open'); scene.menu(false); mbtn.setAttribute('aria-expanded', 'false'); mbtn.firstChild.nodeValue = 'Menu '; }
   mbtn.addEventListener('click', function () {
     var open = !document.body.classList.contains('menu-open');
-    document.body.classList.toggle('menu-open', open); mbtn.setAttribute('aria-expanded', open); mbtn.firstChild.nodeValue = open ? 'Fermer ' : 'Menu ';
+    document.body.classList.toggle('menu-open', open); scene.menu(open); mbtn.setAttribute('aria-expanded', open); mbtn.firstChild.nodeValue = open ? 'Fermer ' : 'Menu ';
   });
   $$('.menu nav a').forEach(function (a) { a.addEventListener('click', function () { if (a.getAttribute('href') === location.hash || (!location.hash && a.getAttribute('href') === '#accueil')) closeMenu(); }); });
   addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
