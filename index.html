@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0b">
+<title>TMD Motors</title>
+<meta name="description" content="TMD Motors, garage à Brie-Comte-Robert (77). Spécialiste BMW / VAG : reprogrammation Stage 1, 2, 3, conversion Flexfuel E85, mécanique, carrosserie légère. Devis gratuit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800;1,900&family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#0a0a0b;--bg2:#101013;--card:#141418;--card2:#1a1a1f;
+  --line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
+  --fg:#f5f5f6;--muted:#a3a3ad;--dim:#6f6f78;
+  --red:#e3192e;--red2:#ff3045;--redd:#5a0a12;
+  --gutter:clamp(16px,4vw,40px);--max:1200px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --cond:"Barlow Condensed",system-ui,sans-serif;
+  --sans:"Barlow",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red2);outline-offset:3px;border-radius:4px}
+
+/* ---------- Logo ---------- */
+.logo{display:inline-flex;flex-direction:column;align-items:center;line-height:1;font-family:var(--cond)}
+.logo b{font-weight:900;font-style:italic;font-size:30px;letter-spacing:-.01em;color:#fff}
+.logo span{font-weight:800;font-style:italic;font-size:11.5px;letter-spacing:.52em;margin-right:-.52em;color:var(--red);margin-top:2px}
+
+/* ---------- Boutons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:6px;font:700 15px/1 var(--cond);letter-spacing:.12em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;transition:transform .25s var(--ease),background .25s,border-color .25s,box-shadow .25s;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px -10px rgba(227,25,46,.7)}
+.btn-red:hover{background:var(--red2);transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line2);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.35);transform:translateY(-2px)}
+.btn-wa{background:#1fae54;color:#fff}
+.btn-wa:hover{background:#25c25f;transform:translateY(-2px)}
+
+/* ---------- En-tête ---------- */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,border-color .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.nav.solid{background:rgba(10,10,11,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+.nav-links{display:flex;gap:30px;font:600 14px/1 var(--cond);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.nav-links a{position:relative;padding:6px 0;transition:color .2s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav .btn{padding:12px 18px;font-size:14px}
+
+/* ---------- Héro ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:110px 0 70px;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(70% 60% at 72% 42%,rgba(150,14,30,.55),transparent 70%),radial-gradient(60% 50% at 10% 100%,rgba(90,10,18,.5),transparent 70%),var(--bg)}
+.streaks{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.streaks i{position:absolute;height:1px;width:140%;left:-20%;background:linear-gradient(90deg,transparent,rgba(227,25,46,.55),transparent);transform:rotate(-24deg)}
+.streaks i:nth-child(1){top:18%}
+.streaks i:nth-child(2){top:26%;opacity:.5}
+.streaks i:nth-child(3){top:84%;transform:rotate(-14deg);opacity:.6}
+.streaks i:nth-child(4){top:92%;transform:rotate(-14deg);opacity:.35}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:12px;font:700 13px/1 var(--cond);letter-spacing:.32em;text-transform:uppercase;color:var(--red2)}
+.kicker::before{content:"";width:28px;height:2px;background:var(--red)}
+.hero h1{margin:22px 0 20px;font:italic 900 clamp(54px,8.4vw,112px)/.88 var(--cond);text-transform:uppercase;letter-spacing:-.01em}
+.hero h1 em{display:block;font-style:italic;color:var(--red)}
+.hero-sig{font:600 14px/1.4 var(--cond);letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+.hero-sig b{color:var(--red);font-weight:700;padding:0 .3em}
+.hero-lead{max-width:520px;margin-top:22px;font-size:18px;color:#cfcfd5}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.brands{display:flex;flex-wrap:wrap;gap:8px;margin-top:34px}
+.brands span{padding:9px 14px;border:1px solid var(--line2);border-radius:4px;font:700 14px/1 var(--cond);letter-spacing:.14em;text-transform:uppercase;background:rgba(0,0,0,.25)}
+
+/* Compte-tours */
+.gauge-card{position:relative;padding:26px 26px 22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.gauge-card h2{font:700 13px/1 var(--cond);letter-spacing:.3em;text-transform:uppercase;color:var(--muted);text-align:center}
+.gauge{position:relative;width:min(100%,340px);margin:14px auto 0}
+.gauge svg{width:100%;height:auto;overflow:visible}
+.g-track{fill:none;stroke:rgba(255,255,255,.08);stroke-width:14;stroke-linecap:round}
+.g-fill{fill:none;stroke:url(#gred);stroke-width:14;stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:100;transition:stroke-dashoffset 1.1s var(--ease)}
+.g-tick{stroke:rgba(255,255,255,.28);stroke-width:2}
+.g-tick.big{stroke:rgba(255,255,255,.7);stroke-width:3}
+.g-tick.hot{stroke:var(--red)}
+.g-needle{transform-origin:150px 150px;transform:rotate(-135deg);transition:transform 1.1s cubic-bezier(.34,1.35,.5,1)}
+.g-read{position:absolute;left:0;right:0;top:68%;text-align:center}
+.g-read small{display:block;font:700 12px/1 var(--cond);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.g-read strong{display:block;margin-top:6px;font:italic 900 46px/1 var(--cond);letter-spacing:-.01em}
+.g-read strong.quote{font-size:32px;color:var(--red2)}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:18px}
+.stages button{padding:12px 4px;border-radius:6px;border:1px solid var(--line2);background:rgba(0,0,0,.3);font:700 14px/1 var(--cond);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.stages button:hover{border-color:rgba(255,255,255,.35)}
+.stages button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.gauge-note{margin-top:14px;text-align:center;font-size:13px;color:var(--dim)}
+
+/* ---------- Sections ---------- */
+.section{padding:110px 0;position:relative}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+.sec-head h2,.h2{font:italic 900 clamp(40px,5.6vw,72px)/.92 var(--cond);text-transform:uppercase;letter-spacing:-.005em;margin-top:16px}
+.sec-head h2 em,.h2 em{font-style:italic;color:var(--red)}
+.sec-head p{max-width:420px;color:var(--muted);font-size:17px}
+
+/* Bandeau infos */
+.strip{border-block:1px solid var(--line);background:var(--bg2)}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.strip div{display:flex;align-items:center;gap:14px;padding:26px 22px;border-left:1px solid var(--line);font:700 15px/1.25 var(--cond);letter-spacing:.12em;text-transform:uppercase}
+.strip div:first-child{border-left:0;padding-left:0}
+.strip svg{width:28px;height:28px;flex:none;stroke:var(--red);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Spécialiste */
+.spec{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.spec-big{position:relative;font:italic 900 clamp(110px,17vw,220px)/.8 var(--cond);text-transform:uppercase;letter-spacing:-.02em}
+.spec-big span{display:block}
+.spec-big .sl{color:var(--red)}
+.spec-big .out{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,.85)}
+.spec p{color:#cfcfd5;font-size:18px;margin-top:22px;max-width:520px}
+.spec ul{list-style:none;margin-top:28px;display:grid;gap:12px}
+.spec li{display:flex;gap:14px;align-items:flex-start;color:var(--muted)}
+.spec li::before{content:"";flex:none;width:8px;height:8px;margin-top:9px;background:var(--red);transform:skewX(-20deg)}
+.spec li b{color:var(--fg);font-weight:600}
+
+/* Pôles */
+.poles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pole{position:relative;padding:30px 26px 28px;border-radius:12px;background:var(--card);border:1px solid var(--line);overflow:hidden;transition:transform .35s var(--ease),border-color .35s,background .35s}
+.pole::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:var(--red);transform:scaleX(.25);transform-origin:left;transition:transform .45s var(--ease)}
+.pole:hover{transform:translateY(-6px);border-color:rgba(227,25,46,.4);background:var(--card2)}
+.pole:hover::before{transform:scaleX(1)}
+.pole-num{font:italic 900 15px/1 var(--cond);color:var(--dim);letter-spacing:.1em}
+.pole svg{width:40px;height:40px;margin:26px 0 22px;stroke:var(--red);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pole h3{font:800 25px/1 var(--cond);letter-spacing:.04em;text-transform:uppercase}
+.pole ul{list-style:none;margin-top:18px;display:grid;gap:9px;color:var(--muted);font-size:15px}
+.pole li{display:flex;gap:10px;align-items:center}
+.pole li::before{content:"";width:12px;height:1px;background:var(--red);flex:none}
+
+/* Tarifs */
+.tarifs-box{border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,var(--card),var(--bg2));overflow:hidden}
+.tabs{display:flex;gap:4px;padding:8px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:1;min-width:max-content;padding:14px 20px;border:0;border-radius:8px;background:transparent;color:var(--muted);font:700 15px/1 var(--cond);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .25s,color .25s}
+.tabs button[aria-selected="true"]{background:var(--red);color:#fff}
+.tabs button:not([aria-selected="true"]):hover{color:#fff;background:rgba(255,255,255,.05)}
+.panel{padding:12px 34px 30px}
+.panel[hidden]{display:none}
+.row{display:flex;align-items:baseline;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row-name{font-size:18px;font-weight:500}
+.row-name small{display:block;font-size:14px;color:var(--dim);font-weight:400;margin-top:2px}
+.row .dots{flex:1;border-bottom:1px dashed rgba(255,255,255,.12);transform:translateY(-5px)}
+.row-price{font:italic 900 32px/1 var(--cond);color:var(--red2);white-space:nowrap}
+.row-price .from{font:500 14px/1 var(--sans);font-style:normal;color:var(--muted);margin-right:6px;letter-spacing:0}
+.row-price.q{font-size:22px;letter-spacing:.08em;text-transform:uppercase}
+.tarifs-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px 34px;border-top:1px solid var(--line);background:rgba(227,25,46,.06)}
+.tarifs-foot p{font:700 16px/1.3 var(--cond);letter-spacing:.14em;text-transform:uppercase}
+.tarifs-foot p b{color:var(--red2)}
+
+/* Flexfuel */
+.e85{position:relative;overflow:hidden;background:radial-gradient(60% 80% at 85% 30%,rgba(160,14,30,.45),transparent 70%),linear-gradient(180deg,var(--bg2),var(--bg));border-block:1px solid var(--line)}
+.e85-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.e85-price{display:flex;align-items:flex-start;gap:6px;margin-top:22px;font:italic 900 clamp(90px,13vw,170px)/.8 var(--cond);letter-spacing:-.03em}
+.e85-price sup{font-size:.42em;margin-top:.12em;color:var(--red)}
+.e85-sub{margin-top:18px;font:700 20px/1.3 var(--cond);letter-spacing:.06em;text-transform:uppercase}
+.e85-sub b{color:var(--red2)}
+.e85-text{margin-top:14px;color:var(--muted);max-width:480px}
+.e85-feats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.feat{padding:24px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.35)}
+.feat svg{width:34px;height:34px;stroke:var(--red);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{margin-top:16px;font:800 20px/1.1 var(--cond);letter-spacing:.04em;text-transform:uppercase}
+.feat p{margin-top:6px;font-size:14.5px;color:var(--muted)}
+.pump{position:absolute;right:-60px;bottom:-80px;font:italic 900 380px/1 var(--cond);color:rgba(255,255,255,.025);pointer-events:none;letter-spacing:-.04em}
+
+/* Pourquoi */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line)}
+.why div{padding:34px 28px 10px 0;border-right:1px solid var(--line);padding-left:28px}
+.why div:first-child{padding-left:0}
+.why div:last-child{border-right:0}
+.why b{display:block;font:italic 900 54px/1 var(--cond);color:var(--red);letter-spacing:-.02em}
+.why h3{margin-top:18px;font:800 21px/1.15 var(--cond);letter-spacing:.06em;text-transform:uppercase}
+.why p{margin-top:10px;color:var(--muted);font-size:15px}
+.quote-band{padding:44px clamp(24px,5vw,60px);border-radius:16px;background:linear-gradient(110deg,var(--red),#a10f20);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;position:relative;overflow:hidden}
+.quote-band::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-60deg,transparent 0 22px,rgba(255,255,255,.05) 22px 23px);pointer-events:none}
+.quote-band p{font:italic 900 clamp(30px,4.4vw,52px)/1 var(--cond);text-transform:uppercase;position:relative}
+.quote-band .btn{background:#0a0a0b;color:#fff;position:relative}
+.quote-band .btn:hover{background:#000;transform:translateY(-2px)}
+
+/* Devis */
+.devis-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:start}
+.devis-side p{color:var(--muted);font-size:17px;margin-top:22px;max-width:420px}
+.steps{list-style:none;margin-top:32px;display:grid;gap:18px;counter-reset:s}
+.steps li{display:flex;gap:16px;align-items:flex-start;counter-increment:s}
+.steps li::before{content:counter(s,decimal-leading-zero);font:italic 900 22px/1 var(--cond);color:var(--red);min-width:34px}
+.steps b{display:block;font:700 18px/1.2 var(--cond);letter-spacing:.06em;text-transform:uppercase}
+.steps span{color:var(--muted);font-size:15px}
+form{padding:34px;border-radius:16px;border:1px solid var(--line);background:var(--card)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font:700 13px/1 var(--cond);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{width:100%;padding:15px 16px;border-radius:8px;border:1px solid var(--line2);background:#0d0d10;font-size:16px;transition:border-color .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23e3192e' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 3px rgba(227,25,46,.2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer;position:relative}
+.chips input{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:11px 16px;border-radius:6px;border:1px solid var(--line2);font:700 14px/1 var(--cond);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:all .2s}
+.chips input:checked+span{background:var(--red);border-color:var(--red);color:#fff}
+.chips input:focus-visible+span{outline:2px solid var(--red2);outline-offset:2px}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.form-note{margin-top:14px;font-size:13px;color:var(--dim)}
+.err{color:var(--red2);font-size:14px;margin-top:12px;min-height:1em}
+
+/* Contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cbox{padding:34px;border-radius:16px;border:1px solid var(--line);background:var(--card)}
+.cbox h3{font:700 13px/1 var(--cond);letter-spacing:.3em;text-transform:uppercase;color:var(--red2)}
+.tel{display:block;margin-top:14px;font:italic 900 clamp(44px,6vw,68px)/1 var(--cond);letter-spacing:-.01em;transition:color .2s}
+.tel:hover{color:var(--red2)}
+.cbox p{margin-top:12px;color:var(--muted)}
+.cbox .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cbox .addr{color:var(--fg);margin-top:14px;font:800 30px/1.1 var(--cond);text-transform:uppercase;letter-spacing:.02em}
+.addr small{display:block;font:600 20px/1.3 var(--cond);letter-spacing:.12em;color:var(--muted);margin-top:4px}
+.map{position:relative;margin-top:24px;height:190px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#0d0d10}
+.map svg{width:100%;height:100%}
+.pin{position:absolute;left:58%;top:46%;transform:translate(-50%,-100%)}
+.pin i{display:block;width:34px;height:34px;border-radius:50% 50% 50% 0;background:var(--red);transform:rotate(-45deg);box-shadow:0 8px 20px rgba(227,25,46,.6)}
+.pin i::after{content:"";position:absolute;inset:11px;border-radius:50%;background:#0a0a0b}
+.pin::after{content:"";position:absolute;left:50%;bottom:-10px;width:40px;height:40px;margin-left:-20px;border-radius:50%;border:2px solid var(--red);opacity:0;animation:ping 2.4s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(.3);opacity:.9}100%{transform:scale(2.2);opacity:0}}
+.socials{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.soc{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:12px;border:1px solid var(--line);background:var(--card);transition:border-color .25s,transform .25s var(--ease)}
+.soc:hover{border-color:rgba(227,25,46,.5);transform:translateY(-3px)}
+.soc svg{width:26px;height:26px;flex:none}
+.soc b{display:block;font:700 17px/1.1 var(--cond);letter-spacing:.08em;text-transform:uppercase}
+.soc span{font-size:14px;color:var(--muted);word-break:break-all}
+
+/* Pied */
+.foot{padding:60px 0 40px;border-top:1px solid var(--line);background:#060607}
+.foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+.foot .logo b{font-size:42px}
+.foot .logo span{font-size:14px}
+.foot-sig{margin-top:14px;font:600 13px/1 var(--cond);letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.foot-cols{display:flex;gap:60px;flex-wrap:wrap}
+.foot-cols h4{font:700 13px/1 var(--cond);letter-spacing:.24em;text-transform:uppercase;color:var(--red2);margin-bottom:14px}
+.foot-cols a,.foot-cols p{display:block;color:var(--muted);font-size:15px;padding:3px 0}
+.foot-cols a:hover{color:#fff}
+.foot-bot{margin-top:50px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+
+/* Barre d'actions téléphone */
+.mbar{display:none}
+
+/* Apparition */
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.d1{transition-delay:.08s}.js .rv.d2{transition-delay:.16s}.js .rv.d3{transition-delay:.24s}
+.js .hero .rv{transition-duration:1s}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{opacity:1;transform:none;transition:none}
+  .g-needle,.g-fill{transition:none}
+  .pin::after{animation:none}
+}
+
+/* ---------- Tablette ---------- */
+@media (max-width:1020px){
+  .hero-grid,.spec,.e85-grid,.devis-grid{grid-template-columns:1fr}
+  .hero-grid{gap:40px}
+  .gauge-card{max-width:460px}
+  .poles{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr 1fr}
+  .why div:nth-child(2){border-right:0}
+  .why div:nth-child(3){padding-left:0}
+  .strip .wrap{grid-template-columns:1fr 1fr}
+  .strip div:nth-child(3){border-left:0;padding-left:0}
+  .strip div:nth-child(n+3){border-top:1px solid var(--line)}
+  .nav-links{display:none}
+  .spec{gap:30px}
+}
+
+/* ---------- Téléphone ---------- */
+@media (max-width:680px){
+  :root{--gutter:16px}
+  body{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  .nav .wrap{height:62px}
+  .logo b{font-size:26px}
+  .logo span{font-size:9px}
+  .nav .btn{padding:11px 14px;font-size:13px}
+  .nav .btn .lbl{display:none}
+  .hero{min-height:auto;padding:96px 0 56px}
+  .hero h1{font-size:clamp(50px,15.4vw,72px);margin:18px 0 16px}
+  .hero-sig{font-size:11.5px;letter-spacing:.22em}
+  .hero-lead{font-size:16.5px}
+  .hero-actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .hero-actions .btn{justify-content:center;padding:17px}
+  .brands{margin-top:26px}
+  .brands span{font-size:13px;padding:8px 12px}
+  .gauge-card{padding:20px 16px 18px}
+  .g-read strong{font-size:40px}
+  .stages button{font-size:13px;padding:12px 2px}
+  .section{padding:72px 0}
+  .sec-head{margin-bottom:34px}
+  .sec-head p{font-size:16px}
+  .strip .wrap{grid-template-columns:1fr 1fr;padding:0}
+  .strip div{padding:20px 16px;font-size:13px;gap:10px;border-left:1px solid var(--line)!important}
+  .strip div:nth-child(odd){border-left:0!important}
+  .strip svg{width:22px;height:22px}
+  .spec-big{font-size:clamp(96px,32vw,150px)}
+  .spec p{font-size:16.5px}
+  .poles{grid-template-columns:1fr;gap:10px}
+  .pole{padding:24px 22px;display:grid;grid-template-columns:auto 1fr;column-gap:18px;align-items:start}
+  .pole-num{grid-column:1/-1}
+  .pole svg{margin:16px 0 0;width:36px;height:36px;grid-row:2/4}
+  .pole h3{margin-top:18px;font-size:23px}
+  .pole ul{margin-top:12px}
+  .panel{padding:4px 18px 16px}
+  .row{padding:17px 0;gap:10px}
+  .row-name{font-size:16px}
+  .row-price{font-size:27px}
+  .row-price.q{font-size:18px}
+  .tabs button{padding:13px 14px;font-size:13.5px;letter-spacing:.1em}
+  .tarifs-foot{padding:20px 18px}
+  .tarifs-foot .btn{width:100%;justify-content:center}
+  .e85-feats{grid-template-columns:1fr 1fr;gap:8px}
+  .feat{padding:18px 16px}
+  .feat h3{font-size:17px}
+  .feat p{font-size:13.5px}
+  .pump{font-size:220px}
+  .why{grid-template-columns:1fr}
+  .why div{border-right:0!important;padding:26px 0!important;border-bottom:1px solid var(--line);display:grid;grid-template-columns:62px 1fr;column-gap:10px}
+  .why b{grid-row:1/3;font-size:44px}
+  .why h3{margin-top:4px;font-size:19px}
+  .why p{margin-top:6px}
+  .quote-band{padding:32px 22px}
+  .quote-band .btn{width:100%;justify-content:center}
+  form{padding:22px 18px}
+  .fgrid{grid-template-columns:1fr}
+  .form-actions{display:grid;grid-template-columns:1fr}
+  .form-actions .btn{justify-content:center;padding:17px}
+  .contact-grid,.socials{grid-template-columns:1fr}
+  .cbox{padding:26px 22px}
+  .cbox .btns{display:grid;grid-template-columns:1fr}
+  .cbox .btns .btn{justify-content:center}
+  .addr{font-size:26px}
+  .foot-cols{gap:34px}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 1fr;position:fixed;inset:auto 0 0;z-index:60;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));gap:8px;background:rgba(10,10,11,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);transition:transform .35s var(--ease)}
+  .mbar.away{transform:translateY(110%)}
+  .mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:54px;border-radius:10px;font:700 12px/1 var(--cond);letter-spacing:.14em;text-transform:uppercase;background:var(--card2);border:1px solid var(--line)}
+  .mbar a svg{width:20px;height:20px}
+  .mbar a.call{background:var(--red);border-color:var(--red)}
+  .mbar a.wa svg{color:#25d366}
+}
+</style>
+<script>document.documentElement.classList.add("js");
+try{var q=location.search;if(/v=site/.test(q))sessionStorage.setItem("tmd-v","site");if(sessionStorage.getItem("tmd-v")!=="site"&&(matchMedia("(max-width: 760px)").matches||(matchMedia("(pointer: coarse)").matches&&matchMedia("(max-width: 1024px)").matches)))location.replace("mobile.html"+location.hash)}catch(e){}</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s1 2.6 1.1 2.7c.1.2 1.9 2.9 4.6 4.1 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-1.8-2.5V9.7a5.7 5.7 0 1 0 4.9 5.7V9.1a7.4 7.4 0 0 0 4.3 1.4V7.4a4.3 4.3 0 0 1-3.2-1.6z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M3 6h18v12H3zM3 7l9 6 9-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21zM12 12.2a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="TMD Motors, accueil"><b>TMD</b><span>MOTORS</span></a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#prestations">Prestations</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#e85">Flexfuel E85</a>
+      <a href="#devis">Devis</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-red" href="tel:+33629400045"><svg><use href="#i-phone"/></svg><span class="lbl">06 29 40 00 45</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HÉRO -->
+<section class="hero">
+  <div class="streaks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker rv">Garage · Brie-Comte-Robert (77)</p>
+      <h1 class="rv d1">Votre véhicule,<em>notre expertise.</em></h1>
+      <p class="hero-sig rv d2">Mécanique<b>·</b>Performance<b>·</b>Carrosserie</p>
+      <p class="hero-lead rv d2">Spécialiste BMW et groupe VAG. Reprogrammation moteur, conversion Flexfuel E85, entretien, distribution, embrayage et carrosserie légère. Diagnostic toutes marques et devis gratuit.</p>
+      <div class="hero-actions rv d3">
+        <a class="btn btn-red" href="#devis">Demander un devis gratuit<svg><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="tel:+33629400045"><svg><use href="#i-phone"/></svg>Appeler le garage</a>
+      </div>
+      <div class="brands rv d3" aria-label="Marques spécialisées"><span>BMW</span><span>Volkswagen</span><span>Audi</span><span>Seat</span></div>
+    </div>
+
+    <div class="gauge-card rv d2">
+      <h2>Reprogrammation moteur</h2>
+      <div class="gauge">
+        <svg viewBox="0 0 300 260" aria-hidden="true">
+          <defs>
+            <linearGradient id="gred" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#7a0c16"/><stop offset=".6" stop-color="#e3192e"/><stop offset="1" stop-color="#ff4458"/>
+            </linearGradient>
+          </defs>
+          <path class="g-track" d="M65.15 234.85 A120 120 0 1 1 234.85 234.85"/>
+          <path class="g-fill" id="gfill" pathLength="100" d="M65.15 234.85 A120 120 0 1 1 234.85 234.85"/>
+          <g id="ticks"></g>
+          <g class="g-needle" id="needle">
+            <path d="M150 50 L155 150 L145 150 Z" fill="#fff"/>
+          </g>
+          <circle cx="150" cy="150" r="16" fill="#e3192e"/>
+          <circle cx="150" cy="150" r="6" fill="#0a0a0b"/>
+        </svg>
+        <div class="g-read" aria-live="polite"><small id="glabel">Stage 1</small><strong id="gprice">350 €</strong></div>
+      </div>
+      <div class="stages" role="group" aria-label="Choisir une formule">
+        <button type="button" data-k="0" aria-pressed="false">Origine</button>
+        <button type="button" data-k="1" aria-pressed="true">Stage 1</button>
+        <button type="button" data-k="2" aria-pressed="false">Stage 2</button>
+        <button type="button" data-k="3" aria-pressed="false">Stage 3</button>
+      </div>
+      <p class="gauge-note">Cartographie sur mesure · Compatible Flexfuel E85</p>
+    </div>
+  </div>
+</section>
+
+<!-- BANDEAU -->
+<div class="strip">
+  <div class="wrap">
+    <div><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Diagnostic<br>toutes marques</div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Travail de qualité<br>et garantie</div>
+    <div><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 10h8"/></svg>Accueil et conseils<br>personnalisés</div>
+    <div><svg viewBox="0 0 24 24"><path d="M3 15a9 9 0 0 1 18 0"/><path d="M12 15l4-5"/><circle cx="12" cy="15" r="1.5"/></svg>Passion<br>automobile</div>
+  </div>
+</div>
+
+<!-- PRESTATIONS -->
+<section class="section" id="prestations">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="kicker rv">Ce qu'on fait</p><h2 class="rv d1">Nos <em>prestations</em></h2></div>
+      <p class="rv d2">Spécialiste BMW, Volkswagen, Audi et Seat. Quatre métiers sous le même toit, un seul interlocuteur pour votre voiture.</p>
+    </div>
+    <div class="poles">
+      <article class="pole rv">
+        <span class="pole-num">01</span>
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/><path d="M9 9h6v6H9z"/></svg>
+        <h3>Reprogrammation</h3>
+        <ul><li>Stage 1 / 2 / 3</li><li>Flexfuel E85</li><li>Cartographie sur mesure</li><li>Remise d'origine</li></ul>
+      </article>
+      <article class="pole rv d1">
+        <span class="pole-num">02</span>
+        <svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg>
+        <h3>Mécanique</h3>
+        <ul><li>Entretien / Révision</li><li>Distribution</li><li>Embrayage</li><li>Boîte auto (BVA)</li></ul>
+      </article>
+      <article class="pole rv d2">
+        <span class="pole-num">03</span>
+        <svg viewBox="0 0 24 24"><path d="M3 16v-3l2-5h11l3 5h2v3"/><circle cx="7" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/><path d="M9 16.5h6M5 13h16"/></svg>
+        <h3>Carrosserie légère</h3>
+        <ul><li>Réparation</li><li>Peinture</li><li>Rénovation optique</li><li>Débosselage</li></ul>
+      </article>
+      <article class="pole rv d3">
+        <span class="pole-num">04</span>
+        <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l6-6"/><path d="M16 3h5v5"/></svg>
+        <h3>Préparation</h3>
+        <ul><li>Stage performance</li><li>Préparation moteur</li><li>Optimisation</li><li>Suivi personnalisé</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section class="section" id="tarifs" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="kicker rv">Prix clairs</p><h2 class="rv d1">Nos <em>tarifs</em></h2></div>
+      <p class="rv d2">Pas de mauvaise surprise : les prix sont affichés. Pour le reste, le devis est gratuit.</p>
+    </div>
+    <div class="tarifs-box rv">
+      <div class="tabs" role="tablist" aria-label="Catégories de tarifs">
+        <button role="tab" id="t-reprog" aria-controls="p-reprog" aria-selected="true">Reprogrammation</button>
+        <button role="tab" id="t-meca" aria-controls="p-meca" aria-selected="false" tabindex="-1">Mécanique</button>
+      </div>
+      <div class="panel" role="tabpanel" id="p-reprog" aria-labelledby="t-reprog">
+        <div class="row"><span class="row-name">Remise d'origine<small>Retour à la cartographie constructeur</small></span><span class="dots"></span><span class="row-price">200€</span></div>
+        <div class="row"><span class="row-name">Stage 1<small>Optimisation du moteur d'origine</small></span><span class="dots"></span><span class="row-price">350€</span></div>
+        <div class="row"><span class="row-name">Stage 2<small>Pour un véhicule déjà préparé</small></span><span class="dots"></span><span class="row-price">450€</span></div>
+        <div class="row"><span class="row-name">Stage 3<small>Préparation poussée, sur mesure</small></span><span class="dots"></span><span class="row-price q">Sur devis</span></div>
+        <div class="row"><span class="row-name">Conversion Flexfuel E85<small>Rouler à l'éthanol</small></span><span class="dots"></span><span class="row-price">350€</span></div>
+      </div>
+      <div class="panel" role="tabpanel" id="p-meca" aria-labelledby="t-meca" hidden>
+        <div class="row"><span class="row-name">Distribution</span><span class="dots"></span><span class="row-price"><span class="from">dès</span>250€</span></div>
+        <div class="row"><span class="row-name">Embrayage</span><span class="dots"></span><span class="row-price"><span class="from">dès</span>400€</span></div>
+        <div class="row"><span class="row-name">Entretien courant<small>Vidange, révision, freinage…</small></span><span class="dots"></span><span class="row-price q">Sur devis</span></div>
+        <div class="row"><span class="row-name">Carrosserie légère<small>Réparation, peinture, optiques, débosselage</small></span><span class="dots"></span><span class="row-price q">Sur devis</span></div>
+        <div class="row"><span class="row-name">Diagnostic<small>Toutes marques</small></span><span class="dots"></span><span class="row-price q">Sur devis</span></div>
+      </div>
+      <div class="tarifs-foot">
+        <p><b>Devis gratuit</b> · Réponse rapide par téléphone ou WhatsApp</p>
+        <a class="btn btn-red" href="#devis">Demander mon devis<svg><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEXFUEL -->
+<section class="section e85" id="e85">
+  <div class="pump" aria-hidden="true">E85</div>
+  <div class="wrap e85-grid">
+    <div>
+      <p class="kicker rv">Conversion</p>
+      <h2 class="h2 rv d1">Flexfuel <em>E85</em></h2>
+      <div class="e85-price rv d2">350<sup>€</sup></div>
+      <p class="e85-sub rv d2">Roulez à l'éthanol à <b>prix réduit</b> · Devis gratuit</p>
+      <p class="e85-text rv d3">Le bioéthanol coûte bien moins cher à la pompe que l'essence. On installe la conversion sur votre véhicule et elle reste compatible avec une reprogrammation Stage 1, 2 ou 3.</p>
+      <div class="hero-actions rv d3"><a class="btn btn-red" href="#devis" data-presta="Conversion Flexfuel E85">Je veux passer à l'E85<svg><use href="#i-arrow"/></svg></a></div>
+    </div>
+    <div class="e85-feats">
+      <div class="feat rv"><svg viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M4 10h10M14 8l3 2v7a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg><h3>Économies</h3><p>Des économies importantes sur le carburant.</p></div>
+      <div class="feat rv d1"><svg viewBox="0 0 24 24"><path d="M3 16a9 9 0 0 1 18 0"/><path d="M12 16l4-5"/><path d="M6 16h1M17 16h1M12 8v1"/></svg><h3>Compatible</h3><p>Fonctionne avec les Stages 1, 2 et 3.</p></div>
+      <div class="feat rv d2"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.1L3 17.7 6.3 21l6.3-6.3a4 4 0 0 0 5.1-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><h3>Installation pro</h3><p>Posée par le garage, sur votre véhicule.</p></div>
+      <div class="feat rv d3"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><h3>Garantie</h3><p>La garantie qualité TMD Motors.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SLOGAN -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="quote-band rv">
+      <p>TMD Motors, c'est plus qu'un garage&nbsp;!</p>
+      <a class="btn" href="tel:+33629400045"><svg><use href="#i-phone"/></svg>06 29 40 00 45</a>
+    </div>
+  </div>
+</section>
+
+<!-- DEVIS -->
+<section class="section" id="devis" style="padding-top:20px">
+  <div class="wrap devis-grid">
+    <div class="devis-side">
+      <p class="kicker rv">Gratuit et sans engagement</p>
+      <h2 class="h2 rv d1">Votre <em>devis</em> en 1 minute</h2>
+      <p class="rv d2">Remplissez le formulaire, il s'envoie directement sur WhatsApp ou par e-mail au garage.</p>
+    </div>
+    <form id="form" class="rv d1" novalidate>
+      <div class="fgrid">
+        <div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="nom" autocomplete="name" required></div>
+        <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required></div>
+        <div class="field full"><label>Marque</label>
+          <div class="chips">
+            <label><input type="radio" name="marque" value="BMW" checked><span>BMW</span></label>
+            <label><input type="radio" name="marque" value="Volkswagen"><span>Volkswagen</span></label>
+            <label><input type="radio" name="marque" value="Audi"><span>Audi</span></label>
+            <label><input type="radio" name="marque" value="Seat"><span>Seat</span></label>
+            <label><input type="radio" name="marque" value="Autre marque"><span>Autre</span></label>
+          </div>
+        </div>
+        <div class="field"><label for="f-modele">Modèle et moteur</label><input id="f-modele" name="modele" placeholder="Ex. : Golf 7 GTI, 320d…"></div>
+        <div class="field"><label for="f-presta">Prestation</label>
+          <select id="f-presta" name="presta">
+            <option>Stage 1</option><option>Stage 2</option><option>Stage 3</option><option>Remise d'origine</option>
+            <option>Conversion Flexfuel E85</option><option>Entretien / Révision</option><option>Distribution</option>
+            <option>Embrayage</option><option>Boîte auto (BVA)</option><option>Carrosserie légère</option><option>Diagnostic</option><option>Autre</option>
+          </select>
+        </div>
+        <div class="field full"><label for="f-msg">Message</label><textarea id="f-msg" name="msg" placeholder="Kilométrage, symptômes, questions…"></textarea></div>
+      </div>
+      <p class="err" id="err" role="alert"></p>
+      <div class="form-actions">
+        <button class="btn btn-wa" type="submit" data-via="wa"><svg><use href="#i-wa"/></svg>Envoyer sur WhatsApp</button>
+        <button class="btn btn-ghost" type="submit" data-via="mail"><svg><use href="#i-mail"/></svg>Envoyer par e-mail</button>
+      </div>
+      <p class="form-note">Vos informations servent uniquement à vous répondre.</p>
+    </form>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="kicker rv">Nous trouver</p><h2 class="rv d1">Passez au <em>garage</em></h2></div>
+    </div>
+    <div class="contact-grid">
+      <div class="cbox rv">
+        <h3>Téléphone</h3>
+        <a class="tel" href="tel:+33629400045">06 29 40 00 45</a>
+        <p>Appelez ou écrivez-nous sur WhatsApp pour une question, un devis ou un rendez-vous.</p>
+        <div class="btns">
+          <a class="btn btn-red" href="tel:+33629400045"><svg><use href="#i-phone"/></svg>Appeler</a>
+          <a class="btn btn-wa" href="https://wa.me/33629400045" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+        </div>
+      </div>
+      <div class="cbox rv d1">
+        <h3>Adresse</h3>
+        <p class="addr">Allée du Jardin Doliset<small>77170 Brie-Comte-Robert</small></p>
+        <div class="map" aria-hidden="true">
+          <svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="190" fill="#0d0d10"/>
+            <g stroke="#1d1d23" stroke-width="10" fill="none" stroke-linecap="round">
+              <path d="M-10 140 C80 120 150 150 230 110 S360 60 420 70"/>
+              <path d="M90 -10 L140 200"/>
+              <path d="M300 -10 C280 60 260 120 290 200"/>
+            </g>
+            <g stroke="#17171c" stroke-width="5" fill="none">
+              <path d="M-10 60 L420 30"/><path d="M180 -10 L210 200"/><path d="M20 200 L120 100 L240 80"/><path d="M330 120 L420 150"/>
+            </g>
+            <path d="M-10 140 C80 120 150 150 230 110 S360 60 420 70" stroke="rgba(227,25,46,.35)" stroke-width="2" fill="none" stroke-dasharray="6 6"/>
+          </svg>
+          <div class="pin"><i></i></div>
+        </div>
+        <div class="btns">
+          <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=All%C3%A9e%20du%20Jardin%20Doliset%2077170%20Brie-Comte-Robert" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg>Google Maps</a>
+          <a class="btn btn-ghost" href="https://waze.com/ul?q=All%C3%A9e%20du%20Jardin%20Doliset%2077170%20Brie-Comte-Robert&navigate=yes" target="_blank" rel="noopener"><svg><use href="#i-arrow"/></svg>Waze</a>
+        </div>
+      </div>
+    </div>
+    <div class="socials">
+      <a class="soc rv" href="https://www.tiktok.com/@tmdmotors91" target="_blank" rel="noopener"><svg><use href="#i-tiktok"/></svg><div><b>TikTok</b><span>@tmdmotors91</span></div></a>
+      <a class="soc rv d1" href="https://wa.me/33629400045" target="_blank" rel="noopener"><svg style="color:#25d366"><use href="#i-wa"/></svg><div><b>WhatsApp</b><span>06 29 40 00 45</span></div></a>
+      <a class="soc rv d2" href="mailto:tmdmotorspro@gmail.com"><svg style="color:var(--red)"><use href="#i-mail"/></svg><div><b>E-mail</b><span>tmdmotorspro@gmail.com</span></div></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <a class="logo" href="#top" aria-label="TMD Motors"><b>TMD</b><span>MOTORS</span></a>
+        <p class="foot-sig">Mécanique · Performance · Carrosserie</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Garage</h4><a href="#prestations">Prestations</a><a href="#tarifs">Tarifs</a><a href="#e85">Flexfuel E85</a><a href="#devis">Devis gratuit</a></div>
+        <div><h4>Contact</h4><a href="tel:+33629400045">06 29 40 00 45</a><a href="mailto:tmdmotorspro@gmail.com">tmdmotorspro@gmail.com</a><p>Allée du Jardin Doliset<br>77170 Brie-Comte-Robert</p></div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="yr">2026</span> TMD Motors · Spécialiste BMW / VAG</span>
+      <span>Site réalisé par Mon Site Studio</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mbar" id="mbar" aria-label="Actions rapides">
+  <a class="call" href="tel:+33629400045"><svg><use href="#i-phone"/></svg>Appeler</a>
+  <a class="wa" href="https://wa.me/33629400045" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg>WhatsApp</a>
+  <a href="#devis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg>Devis</a>
+</nav>
+
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TEL = '33629400045', MAIL = 'tmdmotorspro@gmail.com';
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* En-tête opaque au défilement */
+  var nav = document.getElementById('nav');
+  function onScroll() { nav.classList.toggle('solid', scrollY > 30); }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* Compte-tours */
+  var ticks = document.getElementById('ticks'), ns = 'http://www.w3.org/2000/svg', html = '';
+  for (var i = 0; i <= 40; i++) {
+    var a = (-135 + i * 6.75) * Math.PI / 180, big = i % 5 === 0;
+    var r1 = big ? 96 : 101, r2 = 108;
+    html += '<line class="g-tick' + (big ? ' big' : '') + (i > 31 ? ' hot' : '') + '" x1="' + (150 + r1 * Math.sin(a)).toFixed(1) + '" y1="' + (150 - r1 * Math.cos(a)).toFixed(1) + '" x2="' + (150 + r2 * Math.sin(a)).toFixed(1) + '" y2="' + (150 - r2 * Math.cos(a)).toFixed(1) + '"/>';
+  }
+  ticks.innerHTML = html;
+  var stages = [
+    { l: "Remise d'origine", p: '200 €', a: -95 },
+    { l: 'Stage 1', p: '350 €', a: -10 },
+    { l: 'Stage 2', p: '450 €', a: 60 },
+    { l: 'Stage 3', p: 'Sur devis', a: 122 }
+  ];
+  var needle = document.getElementById('needle'), fill = document.getElementById('gfill');
+  var lab = document.getElementById('glabel'), price = document.getElementById('gprice');
+  var btns = document.querySelectorAll('.stages button'), cur = 1, auto = null;
+  function setStage(k) {
+    cur = k; var s = stages[k];
+    needle.style.transform = 'rotate(' + s.a + 'deg)';
+    fill.style.strokeDashoffset = (100 - (s.a + 135) / 270 * 100).toFixed(1);
+    lab.textContent = s.l; price.textContent = s.p;
+    price.classList.toggle('quote', s.p === 'Sur devis');
+    btns.forEach(function (b, j) { b.setAttribute('aria-pressed', j === k ? 'true' : 'false'); });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { clearInterval(auto); auto = null; setStage(+b.dataset.k); }); });
+  /* Démarrage : l'aiguille balaie le cadran puis se pose sur le Stage 1, puis passe d'une formule à l'autre */
+  if (reduce) setStage(1);
+  else {
+    setTimeout(function () { needle.style.transform = 'rotate(135deg)'; fill.style.strokeDashoffset = 0; }, 350);
+    setTimeout(function () { setStage(1); }, 1350);
+    var gc = document.querySelector('.gauge-card');
+    var startAuto = function () { if (!auto) auto = setInterval(function () { setStage((cur + 1) % 4); }, 2800); };
+    var stopAuto = function () { clearInterval(auto); auto = null; };
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { e[0].isIntersecting ? setTimeout(startAuto, 1600) : stopAuto(); }).observe(gc);
+    gc.addEventListener('pointerenter', stopAuto);
+  }
+
+  /* Onglets tarifs */
+  var tabs = document.querySelectorAll('[role="tab"]');
+  function selectTab(t) {
+    tabs.forEach(function (x) {
+      var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { selectTab(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; selectTab(n); n.focus();
+    });
+  });
+
+  /* Boutons qui pré-remplissent la prestation */
+  var sel = document.getElementById('f-presta');
+  document.querySelectorAll('[data-presta]').forEach(function (a) { a.addEventListener('click', function () { sel.value = a.dataset.presta; }); });
+  btns.forEach(function (b) { b.addEventListener('click', function () { sel.value = ["Remise d'origine", 'Stage 1', 'Stage 2', 'Stage 3'][+b.dataset.k]; }); });
+
+  /* Formulaire de devis : WhatsApp ou e-mail */
+  var form = document.getElementById('form'), err = document.getElementById('err'), via = 'wa';
+  form.querySelectorAll('[data-via]').forEach(function (b) { b.addEventListener('click', function () { via = b.dataset.via; }); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = new FormData(form), nom = (d.get('nom') || '').trim(), tel = (d.get('tel') || '').trim();
+    if (!nom || tel.replace(/\D/g, '').length < 9) { err.textContent = 'Merci d’indiquer votre nom et un numéro de téléphone valide.'; (nom ? form.tel : form.nom).focus(); return; }
+    err.textContent = '';
+    var txt = 'Bonjour TMD Motors, je souhaite un devis.\n\n' +
+      'Nom : ' + nom + '\nTéléphone : ' + tel + '\nVéhicule : ' + d.get('marque') + (d.get('modele') ? ' ' + d.get('modele') : '') +
+      '\nPrestation : ' + d.get('presta') + (d.get('msg') ? '\n\n' + d.get('msg') : '');
+    if (via === 'wa') window.open('https://wa.me/' + TEL + '?text=' + encodeURIComponent(txt), '_blank', 'noopener');
+    else location.href = 'mailto:' + MAIL + '?subject=' + encodeURIComponent('Demande de devis - ' + d.get('presta')) + '&body=' + encodeURIComponent(txt);
+  });
+
+  /* Barre téléphone : se cache sur le pied de page */
+  var mbar = document.getElementById('mbar');
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { mbar.classList.toggle('away', e[0].isIntersecting); }).observe(document.getElementById('foot'));
+
+  /* Apparition au défilement */
+  var rvs = document.querySelectorAll('.rv');
+  if (reduce || !('IntersectionObserver' in window)) rvs.forEach(function (el) { el.classList.add('in'); });
+  else {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    rvs.forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
