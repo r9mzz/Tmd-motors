@@ -7,10 +7,18 @@
 <meta name="color-scheme" content="dark only">
 <title>TMD Motors</title>
 <meta name="description" content="TMD Motors, garage à Brie-Comte-Robert (77). Spécialiste BMW / VAG : reprogrammation Stage 1, 2, 3, conversion Flexfuel E85, mécanique, carrosserie légère. Devis gratuit.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700;1,800;1,900&family=Barlow:wght@400;500;600&display=swap">
 <style>
+/* Polices Barlow hébergées avec le site (licence OFL, voir polices/OFL.txt) */
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url(polices/barlow-400.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url(polices/barlow-500.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(polices/barlow-600.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow Condensed';font-style:italic;font-weight:700;font-display:swap;src:url(polices/barlow-condensed-700-italique.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow Condensed';font-style:italic;font-weight:800;font-display:swap;src:url(polices/barlow-condensed-800-italique.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow Condensed';font-style:italic;font-weight:900;font-display:swap;src:url(polices/barlow-condensed-900-italique.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:swap;src:url(polices/barlow-condensed-500.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(polices/barlow-condensed-600.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(polices/barlow-condensed-700.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:800;font-display:swap;src:url(polices/barlow-condensed-800.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 :root{
   --bg:#0a0a0b;--bg2:#101013;--card:#141418;--card2:#1a1a1f;
   --line:rgba(255,255,255,.08);--line2:rgba(255,255,255,.14);
@@ -217,6 +225,8 @@ form{padding:34px;border-radius:16px;border:1px solid var(--line);background:var
 .chips input:focus-visible+span{outline:2px solid var(--red2);outline-offset:2px}
 .form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
 .form-note{margin-top:14px;font-size:13px;color:var(--dim)}
+.form-note a,.foot-bot a{text-decoration:underline;text-underline-offset:3px}
+.foot-bot a:hover{color:#fff}
 .err{color:var(--red2);font-size:14px;margin-top:12px;min-height:1em}
 
 /* Contact */
@@ -492,7 +502,7 @@ try{var q=location.search;if(/v=site/.test(q))sessionStorage.setItem("tmd-v","si
   <div class="wrap">
     <div class="sec-head">
       <div><p class="kicker rv">Prix clairs</p><h2 class="rv d1">Nos <em>tarifs</em></h2></div>
-      <p class="rv d2">Pas de mauvaise surprise : les prix sont affichés. Pour le reste, le devis est gratuit.</p>
+      <p class="rv d2">Pas de mauvaise surprise : les prix sont affichés TTC. Pour le reste, le devis est gratuit.</p>
     </div>
     <div class="tarifs-box rv">
       <div class="tabs" role="tablist" aria-label="Catégories de tarifs">
@@ -588,7 +598,7 @@ try{var q=location.search;if(/v=site/.test(q))sessionStorage.setItem("tmd-v","si
         <button class="btn btn-wa" type="submit" data-via="wa"><svg><use href="#i-wa"/></svg>Envoyer sur WhatsApp</button>
         <button class="btn btn-ghost" type="submit" data-via="mail"><svg><use href="#i-mail"/></svg>Envoyer par e-mail</button>
       </div>
-      <p class="form-note">Vos informations servent uniquement à vous répondre.</p>
+      <p class="form-note">Vos informations servent uniquement à vous répondre. <a href="mentions-legales.html#donnees">En savoir plus</a></p>
     </form>
   </div>
 </section>
@@ -657,7 +667,7 @@ try{var q=location.search;if(/v=site/.test(q))sessionStorage.setItem("tmd-v","si
     </div>
     <div class="foot-bot">
       <span>© <span id="yr">2026</span> TMD Motors · Spécialiste BMW / VAG</span>
-      <span>Site réalisé par Mon Site Studio</span>
+      <span><a href="mentions-legales.html">Mentions légales</a> · Site réalisé par Mon Site Studio</span>
     </div>
   </div>
 </footer>
