@@ -154,6 +154,9 @@ form{display:grid;gap:16px;margin-top:28px}
 .cgroup{margin-top:44px}
 .cgroup h3{font-size:14px;font-weight:500;color:var(--muted);margin-bottom:6px}
 .addr{font-size:19px;font-weight:600;line-height:1.35}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:16px}
+.hours dt{font-weight:600}
+.hours dd{color:var(--muted)}
 .addr span{display:block;font-weight:400;color:var(--muted);font-size:16px}
 
 /* Onglets */
@@ -212,7 +215,7 @@ form{display:grid;gap:16px;margin-top:28px}
         <g class="g-needle" id="needle"><path d="M150 52 L153 150 L147 150 Z" fill="#f1f1f2"/></g>
         <circle cx="150" cy="150" r="8" fill="#e3192e"/>
       </svg>
-      <div class="g-read" aria-live="polite"><small id="glabel">Stage 1</small><strong id="gprice">350 €</strong></div>
+      <div class="g-read" aria-live="polite"><small id="glabel">Stage 1</small><strong id="gprice">420 €</strong></div>
     </div>
     <div class="stages" role="group" aria-label="Choisir une formule">
       <span class="ind" id="sind"></span>
@@ -235,7 +238,7 @@ form{display:grid;gap:16px;margin-top:28px}
 
   <a class="e85 up" href="#devis" data-presta="Conversion Flexfuel E85">
     <p class="eyebrow">Conversion</p>
-    <div class="row"><h2 class="h2">Flexfuel E85</h2><span class="px">350 €</span></div>
+    <div class="row"><h2 class="h2">Flexfuel E85</h2><span class="px">420 €</span></div>
     <p>Roulez à l'éthanol à prix réduit. Compatible Stage 1, 2 et 3.</p>
   </a>
 
@@ -257,11 +260,11 @@ form{display:grid;gap:16px;margin-top:28px}
     <div class="svc" id="s-reprog">
       <h3 class="up">Reprogrammation</h3>
       <div class="list">
-        <div class="it up"><span class="tx"><b>Stage 1</b></span><span class="price">350 €</span></div>
-        <div class="it up"><span class="tx"><b>Stage 2</b></span><span class="price">450 €</span></div>
+        <div class="it up"><span class="tx"><b>Stage 1</b></span><span class="price">420 €</span></div>
+        <div class="it up"><span class="tx"><b>Stage 2</b></span><span class="price">540 €</span></div>
         <div class="it up"><span class="tx"><b>Stage 3</b></span><span class="price q">Sur devis</span></div>
-        <div class="it up"><span class="tx"><b>Flexfuel E85</b></span><span class="price">350 €</span></div>
-        <div class="it up"><span class="tx"><b>Remise d'origine</b></span><span class="price">200 €</span></div>
+        <div class="it up"><span class="tx"><b>Flexfuel E85</b></span><span class="price">420 €</span></div>
+        <div class="it up"><span class="tx"><b>Remise d'origine</b></span><span class="price">240 €</span></div>
         <div class="it up"><span class="tx"><b>Cartographie sur mesure</b></span><span class="price q">Sur devis</span></div>
       </div>
       <a class="ask" href="#devis" data-presta="Stage 1">Demander un devis<svg><use href="#i-arrow"/></svg></a>
@@ -270,8 +273,8 @@ form{display:grid;gap:16px;margin-top:28px}
     <div class="svc" id="s-meca">
       <h3 class="up">Mécanique</h3>
       <div class="list">
-        <div class="it up"><span class="tx"><b>Distribution</b></span><span class="price"><small>dès</small>250 €</span></div>
-        <div class="it up"><span class="tx"><b>Embrayage</b></span><span class="price"><small>dès</small>400 €</span></div>
+        <div class="it up"><span class="tx"><b>Distribution</b></span><span class="price"><small>dès</small>300 €</span></div>
+        <div class="it up"><span class="tx"><b>Embrayage</b></span><span class="price"><small>dès</small>480 €</span></div>
         <div class="it up"><span class="tx"><b>Entretien / Révision</b></span><span class="price q">Sur devis</span></div>
         <div class="it up"><span class="tx"><b>Boîte auto (BVA)</b></span><span class="price q">Sur devis</span></div>
       </div>
@@ -351,6 +354,11 @@ form{display:grid;gap:16px;margin-top:28px}
     </div>
 
     <div class="cgroup up">
+      <h3>Horaires</h3>
+      <dl class="hours"><dt>Lundi – jeudi</dt><dd>8h30 – 12h · 13h – 18h</dd><dt>Vendredi</dt><dd>8h30 – 12h · 13h30 – 17h</dd><dt>Samedi</dt><dd>9h – 12h</dd><dt>Dimanche</dt><dd>Fermé</dd></dl>
+    </div>
+
+    <div class="cgroup up">
       <h3>En ligne</h3>
       <div class="list">
         <a href="mailto:tmdmotorspro@gmail.com"><span class="tx"><b>E-mail</b><span class="d">tmdmotorspro@gmail.com</span></span><svg class="chev"><use href="#i-chev"/></svg></a>
@@ -416,9 +424,9 @@ form{display:grid;gap:16px;margin-top:28px}
   }
   $('#ticks').innerHTML = html;
   var stages = [
-    { l: "Remise d'origine", p: 200, a: -95 },
-    { l: 'Stage 1', p: 350, a: -10 },
-    { l: 'Stage 2', p: 450, a: 60 },
+    { l: "Remise d'origine", p: 240, a: -95 },
+    { l: 'Stage 1', p: 420, a: -10 },
+    { l: 'Stage 2', p: 540, a: 60 },
     { l: 'Stage 3', p: 0, a: 122 }
   ];
   var needle = $('#needle'), fill = $('#gfill'), lab = $('#glabel'), price = $('#gprice'), sind = $('#sind');
