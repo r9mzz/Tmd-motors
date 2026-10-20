@@ -10,3 +10,5 @@ Maquettes du site de TMD Motors, garage spécialiste BMW / VAG à Brie-Comte-Rob
 La Maquette 1 a sa page `maquette-1/mentions-legales.html` (champs en rouge à compléter avec les infos du garage) et ses polices Barlow hébergées dans `maquette-1/polices/` (licence OFL) : aucune requête vers Google.
 
 Réalisé par Mon Site Studio.
+
+Publication : GitHub Pages, branche main, dossier racine.
