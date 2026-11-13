@@ -20,7 +20,7 @@
 <style>
 :root{
   --beige:#D9C3A9; --sable:#E9DCCB; --creme:#F5EEE5;
-  --taupe:#7E5F4C; --brun:#664517; --encre:#2C2113;
+  --taupe:#7E5F4C; --brun:#74533D; --encre:#2C2113;
   --blanc:#FFFDF9;
   --serif:"Arapey", "Times New Roman", serif;
   --large:min(1200px, 100% - 48px);
@@ -41,8 +41,8 @@ em{font-style:italic;color:var(--taupe)}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;font:inherit;font-size:19px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .25s,color .25s}
 .btn-plein{background:var(--brun);color:var(--blanc)}
 .btn-plein:hover{background:var(--taupe)}
-.btn-trait{border-color:rgba(102,69,23,.55);color:var(--brun)}
-.btn-trait:hover{background:rgba(102,69,23,.07)}
+.btn-trait{border-color:rgba(116,83,61,.55);color:var(--brun)}
+.btn-trait:hover{background:rgba(116,83,61,.07)}
 .btn-blanc{background:var(--beige);color:var(--brun)}
 .btn-blanc:hover{background:#E6D4BE}
 
@@ -92,11 +92,11 @@ em{font-style:italic;color:var(--taupe)}
 
 /* Offres */
 .section{padding:clamp(80px,10vw,128px) 0}
-.section + .section:not(.design),.moi + .section{border-top:1px solid rgba(102,69,23,.18)}
+.section + .section:not(.design),.moi + .section{border-top:1px solid rgba(116,83,61,.18)}
 .tete{max-width:36em;margin-bottom:48px}
 .tete p{margin-top:14px}
 .offres{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.offre{background:rgba(255,255,255,.18);border-radius:22px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(102,69,23,.3)}
+.offre{background:rgba(255,255,255,.18);border-radius:22px;padding:36px 32px;display:flex;flex-direction:column;gap:14px;border:1px solid rgba(116,83,61,.3)}
 .offre.phare{background:var(--brun);color:var(--blanc);border-color:transparent}
 .offre.phare .accroche,.offre.phare .prix small{color:var(--beige)}
 .offre .accroche{font-style:italic;color:var(--taupe);font-size:20px;line-height:1.4}
@@ -108,7 +108,7 @@ em{font-style:italic;color:var(--taupe)}
 
 /* Déroulé */
 .deroule{}
-.etapes{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(102,69,23,.25)}
+.etapes{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(116,83,61,.25)}
 .etape{padding:28px 24px 0 0}
 .etape h3{margin-bottom:10px}
 .etape p{font-size:18px}
@@ -213,7 +213,7 @@ em{font-style:italic;color:var(--taupe)}
     <nav class="menu" id="menu" aria-label="Menu principal">
       <a href="#chloe">Qui suis-je</a>
       <a href="#offres">Mes offres</a>
-      <a href="#event-design">Event design</a>
+      <a href="#event-design">Décoration</a>
       <a class="cta" href="#contact">Contact</a>
     </nav>
   </div>
@@ -329,7 +329,7 @@ em{font-style:italic;color:var(--taupe)}
     <div class="conteneur">
       <div class="tete apparait">
         <div>
-          <p class="surtitre">Event design</p>
+          <p class="surtitre">Décoration &amp; event design</p>
           <h2>Vos événements, <em>à votre image.</em></h2>
         </div>
         <p>Mariages, anniversaires, baptêmes, gender reveal : je crée la décoration et l'ambiance de vos moments, dans des tons doux et élégants.</p>
